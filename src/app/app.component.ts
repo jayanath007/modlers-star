@@ -11,12 +11,9 @@ import { AngularFireDatabase, AngularFireList, AngularFireObject } from 'angular
 export class AppComponent {
 
   connected$: AngularFireObject<{}>;
-  title = 'app';
 
   constructor(private db: AngularFireDatabase) {
-
     this.connected$ = this.db.object(`connected`);
-    
   }
 
 
