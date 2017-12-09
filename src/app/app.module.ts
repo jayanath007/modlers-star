@@ -1,3 +1,4 @@
+
 import 'hammerjs';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -7,7 +8,6 @@ import { AppComponent } from './app.component';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import {
   MatButtonModule,
@@ -35,26 +35,12 @@ const firebaseConfig = {
     AppComponent
   ],
   imports: [
-
     BrowserModule,
-    FormsModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    BrowserAnimationsModule,
     FlexLayoutModule,
-    MatButtonModule,
-    MatCardModule,
-    MatInputModule,
     MatToolbarModule,
-    MatProgressBarModule,
-    MatSelectModule,
-    BrowserModule,
-    FormsModule,
-    AngularFireDatabaseModule,
-    AngularFireAuthModule,
-    FlexLayoutModule,
-    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
