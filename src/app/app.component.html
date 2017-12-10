@@ -1,11 +1,30 @@
 <!--The content below is only a placeholder and can be replaced.-->
 
 
-<mat-toolbar color="primary">
+<!-- <mat-toolbar color="primary">
   <span>modlers star</span>
 </mat-toolbar>
 <div style="text-align:center">
-  <h1>
-    {{connected$ | async | json}} lushan
-  </h1>
+<app-home></app-home>
+
+</div> 
+  -->
+
+<mat-toolbar color="primary">
+  <div fxLayoutAlign="space-between center" class="nav-buttons">
+   <button mat-button [routerLink]="['/home']">Photo Gallery</button>
+    <!-- <div *ngIf="!(authService.user$ | async)?.uid"> -->
+      <!-- <button class="login" mat-button (click)="authService.login()">Login</button> -->
+    <!-- </div> -->
+    <!-- <div *ngIf="(authService.user$ | async)?.uid"> -->
+      <button mat-button [routerLink]="['/company-list']">Companies</button>
+      <button mat-button [routerLink]="['/contact-list']">Contacts</button>
+      <!-- <button class="logout" mat-button (click)="authService.logout()">Logout</button> -->
+    <!-- </div> -->
+  </div>
+</mat-toolbar>
+<div>
+  <div fxFlexOffset.gt-sm="15%" fxFlex.gt-sm="70%">
+    <router-outlet></router-outlet>
+  </div>
 </div>

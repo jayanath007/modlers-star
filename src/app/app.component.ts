@@ -1,6 +1,7 @@
 
 import { Component } from '@angular/core';
 import { AngularFireDatabase, AngularFireList, AngularFireObject } from 'angularfire2/database';
+import { Observable } from 'rxjs/Observable';
 
 
 @Component({
@@ -10,11 +11,9 @@ import { AngularFireDatabase, AngularFireList, AngularFireObject } from 'angular
 })
 export class AppComponent {
 
-  connected$: AngularFireObject<{}>;
-
-  constructor(private db: AngularFireDatabase) {
-    this.connected$ = this.db.object(`connected`);
+  albums$: Observable<any[]>;
+  constructor(database: AngularFireDatabase) {
+    this.albums$ = database.list('albums').valueChanges();
   }
-
 
 }

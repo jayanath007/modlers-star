@@ -11,12 +11,11 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 import {
   MatButtonModule,
-  MatCardModule,
-  MatInputModule,
-  MatToolbarModule,
-  MatProgressBarModule,
-  MatSelectModule
+  MatToolbarModule
 } from '@angular/material';
+import { AppRouteRoutes } from './app-route.routing';
+
+
 
 
 
@@ -32,16 +31,17 @@ const firebaseConfig = {
 
 @NgModule({
   declarations: [
-    AppComponent,
-    HomeComponent
+    AppComponent
 ],
   imports: [
+    AppRouteRoutes,
     BrowserModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     FlexLayoutModule,
     MatToolbarModule,
+    MatButtonModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
