@@ -1,9 +1,10 @@
 export interface Album {
+    key: string;
     name: string;
     modler: string;
     likes: number;
     rating: number;
     commentTotal: number;
     rank: number;
-    urls: Array<string>;
+    imageUrls: Array<string>;
 }
