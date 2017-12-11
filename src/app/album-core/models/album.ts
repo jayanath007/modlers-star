@@ -1,6 +1,7 @@
 export interface Album {
     key: string;
     name: string;
+    category: string[];
     modler: string;
     likes: number;
     rating: number;
