@@ -1,5 +1,5 @@
+import { CreateAlbumComponent } from '../album-desktop/create-album/create-album.component';
 import { RouterModule } from '@angular/router';
-
 import { NgModule, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule, MatButtonModule } from '@angular/material';
@@ -11,12 +11,16 @@ import { MatSelectModule } from '@angular/material/select';
 import {MatListModule} from '@angular/material/list';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { NgxGalleryModule } from 'ngx-gallery';
+import { DynamicFormModule } from '../dynamic-form/dynamic-form.module';
 
 
 const routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: 'home', component: HomeComponent },
-  { path: 'addImages', component: AddAlbumComponent }
+  { path: 'addImages', component: AddAlbumComponent },
+  { path: 'createAlbum', component: CreateAlbumComponent },
+  { path: 'AddAlbum', component: AddAlbumComponent }
 ];
 
 @NgModule({
@@ -30,9 +34,12 @@ const routes = [
     MatSelectModule,
     MatListModule,
     FormsModule,
+    NgxGalleryModule,
+    DynamicFormModule,
   ],
   declarations: [HomeComponent,
-    AddAlbumComponent
+    AddAlbumComponent,
+    CreateAlbumComponent,
   ]
 })
 export class AlbumDesktopModule { }

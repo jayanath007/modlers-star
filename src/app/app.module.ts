@@ -1,4 +1,4 @@
-
+import { FlexLayoutModule } from '@angular/flex-layout';
 import 'hammerjs';
 import 'firebase/storage'; // global firebase storage js;
 import { BrowserModule } from '@angular/platform-browser';
@@ -8,16 +8,13 @@ import { AngularFireModule } from 'angularfire2';
 import { AppComponent } from './app.component';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
-import { FlexLayoutModule } from '@angular/flex-layout';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   MatButtonModule,
   MatToolbarModule
 } from '@angular/material';
 import { AppRouteRoutes } from './app-route.routing';
-
-
-
 
 
 // Initialize Firebase

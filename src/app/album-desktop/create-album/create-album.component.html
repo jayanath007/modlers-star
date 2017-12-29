@@ -1,0 +1,13 @@
+<p>
+  create-album works!
+</p>
+
+<div class="app">
+  <app-dynamic-form
+    [config]="config"
+    #form="dynamicForm"
+    (submit)="submit($event)">
+  </app-dynamic-form>
+  {{ form.valid }}
+  {{ form.value | json }}
+</div>

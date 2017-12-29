@@ -1,14 +1,19 @@
-.albums-card {
-    /* width: 400px; */
+mat-card {
+  margin: 10px 0px 20px 0px;
+}
+
+.example-card {
+    height: 150px;
+    padding: 5px 5px 0px 0px;
+    background-color:rgb(239, 242, 247);  
+  }
+
+  .image-view{
+   display: inline-block;
+   height: 150px;
+   overflow: hidden;
+   padding: 5px;
   }
   
 
-  button[mat-fab] {
-    position: fixed;
-    bottom: 25px;
-    right: 25px;
-}
 
-mat-card {
-    margin: 10px;
-}
