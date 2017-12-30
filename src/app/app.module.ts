@@ -17,6 +17,7 @@ import {
 import { AppRouteRoutes } from './app-route.routing';
 
 
+
 // Initialize Firebase
 const firebaseConfig = {
   apiKey: 'AIzaSyDO4WN4ugiloTsArr1KktR-nVZyJP8s1G8',
@@ -29,7 +30,7 @@ const firebaseConfig = {
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
 ],
   imports: [
     AppRouteRoutes,

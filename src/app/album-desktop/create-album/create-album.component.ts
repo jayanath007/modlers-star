@@ -1,8 +1,8 @@
 import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
-import { FieldConfig } from '../../dynamic-form/models/field-config.interface';
-import { DynamicFormComponent } from '../../dynamic-form/containers/dynamic-form/dynamic-form.component';
 import { Validators } from '@angular/forms';
 import { timeout } from 'q';
+import { DynamicFormComponent } from '../../shared/dynamic-form/containers/dynamic-form/dynamic-form.component';
+import { FieldConfig } from '../../shared/dynamic-form/models/field-config.interface';
 
 @Component({
   selector: 'app-create-album',

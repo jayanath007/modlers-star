@@ -3,8 +3,9 @@
     <mat-card-title>modler</mat-card-title>
     <mat-card-subtitle>location details</mat-card-subtitle>
   </mat-card-header>
+
   <div class="image-view">
-    <img class="example-card" *ngFor="let item of album.imageUrls" [src]="item" alt="album image profile">
+    <img class="example-card" (click)="openGallery(i , album.imageUrls)" *ngFor="let item of album.imageUrls; let i = index" [src]="item" alt="album image profile">
   </div>
   <mat-card-content>
     <p>
@@ -17,5 +18,11 @@
     <button mat-button>SHARE</button>
   </mat-card-actions>
 </mat-card>
+
+
+
+<app-image-gallery>
+
+</app-image-gallery>
 
 

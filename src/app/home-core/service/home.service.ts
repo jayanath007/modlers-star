@@ -6,7 +6,7 @@ import { Album } from '../../shared/models/album';
 
 
 @Injectable()
-export class AlbumService {
+export class HomeService {
 
     albums$: AngularFireList<Album>;
 
