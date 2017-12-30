@@ -4,7 +4,7 @@
     <div class="images-container" (swiperight)="prev()" (swipeleft)="next()">
         <!-- images array -->
         <div class="image" *ngFor="let image of images; let i = index;" [class.active]="!loading && (i == activeImageIndex)" [ngStyle]="{top: conf.imageOffset, bottom: conf.imageOffset}">
-            <img *ngIf="i == activeImageIndex" [src]="image.url" [alt]="image.altText || ''" [style.cursor]="conf.imagePointer?  'pointer':'default'"
+            <img class="image-view" *ngIf="i == activeImageIndex" [src]="image.url" [alt]="image.altText || ''" [style.cursor]="conf.imagePointer?  'pointer':'default'"
                 [style.borderRadius]="conf.imageBorderRadius" (click)="clickOnImage(activeImageIndex)" />
         </div>
 
@@ -26,10 +26,10 @@
 
     <!-- info and thumbnails -->
     <div class="info-container">
-        <div class="title" *ngIf="conf.showImageTitle && !loading && activeImage && activeImage.title" [style.paddingBottom]="conf.showThumbnails ? '0px' : '30px'"
+        <app-comment-box></app-comment-box>
+        <!-- <div class="title" *ngIf="conf.showImageTitle && !loading && activeImage && activeImage.title" [style.paddingBottom]="conf.showThumbnails ? '0px' : '30px'"
             [class.dark]="conf.inline">{{ activeImage.title }}
-        </div>
-
+        </div> -->
     </div>
 </div>
 
