@@ -15,6 +15,7 @@ import { ImageGalleryModule } from '../shared/image-gallery/image-gallery.module
 import { CommentBoxDesktopModule } from '../shared/comment/comment-desktop/comment-box-desktop.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ImageViewerModule } from '../image-viewer/image-viewer.module';
+import { ImageGalleryMobileModule } from '../shared/image-gallery-mobile/image-gallery.mobile.module';
 
 
 const routes = [
@@ -34,6 +35,7 @@ const routes = [
     MatListModule,
     FormsModule,
     ImageGalleryModule,
+    ImageGalleryMobileModule,
     CommentBoxDesktopModule,
     FlexLayoutModule,
     ImageViewerModule

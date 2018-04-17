@@ -1,3 +1,4 @@
+import { ImageGalleryMobileComponent } from './../../shared/image-gallery-mobile/image-gallery-mobile.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
@@ -13,6 +14,7 @@ import { GalleryImage } from '../../shared/image-gallery/config';
 })
 export class HomeComponent implements OnInit {
   @ViewChild(ImageGalleryComponent) imageGalleryComponent: ImageGalleryComponent;
+  @ViewChild(ImageGalleryMobileComponent) imageGalleryMobileComponent: ImageGalleryMobileComponent;
 
   albums$: Observable<any[]>;
   constructor(private albumService: HomeService) {
@@ -28,6 +30,6 @@ export class HomeComponent implements OnInit {
     const galleryImages: GalleryImage[] = imageUrls.map((url) => {
       return { url: url };
     });
-    this.imageGalleryComponent.openGallery(index, galleryImages);
+    this.imageGalleryMobileComponent.openGallery(index, galleryImages);
   }
 }
