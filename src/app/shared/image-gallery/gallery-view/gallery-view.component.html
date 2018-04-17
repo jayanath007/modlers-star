@@ -3,36 +3,21 @@
     <!-- images -->
     <div class="images-container" (swiperight)="prev()" (swipeleft)="next()">
         <!-- images array -->
-        <div class="image" *ngFor="let image of images; let i = index;" [class.active]="!loading && (i == activeImageIndex)" [ngStyle]="{top: conf.imageOffset, bottom: conf.imageOffset}">
+        <div class="image" *ngFor="let image of images; let i = index;"
+         [class.active]="!loading && (i == activeImageIndex)" 
+         [ngStyle]="{top: conf.imageOffset, bottom: conf.imageOffset}">
             <img class="image-view" *ngIf="i == activeImageIndex" [src]="image.url" [alt]="image.altText || ''" [style.cursor]="conf.imagePointer?  'pointer':'default'"
                 [style.borderRadius]="conf.imageBorderRadius" (click)="clickOnImage(activeImageIndex)" />
         </div>
-
         <!-- loading animation -->
         <div class="loading-animation" *ngIf="(images.length == 0) || loading">
-            <svg version="1.1" id="L3" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve">
-                <circle fill="none" stroke="#fff" stroke-width="4" cx="50" cy="50" r="44" style="opacity:0.5;" />
-                <circle fill="#4caf50" stroke="#eee" stroke-width="3" cx="8" cy="54" r="6">
-                    <animateTransform attributeName="transform" dur="2s" type="rotate" from="0 50 48" to="360 50 52" repeatCount="indefinite"
-                    />
-
-                    <animate attributeName="fill" begin="1s" dur="16s" values="#4caf50; #cddc39; #ff9800; #f44336; #e91e63; #ff5722; #ffeb3b; #4caf50"
-                        repeatCount="indefinite" />
-                </circle>
-            </svg>
         </div>
     </div>
-
     <!-- info and thumbnails -->
     <div class="info-container">
-        <app-comment-box></app-comment-box>
-        <!-- <div class="title" *ngIf="conf.showImageTitle && !loading && activeImage && activeImage.title" [style.paddingBottom]="conf.showThumbnails ? '0px' : '30px'"
-            [class.dark]="conf.inline">{{ activeImage.title }}
-        </div> -->
+        <app-comment-box [commentMaxHieght]="commentBoxMaxHieght" ></app-comment-box>
     </div>
 </div>
-
 
 <!-- gallery controls -->
 <div class="control arrow left" *ngIf="conf.showArrows && (images.length > 1) && !loading" [class.dark]="conf.inline" [class.disabled]="onFirstImage"
@@ -41,17 +26,8 @@
     (click)="next()"></div>
 
 <div class="control right-top">
-    <a class="ext-url" [class.dark]="conf.inline" *ngIf="conf.showExtUrlControl && activeImage && activeImage.extUrl && !loading"
-        [href]="activeImage.extUrl" [target]="activeImage.extUrlTarget || '_blank'">
-        <div class="feedback"></div>
-    </a>
     <div class="close" [class.dark]="conf.inline" *ngIf="conf.showCloseControl" (click)="close()">
         <div class="feedback"></div>
     </div>
 </div>
 
-<div class="control left-top">
-    <div class="delete-img" [class.dark]="conf.inline" *ngIf="conf.showDeleteControl && !loading" (click)="deleteImage(activeImageIndex)">
-        <div class="feedback"></div>
-    </div>
-</div>

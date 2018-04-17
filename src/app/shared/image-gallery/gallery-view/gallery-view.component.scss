@@ -190,6 +190,7 @@ $break-large: 1024px;
 			flex: none;
 			width: 30%;
 			display: flex;
+			padding: 10px;
 			flex-direction: column;
 			align-items: flex-start;
 			@include respond-to(handhelds) {	width: 100%;}

@@ -4,8 +4,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CommentBoxComponent } from './comment-box/comment-box.component';
 import { FormsModule } from '@angular/forms';
-import { MatSelectModule, MatInputModule, MatButtonModule, MatCardModule, MatListModule } from '@angular/material';
-
+import { MatSelectModule, MatInputModule, MatButtonModule, MatCardModule, MatListModule, MatIconModule } from '@angular/material';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { FlexLayoutModule } from '@angular/flex-layout';
 // const routes = [
 //   { path: '', pathMatch: 'full', redirectTo: 'home' },
 //   { path: 'home', component: HomeComponent },
@@ -21,6 +22,9 @@ import { MatSelectModule, MatInputModule, MatButtonModule, MatCardModule, MatLis
     MatSelectModule,
     MatListModule,
     FormsModule,
+    MatCheckboxModule,
+    FlexLayoutModule,
+    MatIconModule,
   ],
   exports: [
     CommentBoxComponent,

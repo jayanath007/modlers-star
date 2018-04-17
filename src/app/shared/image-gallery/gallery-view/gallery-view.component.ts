@@ -64,17 +64,17 @@ export class GalleryViewComponent implements OnInit, OnChanges {
     // event emmiters
     // tslint:disable-next-line:no-output-on-prefix
     @Output() onOpen = new EventEmitter();
-        // tslint:disable-next-line:no-output-on-prefix
+    // tslint:disable-next-line:no-output-on-prefix
     @Output() onClose = new EventEmitter();
-        // tslint:disable-next-line:no-output-on-prefix
+    // tslint:disable-next-line:no-output-on-prefix
     @Output() onDelete = new EventEmitter();
-        // tslint:disable-next-line:no-output-on-prefix
+    // tslint:disable-next-line:no-output-on-prefix
     @Output() onImageChange = new EventEmitter();
-        // tslint:disable-next-line:no-output-on-prefix
+    // tslint:disable-next-line:no-output-on-prefix
     @Output() onImageClicked = new EventEmitter();
 
-
-
+    viewPortHieght: number;
+    commentBoxMaxHieght: number;
     // debounced prev
     private debouncedPrev = debounce(() => this.prev(), 100, { 'leading': true, 'trailing': false });
 
@@ -259,6 +259,7 @@ export class GalleryViewComponent implements OnInit, OnChanges {
 
     /***************************************************/
 
+
     constructor(private galleryElem: ElementRef,
         private renderer: Renderer2) {
     }
@@ -275,6 +276,8 @@ export class GalleryViewComponent implements OnInit, OnChanges {
             this.renderer.addClass(this.galleryElem.nativeElement, 'inline');
             this.open(0);
         }
+        this.viewPortHieght = (window.screen.height);
+        this.commentBoxMaxHieght = this.viewPortHieght - 10;
     }
 
     ngOnChanges(changes: SimpleChanges) {

@@ -16,7 +16,7 @@ export class ImageGalleryComponent implements OnInit {
   conf: GalleryConf = DEMO_GALLERY_CONF;
   images: GalleryImage[] = DEMO_GALLERY_IMAGE;
 
-  constructor() { }
+  constructor( ) { }
 
   ngOnInit() { }
 

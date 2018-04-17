@@ -1,20 +1,37 @@
-mat-card {
-  margin: 10px 0px 20px 0px;
-  /* width: 500px; */
+.comment-user-image{
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
 }
 
-.example-card {
-    height: 150px;
-    padding: 5px 5px 0px 0px;
-    background-color:rgb(239, 242, 247);  
-  }
-
-  .image-view{
-   display: inline-block;
-   height: 150px;
-   overflow: hidden;
-   padding: 5px;
-  }
-  
 
 
+.sec2 {
+  padding-left: 10px;
+}
+
+.sec3 {
+  background: blue;
+  color:white;
+  text-transform: uppercase
+} 
+
+.content {
+  min-width: 300px;
+  height: 100px;
+}
+
+.comment-box{
+  padding-top: 2px;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.comment-content {
+  overflow-y: auto
+}

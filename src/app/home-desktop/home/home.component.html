@@ -1,28 +1,28 @@
-<mat-card *ngFor="let album of albums$ | async">
+<!-- <app-image-viewer>
+  
+</app-image-viewer> -->
+
+
+<mat-card *ngFor="let album of albums$ | async" >
   <mat-card-header>
-    <mat-card-title>modler</mat-card-title>
-    <mat-card-subtitle>location details</mat-card-subtitle>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>modler name </mat-card-title>
+    <mat-card-subtitle> The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that
+      copes very well with mountainous terrain, the Shiba Inu was originally bred for hunting.</mat-card-subtitle>
   </mat-card-header>
+  <mat-divider></mat-divider>
 
-  <div class="image-view">
-    <img class="example-card" (click)="openGallery(i , album.imageUrls)" *ngFor="let item of album.imageUrls; let i = index" [src]="item" alt="album image profile">
+  <div fxLayout="row wrap">
+    <div fxFlex="0 1 auto" class="sec1" fxLayoutAlign="start center" *ngFor="let item of album.imageUrls; let i = index">
+      <img class="example-card" [src]="item" alt="album image profile" (click)="openGallery(i, album.imageUrls)">
+    </div>
   </div>
+
   <mat-card-content>
-    <p>
-      The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that copes
-      very well with mountainous terrain, the Shiba Inu was originally bred for hunting.
-    </p>
+    <app-comment-box></app-comment-box>
   </mat-card-content>
-  <mat-card-actions>
-    <button mat-button>LIKE</button>
-    <button mat-button>SHARE</button>
-  </mat-card-actions>
 </mat-card>
-
-
 
 <app-image-gallery>
 
 </app-image-gallery>
-
-

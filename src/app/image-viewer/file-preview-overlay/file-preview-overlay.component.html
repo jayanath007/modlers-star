@@ -1,0 +1,25 @@
+<tm-file-preview-overlay-toolbar>
+    <mat-icon>description</mat-icon>
+    {{ image.name }}
+</tm-file-preview-overlay-toolbar>
+
+
+<div class="overlay-content" [@slideContent]="animationState" 
+(@slideContent.start)="onAnimationStart($event)"
+ (@slideContent.done)="onAnimationDone($event)">
+    <div fxLayout="column" fxFlexFill>
+        <div fxFlex fxFlexAlign="center" class="sec1" >
+            <div class="spinner-wrapper" *ngIf="loading">
+                <mat-spinner></mat-spinner>
+            </div>
+            abc
+            <!-- <img  [style.max-height]="800"    
+              [@fade]="loading ? 'fadeOut' : 'fadeIn'" (load)="onLoad($event)" [src]="image.url"    > -->
+        </div>
+        <div fxFlex class="sec2"  >
+            third-section
+        </div>
+    </div>
+</div>
+
+

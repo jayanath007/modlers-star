@@ -13,6 +13,9 @@ import { HomeComponent } from './home/home.component';
 import { HomeCoreModule } from '../home-core/home-core.module';
 import { ImageGalleryModule } from '../shared/image-gallery/image-gallery.module';
 import { CommentBoxDesktopModule } from '../shared/comment/comment-desktop/comment-box-desktop.module';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { ImageViewerModule } from '../image-viewer/image-viewer.module';
+
 
 const routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -32,6 +35,8 @@ const routes = [
     FormsModule,
     ImageGalleryModule,
     CommentBoxDesktopModule,
+    FlexLayoutModule,
+    ImageViewerModule
   ],
   declarations: [
     HomeComponent,

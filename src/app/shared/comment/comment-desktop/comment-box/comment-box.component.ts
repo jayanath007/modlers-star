@@ -1,7 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 import { CommentService } from '../../comment-core/service/comment.service';
+import { MatIconRegistry } from '@angular/material';
+import { DomSanitizer } from '@angular/platform-browser';
 
 
 
@@ -12,11 +14,13 @@ import { CommentService } from '../../comment-core/service/comment.service';
 })
 export class CommentBoxComponent implements OnInit {
 
-
   comment$: Observable<any[]>;
 
+  @Input()
+  commentMaxHieght;
+
   constructor(private commentService: CommentService) {
-    this.comment$ = this.commentService.getComments();
+
   }
 
   ngOnInit() {
