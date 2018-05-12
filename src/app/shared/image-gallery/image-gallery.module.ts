@@ -1,9 +1,10 @@
+import { GalleryViewMobileComponent } from './gallery-view-mobile/gallery-view-mobile.component';
+import { ClickOutsideDirective } from './directives/click-outside.directive';
+import { MouseWheelDirective } from './directives/mousewheel.directive';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ImageGalleryComponent } from './image-gallery.component';
 import { GalleryViewComponent } from './gallery-view/gallery-view.component';
-import { MouseWheelDirective } from './gallery-view/directives/mousewheel.directive';
-import { ClickOutsideDirective } from './gallery-view/directives/click-outside.directive';
 import { CommentBoxDesktopModule } from '../comment/comment-desktop/comment-box-desktop.module';
 
 @NgModule({
@@ -18,6 +19,7 @@ import { CommentBoxDesktopModule } from '../comment/comment-desktop/comment-box-
   ],
   declarations: [
     ImageGalleryComponent,
+    GalleryViewMobileComponent,
     GalleryViewComponent,
     MouseWheelDirective,
     ClickOutsideDirective,

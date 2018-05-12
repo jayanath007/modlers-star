@@ -1,29 +1,25 @@
+
 import {
-    Component,
     OnInit,
     HostBinding,
     Input,
     HostListener,
-    ElementRef,
-    Renderer2,
     EventEmitter,
     Output,
     OnChanges,
     SimpleChanges,
-    ViewChild
+    ViewChild,
+    ElementRef,
+    Renderer2
 } from '@angular/core';
 
 import { assign, findIndex, debounce } from 'lodash';
-import { GalleryConf, GalleryImage } from '../config';
-
-
-// key codes to react
+import { GalleryConf, GalleryImage } from './config';
 const KEY_CODES = {
     37: 'LEFT',
     39: 'RIGHT',
     27: 'ESC'
 };
-
 // default gallery configuration
 const DEFAULT_CONF: GalleryConf = {
     imageBorderRadius: '3px',
@@ -44,13 +40,8 @@ const DEFAULT_CONF: GalleryConf = {
     showArrows: true
 };
 
-@Component({
-    // tslint:disable-next-line:component-selector
-    selector: 'gallery-view',
-    templateUrl: './gallery-view.component.html',
-    styleUrls: ['./gallery-view.component.scss']
-})
-export class GalleryViewComponent implements OnInit, OnChanges {
+
+export class GalleryView  implements OnInit, OnChanges {
 
     // gallery opened memory
     @HostBinding('class.active') opened = false;

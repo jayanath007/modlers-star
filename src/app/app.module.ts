@@ -1,3 +1,4 @@
+import { UtilsService } from './shared/Utils.service';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 
@@ -45,7 +46,7 @@ const firebaseConfig = {
     FlexLayoutModule,
     MatIconModule,
   ],
-  providers: [],
+  providers: [UtilsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

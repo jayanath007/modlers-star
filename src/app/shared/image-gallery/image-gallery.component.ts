@@ -1,3 +1,5 @@
+import { UtilsService } from './../Utils.service';
+import { GalleryViewMobileComponent } from './gallery-view-mobile/gallery-view-mobile.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { GalleryViewComponent } from './gallery-view/gallery-view.component';
 import { DEMO_GALLERY_CONF, DEMO_GALLERY_IMAGE, GalleryConf, GalleryImage } from './config';
@@ -11,12 +13,14 @@ export class ImageGalleryComponent implements OnInit {
 
   // get reference to gallery component
   @ViewChild(GalleryViewComponent) ngxImageGallery: GalleryViewComponent;
+  @ViewChild(GalleryViewMobileComponent) ngxImageGalleryMobile: GalleryViewMobileComponent;
+
 
   // gallery configuration
   conf: GalleryConf = DEMO_GALLERY_CONF;
   images: GalleryImage[] = DEMO_GALLERY_IMAGE;
 
-  constructor( ) { }
+  constructor(public utilsService: UtilsService) { }
 
   ngOnInit() { }
 
@@ -24,7 +28,11 @@ export class ImageGalleryComponent implements OnInit {
   // open gallery
   openGallery(index: number = 0, galleryImage: GalleryImage[]) {
     this.images = galleryImage;
-    this.ngxImageGallery.open(index);
+    if (this.utilsService.isMobile.any) {
+      this.ngxImageGallery.open(index);
+    } else {
+      this.ngxImageGalleryMobile.open(index);
+    }
   }
 
   // close gallery
