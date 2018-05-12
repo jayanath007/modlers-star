@@ -1,20 +1,20 @@
-<div class="galleria" fxLayout="row"    fxFlexFill   fxLayout.xs="column"
- mouseWheel (mouseWheelDown)="mouseWheelDown()"
-  (mouseWheelUp)="mouseWheelUp()" 
-  (contextmenu)="rightClickOnImage($event)">
-    <div class="images-container" fxFlex="75" (swiperight)="prev()" (swipeleft)="next()">
-        <div class="image" *ngFor="let image of images; let i = index;" [class.active]="!loading && (i == activeImageIndex)" [ngStyle]="{top: conf.imageOffset, bottom: conf.imageOffset}">
-            <img class="image-view" *ngIf="i == activeImageIndex" [src]="image.url" [alt]="image.altText || ''" [style.cursor]="conf.imagePointer?  'pointer':'default'"
-                (click)="clickOnImage(activeImageIndex)" />
+<div>
+    <div class="galleria" fxLayout="column"  fxFlexFill   mouseWheel (mouseWheelDown)="mouseWheelDown()"
+     (mouseWheelUp)="mouseWheelUp()"  (contextmenu)="rightClickOnImage($event)">
+        <div fxFlex="1" class="images-container" (swiperight)="prev()" (swipeleft)="next()">
+            <div class="image" *ngFor="let image of images; let i = index;" [class.active]="!loading
+             && (i == activeImageIndex)" [ngStyle]="{top: conf.imageOffset, bottom: conf.imageOffset}">
+                <img class="image-view" *ngIf="i == activeImageIndex" [src]="image.url" 
+                [alt]="image.altText || ''" [style.cursor]="conf.imagePointer?  'pointer':'default'"
+                    (click)="clickOnImage(activeImageIndex)" />
+            </div>
+            <div class="loading-animation" *ngIf="(images.length == 0) || loading">  </div>
+            <div class="arrow-left" *ngIf="(images.length > 1) && !loading" [class.disabled]="onFirstImage" (click)="prev()"></div>
+            <div class="arrow-right" *ngIf="(images.length > 1) && !loading" [class.disabled]="onLastImage" (click)="next()"></div>
+            <div class="control-close"  (click)="close()"></div>
         </div>
-        <div class="loading-animation" *ngIf="(images.length == 0) || loading">
+        <div fxFlex="1" class="info-container">
+            <app-comment-box [commentMaxHieght]="commentBoxMaxHieght"></app-comment-box>
         </div>
-        <div class="arrow-left" *ngIf="(images.length > 1) && !loading" [class.disabled]="onFirstImage" (click)="prev()"></div>
-        <div class="arrow-right" *ngIf="(images.length > 1) && !loading" [class.disabled]="onLastImage" (click)="next()"></div>
-        <div class="control-close"  (click)="close()">
-        </div>
-    </div>
-    <div class="info-container" fxFlex="25" >
-        <app-comment-box [commentMaxHieght]="commentBoxMaxHieght"></app-comment-box>
     </div>
 </div>
