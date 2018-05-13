@@ -40,4 +40,4 @@ const routes = [
     HomeComponent,
 ]
 })
-export class HomeDesktopModule { }
+export class HomeMobileModule { }

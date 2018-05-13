@@ -4,6 +4,8 @@ import { MatIconRegistry } from '@angular/material';
 import { Component } from '@angular/core';
 import { AngularFireDatabase, AngularFireList, AngularFireObject } from 'angularfire2/database';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
+import { UtilsService } from './shared/Utils.service';
 
 
 @Component({
@@ -13,16 +15,16 @@ import { Observable } from 'rxjs';
 })
 export class AppComponent {
 
-  albums$: Observable<any[]>;
-  constructor(database: AngularFireDatabase,
-    iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
+  links: Array<{ text: string, path: string }> = [];
 
-    this.albums$ = database.list('albums').valueChanges();
-    iconRegistry.addSvgIcon(
-      'thumbs-up',
-      sanitizer.
-      bypassSecurityTrustResourceUrl
-      ('assets/img/ic_thumb_up_black_24px.svg'));
+  constructor(private router: Router, utilsService: UtilsService) {
+    if (utilsService.isMobile.any()) {
+      this.router.resetConfig([
+        { path: '', loadChildren: 'app/home-mobile/home-mobile.module#HomeMobileModule' },
+        { path: 'album', loadChildren: 'app/album-desktop/album-desktop.module#AlbumDesktopModule' },
+      ]);
+    }
   }
+
 
 }
