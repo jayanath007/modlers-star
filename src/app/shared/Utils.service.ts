@@ -22,8 +22,8 @@ constructor() { }
         return navigator.userAgent.match(/IEMobile/i) || navigator.userAgent.match(/WPDesktop/i);
     },
     any: function() {
-        return (this.isMobile.Android() || this.isMobile.BlackBerry() 
-        || this.isMobile.iOS() || this.isMobile.Opera() || this.isMobile.Windows());
+        return (this.Android() || this.BlackBerry() 
+        || this.iOS() || this.Opera() || this.Windows());
     }
 };
 

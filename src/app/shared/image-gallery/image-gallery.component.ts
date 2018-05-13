@@ -28,21 +28,29 @@ export class ImageGalleryComponent implements OnInit {
   // open gallery
   openGallery(index: number = 0, galleryImage: GalleryImage[]) {
     this.images = galleryImage;
-    if (this.utilsService.isMobile.any) {
-      this.ngxImageGallery.open(index);
-    } else {
+    if (this.utilsService.isMobile.any()) {
       this.ngxImageGalleryMobile.open(index);
+    } else {
+      this.ngxImageGallery.open(index);
     }
   }
 
   // close gallery
   closeGallery() {
-    this.ngxImageGallery.close();
+    if (this.utilsService.isMobile.any()) {
+      this.ngxImageGalleryMobile.close();
+    } else {
+      this.ngxImageGallery.close();
+    }
   }
 
   // set new active(visible) image in gallery
   newImage(index: number = 0) {
-    this.ngxImageGallery.setActiveImage(index);
+    if (this.utilsService.isMobile.any()) {
+      this.ngxImageGalleryMobile.setActiveImage(index);
+    } else {
+      this.ngxImageGallery.setActiveImage(index);
+    }
   }
 
   // next image in gallery
