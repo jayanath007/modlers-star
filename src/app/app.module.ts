@@ -9,15 +9,14 @@ import { AngularFireModule } from 'angularfire2';
 import { AppComponent } from './app.component';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
-// import { MatDividerModule } from '@angular/material/divider';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AppRouteRoutes } from './app-route.routing';
 import {
   MatButtonModule,
   MatToolbarModule,
-  MatCardModule
+  MatCardModule, MatFormFieldModule, MatSelectModule, MatIconModule, MatMenuModule, MatSidenavModule, MatListModule
 } from '@angular/material';
-import { AppRouteRoutes } from './app-route.routing';
-import {MatIconModule} from '@angular/material/icon';
+
 
 // Initialize Firebase
 const firebaseConfig = {
@@ -45,6 +44,11 @@ const firebaseConfig = {
     BrowserModule,
     FlexLayoutModule,
     MatIconModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatMenuModule,
+    MatSidenavModule,
+    MatListModule,
   ],
   providers: [UtilsService],
   bootstrap: [AppComponent]

@@ -16,7 +16,10 @@ import { UtilsService } from './shared/Utils.service';
 export class AppComponent {
 
   links: Array<{ text: string, path: string }> = [];
-
+  list = ['1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1',
+  '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1',
+  '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1',
+   '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'];
   constructor(private router: Router, utilsService: UtilsService) {
     if (utilsService.isMobile.any()) {
       this.router.resetConfig([

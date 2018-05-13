@@ -1,12 +1,112 @@
-<mat-toolbar color="primary">
+<!--  -->
+
+<!-- <mat-toolbar color="primary">
   <div fxLayoutAlign="space-between center" class="nav-buttons">
     <button mat-button [routerLink]="['/home']">Photo Gallery</button>
     <button mat-button [routerLink]="['album/AddAlbum']">AddAlbum</button>
-      <!-- <button mat-button [routerLink]="['album/createAlbum']">upload your images</button> -->
+<button mat-button [routerLink]="['album/createAlbum']">upload your images</button>
   </div>
+</mat-toolbar> -->
+
+<!-- <div class="app-contaner">
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <button mat-icon-button (click)="sidenav.toggle()" fxShow="true" fxHide.gt-sm>
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>Responsive Navigation</span>
+      <span class="example-spacer"></span>
+      <div fxShow="true" fxHide.lt-md="true">
+ 
+        <a href="#" mat-button>Menu Item 1</a>
+        <a href="#" mat-button>Menu Item 2</a>
+        <a href="#" mat-button>Menu Item 3</a>
+        <a href="#" mat-button>Menu Item 4</a>
+        <a href="#" mat-button>Menu Item 5</a>
+        <a href="#" mat-button>Menu Item 6</a>
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <mat-sidenav-container fxFlexFill>
+    <mat-sidenav #sidenav>
+      <mat-nav-list>
+        <a (click)="sidenav.toggle()" mat-list-item>Close</a>
+        <a href="#" mat-list-item>Menu Item 1</a>
+        <a href="#" mat-list-item>Menu Item 2</a>
+        <a href="#" mat-list-item>Menu Item 3</a>
+        <a href="#" mat-list-item>Menu Item 4</a>
+        <a href="#" mat-list-item>Menu Item 5</a>
+        <a href="#" mat-list-item>Menu Item 6</a>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content fxFlexFill>
+
+    
+     
+
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div> -->
+
+<!-- 
+<div style="position:absolute; top:0; bottom:0; left:0; right: 0; display: flex; flex-direction: column;">        
+    <mat-toolbar color="primary">
+        <button mat-icon-button >
+            <mat-icon>menu</mat-icon>
+        </button>
+        TOOLBAR
+    </mat-toolbar>
+</div>
+
+<h1 *ngFor="let item of list" > lushan jayanath </h1> -->
+
+
+
+
+
+
+<mat-toolbar color="primary" layout="row" style="position: fixed;">
+  <button mat-icon-button class="menu-icon">
+    <mat-icon (click)="sidenav.toggle()" class="mat-24" aria-label="Menu">menu</mat-icon>
+  </button>
+  <a mat-button [routerLink]="['/home']">
+    <h2>Photo Gallery</h2>
+  </a>
+  <span class="toolbar-spacer"></span>
+
+  <span mat-icon-button [matMenuTriggerFor]="appMenu">
+    <mat-icon class="toolbar-icon">settings</mat-icon>
+  </span>
+  <mat-menu #appMenu="matMenu">
+    <a mat-menu-item [routerLink]="['/home']">home</a>
+    <a mat-menu-item [routerLink]="['album/AddAlbum']">add album</a>
+    <a mat-menu-item [routerLink]="['album/createAlbum']">upload your images</a>
+  </mat-menu>
+
 </mat-toolbar>
+<mat-sidenav-container class="example-container" fullscreen style="margin-top: 62px ">
+  <mat-sidenav #sidenav class="sidenav">
+    <h4 class="subheader">Menu</h4>
+  </mat-sidenav>
+  <div class="content">
+    <div fxFlexOffset.gt-sm="15%" fxFlex.gt-sm="70%">
+      <router-outlet></router-outlet>
+    </div>
+    <div style="padding: 5px;"></div>
+  </div>
+</mat-sidenav-container>
+
+
+
+
+
+
+
+
+<!-- 
 <div>
   <div fxFlexOffset.gt-sm="15%" fxFlex.gt-sm="70%">
-    <router-outlet></router-outlet>
+
   </div>
-</div>
+</div> -->
