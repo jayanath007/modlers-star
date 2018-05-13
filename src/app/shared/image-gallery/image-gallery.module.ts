@@ -6,11 +6,13 @@ import { CommonModule } from '@angular/common';
 import { ImageGalleryComponent } from './image-gallery.component';
 import { GalleryViewComponent } from './gallery-view/gallery-view.component';
 import { CommentBoxDesktopModule } from '../comment/comment-desktop/comment-box-desktop.module';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   imports: [
     CommonModule,
     CommentBoxDesktopModule,
+    MatProgressSpinnerModule,
   ],
   exports: [
     ImageGalleryComponent,
