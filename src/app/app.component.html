@@ -1,27 +1,8 @@
-<!--The content below is only a placeholder and can be replaced.-->
-
-
-<!-- <mat-toolbar color="primary">
-  <span>modlers star</span>
-</mat-toolbar>
-<div style="text-align:center">
-<app-home></app-home>
-
-</div> 
-  -->
-
 <mat-toolbar color="primary">
   <div fxLayoutAlign="space-between center" class="nav-buttons">
-   <button mat-button [routerLink]="['/home']">Photo Gallery</button>
-    <!-- <div *ngIf="!(authService.user$ | async)?.uid"> -->
-      <!-- <button class="login" mat-button (click)="authService.login()">Login</button> -->
-    <!-- </div> -->
-    <!-- <div *ngIf="(authService.user$ | async)?.uid"> -->
-      <button mat-button [routerLink]="['album/createAlbum']">upload your images</button>
-      <button mat-button [routerLink]="['album/AddAlbum']">AddAlbum</button>
-      
-      <!-- <button class="logout" mat-button (click)="authService.logout()">Logout</button> -->
-    <!-- </div> -->
+    <button mat-button [routerLink]="['/home']">Photo Gallery</button>
+    <button mat-button [routerLink]="['album/AddAlbum']">AddAlbum</button>
+      <!-- <button mat-button [routerLink]="['album/createAlbum']">upload your images</button> -->
   </div>
 </mat-toolbar>
 <div>

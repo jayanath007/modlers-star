@@ -1,6 +1,5 @@
 import { OverlayRef } from '@angular/cdk/overlay';
-import { Subject } from 'rxjs/Subject';
-import { Observable } from 'rxjs/Observable';
+import { Subject ,  Observable } from 'rxjs';
 
 import { filter, take } from 'rxjs/operators';
 import { FilePreviewOverlayComponent } from './file-preview-overlay/file-preview-overlay.component';

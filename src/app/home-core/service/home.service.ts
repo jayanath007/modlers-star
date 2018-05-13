@@ -1,5 +1,6 @@
+
+import {throwError as observableThrowError,  Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { Album } from '../../shared/models/album';
 
@@ -23,7 +24,7 @@ export class HomeService {
 
     private errorHandler(error) {
         console.log(error);
-        return Observable.throw(error.message);
+        return observableThrowError(error.message);
     }
 
 

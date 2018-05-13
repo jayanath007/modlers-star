@@ -3,7 +3,7 @@ import { MatIconRegistry } from '@angular/material';
 
 import { Component } from '@angular/core';
 import { AngularFireDatabase, AngularFireList, AngularFireObject } from 'angularfire2/database';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 
 @Component({

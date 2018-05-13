@@ -1,7 +1,5 @@
 import { UtilsService } from './shared/Utils.service';
 import { FlexLayoutModule } from '@angular/flex-layout';
-
-
 import 'hammerjs';
 import 'firebase/storage'; // global firebase storage js;
 import { BrowserModule } from '@angular/platform-browser';
@@ -15,7 +13,8 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   MatButtonModule,
-  MatToolbarModule
+  MatToolbarModule,
+  MatCardModule
 } from '@angular/material';
 import { AppRouteRoutes } from './app-route.routing';
 import {MatIconModule} from '@angular/material/icon';
@@ -42,6 +41,7 @@ const firebaseConfig = {
     AngularFireAuthModule,
     MatToolbarModule,
     MatButtonModule,
+    MatCardModule,
     BrowserModule,
     FlexLayoutModule,
     MatIconModule,

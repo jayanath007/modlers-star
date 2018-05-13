@@ -1,7 +1,7 @@
 // import { Injectable } from '@angular/core';
 // import { Effect, Actions, toPayload } from '@ngrx/effects';
 // import { Router } from '@angular/router';
-// import { Observable } from 'rxjs/Observable';
+// import { Observable } from 'rxjs';
 // import { Action } from '@ngrx/store';
 
 // import { CompanyService } from '../company/company.service';

@@ -1,28 +1,28 @@
-mat-card {
-  margin: 10px 0px 20px 0px;
-}
+// mat-card {
+//   margin: 10px 0px 20px 0px;
+// }
 
 .example-card {
     max-height: 150px;
     padding: 5px 5px 0px 0px;
-    // background-color:rgb(25, 78, 170);  
   }
 
 
-    // .image-view{
-    //  display: inline-block;
-    //  height: 150px;
-    //  overflow: hidden;
-    //  padding: 5px;
+    .image-view{
+     display: inline-block;
+     height: 150px;
+     overflow: hidden;
+     padding: 5px;
+    }
+  
+    // .example-card {
+    //   max-width: 400px;
     // }
     
-
-
-  
-  .example-header-image {
-    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
-    background-size: cover;
-  }
+    .example-header-image {
+      background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+      background-size: cover;
+    }
 
 
   
@@ -34,21 +34,21 @@ mat-card {
 //   text-transform: uppercase
 // }
 
-.sec2 {
-  background: yellow;
-  color:blue;
+// .sec2 {
+//   background: yellow;
+//   color:blue;
   
-}
+// }
 
-.sec3 {
-  background: blue;
-  color:white;
-  text-transform: uppercase
-}
+// .sec3 {
+//   background: blue;
+//   color:white;
+//   text-transform: uppercase
+// }
 
 
 
-.content {
-  min-width: 300px;
-  height: 100px;
-}
+// .content {
+//   min-width: 300px;
+//   height: 100px;
+// }

@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { HomeService } from '../../home-core/service/home.service';
 import { ImageGalleryComponent } from '../../shared/image-gallery/image-gallery.component';
 import { GalleryImage } from '../../shared/image-gallery/config';
