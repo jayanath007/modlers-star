@@ -1,16 +1,10 @@
-
    .example-card {
        max-height: 200px;
        padding: 5px 5px 0px 0px;
     }
-
-    .image-view{
-     display: inline-block;
-     height: 200px;
-     overflow: hidden;
-     padding: 5px;
+    mat-card {
+      margin-top:25px;
     }
-  
     .example-header-image {
       background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
       background-size: cover;

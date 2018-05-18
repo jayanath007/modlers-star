@@ -1,8 +1,6 @@
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material';
-
 import { Component } from '@angular/core';
-import { AngularFireDatabase, AngularFireList, AngularFireObject } from 'angularfire2/database';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { UtilsService } from './shared/Utils.service';
