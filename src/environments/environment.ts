@@ -5,12 +5,14 @@
 
 export const environment = {
   production: false,
-   firebaseConfig : {
-    apiKey: 'AIzaSyDO4WN4ugiloTsArr1KktR-nVZyJP8s1G8',
-    authDomain: 'modlers-star.firebaseapp.com',
-    databaseURL: 'https://modlers-star.firebaseio.com',
-    projectId: 'modlers-star',
-    storageBucket: 'modlers-star.appspot.com',
-    messagingSenderId: '268108510880'
-  }
+
 };
+
+export const firebaseConfig = {
+  apiKey: 'AIzaSyDO4WN4ugiloTsArr1KktR-nVZyJP8s1G8',
+  authDomain: 'modlers-star.firebaseapp.com',
+  databaseURL: 'https://modlers-star.firebaseio.com',
+  projectId: 'modlers-star',
+  storageBucket: 'modlers-star.appspot.com',
+  messagingSenderId: '268108510880'
+}

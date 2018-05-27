@@ -17,15 +17,21 @@ import {
   MatCardModule, MatFormFieldModule, MatSelectModule, MatIconModule,
   MatMenuModule, MatSidenavModule, MatListModule
 } from '@angular/material';
-import { environment } from '../environments/environment';
+
 import { PaginationService } from './shared/pagination.service';
 import { AngularFirestore, AngularFirestoreModule } from 'angularfire2/firestore';
 import {HttpClientModule, HttpClient} from '@angular/common/http';
 import { ScrollableDirective } from './shared/scrollable.directive';
 
-
 // Initialize Firebase
-
+const firebaseConfig = {
+  apiKey: 'AIzaSyDO4WN4ugiloTsArr1KktR-nVZyJP8s1G8',
+  authDomain: 'modlers-star.firebaseapp.com',
+  databaseURL: 'https://modlers-star.firebaseio.com',
+  projectId: 'modlers-star',
+  storageBucket: 'modlers-star.appspot.com',
+  messagingSenderId: '268108510880'
+};
 
 @NgModule({
   declarations: [
@@ -35,7 +41,7 @@ import { ScrollableDirective } from './shared/scrollable.directive';
   imports: [
     AppRouteRoutes,
     BrowserAnimationsModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule,
     MatToolbarModule,
     MatButtonModule,
