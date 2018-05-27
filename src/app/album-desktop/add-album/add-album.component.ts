@@ -19,6 +19,7 @@ export class AddAlbumComponent implements OnInit {
   ngOnInit() {
   }
   saveAlbum(album: Album) {
+    album.rating = Math.random() * 100;
     this.albumService.saveAlbum(album);
   }
 

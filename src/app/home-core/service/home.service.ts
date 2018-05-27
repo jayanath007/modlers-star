@@ -22,7 +22,8 @@ export class HomeService {
         return this.db.object(`albums/${albumKey}`).valueChanges();
     }
 
-    getAlbumNew(batch, lastKey?) {
+
+    getMovies(batch, lastKey?) {
         const query = {
             orderByKey: true,
             limitToFirst: batch,
@@ -31,8 +32,10 @@ export class HomeService {
         if (lastKey) {
             query['startAt'] = lastKey;
         }
-        return this.db.list('/movies', query);
+       // return this.db.list('/movies', { query });
     }
+
+
 
     private errorHandler(error) {
         console.log(error);

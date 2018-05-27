@@ -1,36 +1,32 @@
 
-import {throwError as observableThrowError,  Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { Album } from '../../shared/models/album';
-
-
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class AlbumService {
 
-    albums$: AngularFireList<Album>;
 
-    constructor(private db: AngularFireDatabase) {
-        this.albums$ = this.db.list('albums');
+    albumsCol: AngularFirestoreCollection<Album>;
+    albums$: Observable<Album[]>;
+
+
+    constructor(private afs: AngularFirestore) {
+        this.albumsCol = this.afs.collection('albums');
     }
 
-    getAlbums() {
-        return this.albums$.valueChanges();
-    }
-    getAlbum(albumKey: string) {
-        return this.db.object(`albums/${albumKey}`).valueChanges();
-    }
 
-    private errorHandler(error) {
-        console.log(error);
-        return observableThrowError(error.message);
+    getAlbum() {
+        return this.albums$ = this.albumsCol.valueChanges();
     }
 
 
     saveAlbum(album: Album) {
-        return this.albums$.push(album)
-          .then(_ => console.log('album success'));
-      }
+        return this.albumsCol.add(album)
+            .then(_ => console.log('album success'));
+    }
 
 }

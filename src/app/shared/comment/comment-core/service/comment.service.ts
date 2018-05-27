@@ -8,28 +8,29 @@ import { Comment } from '../../models/comment';
 @Injectable()
 export class CommentService {
 
-    comments$: AngularFireList<Comment>;
+    // comments$: AngularFireList<Comment>;
 
-    constructor(private db: AngularFireDatabase) {
-        this.comments$ = this.db.list('comments');
+    constructor() {
+        // private db: AngularFireDatabase
+        // this.comments$ = this.db.list('comments');
     }
 
     getComments() {
-        return this.comments$.valueChanges();
+       // return this.comments$.valueChanges();
     }
     getComment(albumKey: string) {
-        return this.db.object(`comments/${albumKey}`).valueChanges();
+        // return this.db.object(`comments/${albumKey}`).valueChanges();
     }
 
     private errorHandler(error) {
         console.log(error);
-        return observableThrowError(error.message);
+        // return observableThrowError(error.message);
     }
 
 
     saveComment(album: Comment) {
-        return this.comments$.push(album)
-          .then(_ => console.log('Comment success'));
+        // return this.comments$.push(album)
+        //   .then(_ => console.log('Comment success'));
       }
 
 }

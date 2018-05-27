@@ -14,30 +14,29 @@ import { AppRouteRoutes } from './app-route.routing';
 import {
   MatButtonModule,
   MatToolbarModule,
-  MatCardModule, MatFormFieldModule, MatSelectModule, MatIconModule, MatMenuModule, MatSidenavModule, MatListModule
+  MatCardModule, MatFormFieldModule, MatSelectModule, MatIconModule,
+  MatMenuModule, MatSidenavModule, MatListModule
 } from '@angular/material';
+import { environment } from '../environments/environment';
+import { PaginationService } from './shared/pagination.service';
+import { AngularFirestore, AngularFirestoreModule } from 'angularfire2/firestore';
+import {HttpClientModule, HttpClient} from '@angular/common/http';
+import { ScrollableDirective } from './shared/scrollable.directive';
 
 
 // Initialize Firebase
-const firebaseConfig = {
-  apiKey: 'AIzaSyDO4WN4ugiloTsArr1KktR-nVZyJP8s1G8',
-  authDomain: 'modlers-star.firebaseapp.com',
-  databaseURL: 'https://modlers-star.firebaseio.com',
-  projectId: 'modlers-star',
-  storageBucket: 'modlers-star.appspot.com',
-  messagingSenderId: '268108510880'
-};
+
 
 @NgModule({
   declarations: [
     AppComponent,
+    ScrollableDirective
   ],
   imports: [
     AppRouteRoutes,
     BrowserAnimationsModule,
-    AngularFireModule.initializeApp(firebaseConfig),
-    AngularFireDatabaseModule,
-    AngularFireAuthModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFirestoreModule,
     MatToolbarModule,
     MatButtonModule,
     MatCardModule,
@@ -49,8 +48,11 @@ const firebaseConfig = {
     MatMenuModule,
     MatSidenavModule,
     MatListModule,
+    HttpClientModule,
   ],
-  providers: [UtilsService],
+  providers: [UtilsService,
+    PaginationService],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

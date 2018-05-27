@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 import { MatCardModule, MatButtonModule } from '@angular/material';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { MatListModule} from '@angular/material/list';
+import { MatListModule } from '@angular/material/list';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { DynamicFormModule } from '../shared/dynamic-form/dynamic-form.module';
@@ -14,7 +14,8 @@ import { HomeCoreModule } from '../home-core/home-core.module';
 import { ImageGalleryModule } from '../shared/image-gallery/image-gallery.module';
 import { CommentBoxDesktopModule } from '../shared/comment/comment-desktop/comment-box-desktop.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
-
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 const routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -35,9 +36,11 @@ const routes = [
     ImageGalleryModule,
     CommentBoxDesktopModule,
     FlexLayoutModule,
+    InfiniteScrollModule,
+    MatProgressSpinnerModule,
   ],
   declarations: [
     HomeComponent,
-]
+  ]
 })
 export class HomeDesktopModule { }
