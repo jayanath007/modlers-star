@@ -1,4 +1,4 @@
-<mat-card *ngFor="let album of albums$ | async">
+<mat-card *ngFor="let album of page.data | async">
   <mat-card-header>
     <div mat-card-avatar class="example-header-image"></div>
     <mat-card-title>modler name </mat-card-title>
@@ -6,12 +6,6 @@
       copes very well with mountainous terrain, the Shiba Inu was originally bred for hunting.</mat-card-subtitle>
   </mat-card-header>
   <mat-divider></mat-divider>
-
-  <!-- <div fxLayout="row">
-    <div fxFlex="0 1 auto" class="sec1" fxLayoutAlign="start center" *ngFor="let item of album.imageUrls; let i = index">
-      <img class="example-card" [src]="item" alt="album image profile" (click)="openGallery(i, album.imageUrls)">
-    </div>
-  </div> -->
 
   <div class="bounds">
     <div class="content" fxLayout="row" fxLayoutAlign="center center" fxFlexFill>
@@ -31,6 +25,13 @@
     <app-comment-box></app-comment-box>
   </mat-card-content>
 </mat-card>
+
+
+<div fxLayout="column" >
+    <div fxLayoutAlign="space-around center" >
+      <mat-spinner *ngIf="page.loading | async"></mat-spinner>
+    </div>
+  </div>
 
 <app-image-gallery>
 </app-image-gallery>

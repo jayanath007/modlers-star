@@ -2,7 +2,7 @@ import { CreateAlbumComponent } from '../album-desktop/create-album/create-album
 import { RouterModule } from '@angular/router';
 import { NgModule, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatCardModule, MatButtonModule } from '@angular/material';
+import { MatCardModule, MatButtonModule, MatProgressSpinnerModule } from '@angular/material';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatListModule} from '@angular/material/list';
@@ -35,6 +35,7 @@ const routes = [
     ImageGalleryModule,
     CommentBoxDesktopModule,
     FlexLayoutModule,
+    MatProgressSpinnerModule,
   ],
   declarations: [
     HomeComponent,

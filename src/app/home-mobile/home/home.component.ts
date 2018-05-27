@@ -1,9 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { AngularFireDatabase } from 'angularfire2/database';
-import { Observable } from 'rxjs';
-import { HomeService } from '../../home-core/service/home.service';
+
+import { ViewChild, Component } from '@angular/core';
 import { ImageGalleryComponent } from '../../shared/image-gallery/image-gallery.component';
+import { PaginationService } from '../../shared/pagination.service';
 import { GalleryImage } from '../../shared/image-gallery/config';
+import { HomeBase } from '../../home-core/home.base';
 
 
 @Component({
@@ -11,18 +11,13 @@ import { GalleryImage } from '../../shared/image-gallery/config';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent extends HomeBase {
+
   @ViewChild(ImageGalleryComponent) imageGalleryComponent: ImageGalleryComponent;
 
-  albums$: Observable<any[]>;
-  constructor(private albumService: HomeService) {
-    this.albums$ = this.albumService.getAlbums();
+  constructor(public page: PaginationService) {
+    super(page);
   }
-
-  ngOnInit() {
-
-  }
-
 
   openGallery(index, imageUrls: string[]) {
     const galleryImages: GalleryImage[] = imageUrls.map((url) => {

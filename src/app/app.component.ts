@@ -24,21 +24,4 @@ export class AppComponent {
     }
   }
 
-  scrollHandler(event) {
-    try {
-      const top = event.target.scrollTop;
-      const height = event.target.scrollHeight;
-      const offset = event.target.offsetHeight;
-      if (top > height - offset - 1) {
-        console.log('bottom');
-      }
-      if (top === 0) {
-         console.log('top');
-      }
-
-    } catch (err) { }
-    // should log top or bottom
-  }
-
-
 }

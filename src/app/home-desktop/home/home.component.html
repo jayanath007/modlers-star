@@ -1,28 +1,28 @@
-<div class="content"  (scroll)="scrollHandler($event)" class="content">
+<mat-card *ngFor="let album of page.data | async">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>modler name </mat-card-title>
+    <mat-card-subtitle> The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that
+      copes very well with mountainous terrain, the Shiba Inu was originally bred for hunting.</mat-card-subtitle>
+  </mat-card-header>
+  <mat-divider></mat-divider>
 
-  <mat-card *ngFor="let album of page.data | async">
-    <mat-card-header>
-      <div mat-card-avatar class="example-header-image"></div>
-      <mat-card-title>modler name </mat-card-title>
-      <mat-card-subtitle> The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that
-        copes very well with mountainous terrain, the Shiba Inu was originally bred for hunting.</mat-card-subtitle>
-    </mat-card-header>
-    <mat-divider></mat-divider>
-
-    <div fxLayout="row" style="overflow: hidden;">
-      <div fxFlex="0 1 auto" class="sec1" fxLayoutAlign="start center" *ngFor="let item of album.imageUrls; let i = index">
-        <img class="example-card" [src]="item" alt="album image profile" (click)="openGallery(i, album.imageUrls)">
-      </div>
+  <div fxLayout="row" style="overflow: hidden;">
+    <div fxFlex="0 1 auto" class="sec1" fxLayoutAlign="start center" *ngFor="let item of album.imageUrls; let i = index">
+      <img class="example-card" [src]="item" alt="album image profile" (click)="openGallery(i, album.imageUrls)">
     </div>
-    <mat-card-content>
-      <app-comment-box></app-comment-box>
-    </mat-card-content>
-  </mat-card>
+  </div>
+  <mat-card-content>
+    <app-comment-box></app-comment-box>
+  </mat-card-content>
+</mat-card>
 
-  <p *ngIf="page.done | async">I ran out of boats!</p>
-  <mat-spinner *ngIf="page.loading | async"></mat-spinner>
-
+<div fxLayout="column">
+  <div fxLayoutAlign="space-around center">
+    <mat-spinner *ngIf="page.loading | async"></mat-spinner>
+  </div>
 </div>
+
 
 
 
