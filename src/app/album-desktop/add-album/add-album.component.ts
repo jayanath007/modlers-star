@@ -2,7 +2,7 @@ import * as firebase from 'firebase/app'; // typings only
 import { Component, OnInit } from '@angular/core';
 
 import { AlbumService } from '../../album-core/service/album.service';
-import { Album } from '../../shared/models/album';
+import { Album } from '../../models/models';
 
 @Component({
   selector: 'app-add-album',

@@ -16,6 +16,7 @@ import { CommentBoxDesktopModule } from '../shared/comment/comment-desktop/comme
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { StarReviewModule } from '../star-review/star-review.module';
 
 const routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -38,6 +39,7 @@ const routes = [
     FlexLayoutModule,
     InfiniteScrollModule,
     MatProgressSpinnerModule,
+    StarReviewModule,
   ],
   declarations: [
     HomeComponent,

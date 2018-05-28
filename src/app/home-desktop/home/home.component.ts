@@ -3,6 +3,7 @@ import { ImageGalleryComponent } from '../../shared/image-gallery/image-gallery.
 import { PaginationService } from '../../shared/pagination.service';
 import { GalleryImage } from '../../shared/image-gallery/config';
 import { HomeBase } from '../../home-core/home.base';
+import { AuthService } from '../../core/auth.service';
 
 
 @Component({
@@ -14,7 +15,7 @@ export class HomeComponent extends HomeBase {
 
   @ViewChild(ImageGalleryComponent) imageGalleryComponent: ImageGalleryComponent;
 
-  constructor(public page: PaginationService) {
+  constructor(public page: PaginationService, public auth: AuthService) {
     super(page);
   }
 

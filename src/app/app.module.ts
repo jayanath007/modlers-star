@@ -1,3 +1,4 @@
+import { CoreModule } from './core/core.module';
 import { UtilsService } from './shared/Utils.service';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import 'hammerjs';
@@ -20,8 +21,9 @@ import {
 
 import { PaginationService } from './shared/pagination.service';
 import { AngularFirestore, AngularFirestoreModule } from 'angularfire2/firestore';
-import {HttpClientModule, HttpClient} from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { ScrollableDirective } from './shared/scrollable.directive';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 // Initialize Firebase
 const firebaseConfig = {
@@ -42,7 +44,7 @@ const firebaseConfig = {
     AppRouteRoutes,
     BrowserAnimationsModule,
     AngularFireModule.initializeApp(firebaseConfig),
-    AngularFirestoreModule,
+    CoreModule,
     MatToolbarModule,
     MatButtonModule,
     MatCardModule,

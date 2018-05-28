@@ -1,0 +1,36 @@
+<div *ngIf="post$ | async as post">
+
+  <h1>{{ post.title }}</h1>
+
+  <p>{{ post.content }}</p>
+
+  <p>Last Comment: {{ post.lastActivity }}</p><br>
+  <p>Total Comments: {{ post.commentCount }}</p>
+
+  <h3>Add your Comment</h3>
+
+  <input [(ngModel)]="formValue" (keyup.enter)="addComment()">
+
+  <h3>Recent Comments</h3>
+
+  <!-- Aggregated comments on the post document -->
+  <ng-container *ngIf="!comments$">
+    <div *ngFor="let comment of post.recentComments">
+      <p>{{ comment.content }}</p>
+      <em>posted {{ comment.createdAt }}</em>
+      <hr>
+    </div>
+  </ng-container>
+
+  <!-- Firestore comment documents from the subcollection -->
+  <div *ngFor="let comment of comments$ | async">
+      <p>{{ comment.content }}</p>
+      <em>posted {{ comment.createdAt }}</em>
+      <hr>
+  </div>
+
+  <button (click)="loadMore()">
+    Load all {{ post.commentCount }} comments
+  </button>
+
+</div>

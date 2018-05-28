@@ -20,6 +20,7 @@ export class AppComponent {
       this.router.resetConfig([
         { path: '', loadChildren: 'app/home-mobile/home-mobile.module#HomeMobileModule' },
         { path: 'album', loadChildren: 'app/album-desktop/album-desktop.module#AlbumDesktopModule' },
+        { path: 'user', loadChildren: 'app/user-profile/user-profile.module#UserProfileModule' },
       ]);
     }
   }
