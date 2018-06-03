@@ -4,6 +4,7 @@ import { ImageGalleryComponent } from '../../shared/image-gallery/image-gallery.
 import { PaginationService } from '../../shared/pagination.service';
 import { GalleryImage } from '../../shared/image-gallery/config';
 import { HomeBase } from '../../home-core/home.base';
+import { Album } from '../../models/models';
 
 
 @Component({
@@ -19,10 +20,17 @@ export class HomeComponent extends HomeBase {
     super(page);
   }
 
-  openGallery(index, imageUrls: string[]) {
-    const galleryImages: GalleryImage[] = imageUrls.map((url) => {
-      return { url: url };
+  openGallery(index, album: Album) {
+    const galleryImages: GalleryImage[] = album.imageUrls.map((item) => {
+      return { url: item.url , albumId : album.id , id : item.id};
     });
     this.imageGalleryComponent.openGallery(index, galleryImages);
   }
+
+  // openGallery(index, imageUrls: string[]) {
+  //   const galleryImages: GalleryImage[] = imageUrls.map((url) => {
+  //     return { url: url };
+  //   });
+  //   this.imageGalleryComponent.openGallery(index, galleryImages);
+  // }
 }

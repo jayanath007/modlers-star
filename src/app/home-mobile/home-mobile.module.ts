@@ -14,6 +14,7 @@ import { HomeCoreModule } from '../home-core/home-core.module';
 import { ImageGalleryModule } from '../shared/image-gallery/image-gallery.module';
 import { CommentBoxDesktopModule } from '../shared/comment/comment-desktop/comment-box-desktop.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { CommentModule } from '../comment/comment.module';
 
 
 const routes = [
@@ -36,6 +37,7 @@ const routes = [
     CommentBoxDesktopModule,
     FlexLayoutModule,
     MatProgressSpinnerModule,
+    CommentModule,
   ],
   declarations: [
     HomeComponent,

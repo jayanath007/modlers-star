@@ -2,27 +2,31 @@
   <mat-card-header>
     <div mat-card-avatar class="example-header-image"></div>
     <mat-card-title>modler name </mat-card-title>
-    <mat-card-subtitle> The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that
-      copes very well with mountainous terrain, the Shiba Inu was originally bred for hunting.</mat-card-subtitle>
+    <mat-card-subtitle></mat-card-subtitle>
   </mat-card-header>
   <mat-divider></mat-divider>
 
   <div class="bounds">
     <div class="content" fxLayout="row" fxLayoutAlign="center center" fxFlexFill>
       <div fxFlex="50" class="sec1">
-        <img [src]="album.imageUrls[0]" (click)="openGallery(0, album.imageUrls)" alt="Photo of a Shiba Inu">
-        <img *ngIf="album.imageUrls.length > 1" [src]="album.imageUrls[1]" (click)="openGallery(1, album.imageUrls)" alt="Photo of a Shiba Inu">
+        <img [src]="album.imageUrls[0].url" (click)="openGallery(0, album)" alt="Photo of a Shiba Inu">
+        <img *ngIf="album.imageUrls.length > 1" [src]="album.imageUrls[1].url" (click)="openGallery(1, album)" alt="Photo of a Shiba Inu">
       </div>
       <div *ngIf="album.imageUrls.length > 2"  fxFlex="50" class="sec2">
-        <img [src]="album.imageUrls[2]" (click)="openGallery(2, album.imageUrls)" alt="Photo of a Shiba Inu">
-        <img *ngIf="album.imageUrls.length > 3" [src]="album.imageUrls[3]" (click)="openGallery(3, album.imageUrls)" alt="Photo of a Shiba Inu">
+        <img [src]="album.imageUrls[2].url" (click)="openGallery(2, album)" alt="Photo of a Shiba Inu">
+        <img *ngIf="album.imageUrls.length > 3" [src]="album.imageUrls[3].url" (click)="openGallery(3, album)" alt="Photo of a Shiba Inu">
       </div>
     </div>
   </div>
 
 
   <mat-card-content>
-    <app-comment-box></app-comment-box>
+
+      <app-comment
+      [documentRef]='"/albums/"+album.id + "/photoComments/abc"' 
+      [commentMaxHieght]='500'>
+    </app-comment>
+
   </mat-card-content>
   
 </mat-card>

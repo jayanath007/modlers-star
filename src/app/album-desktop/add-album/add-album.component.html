@@ -5,7 +5,7 @@
         </mat-input-container>
     <div>
         <input type="file" (change)="uploadFile($event)">
-        <img width="200px" *ngFor="let item of album.imageUrls" [src]="item" alt="album image profile">
+        <img width="200px" *ngFor="let item of album.imageUrls" [src]="item.url" alt="album image profile">
     </div>
 
 

@@ -9,12 +9,14 @@ import { CommonModule } from '@angular/common';
 import { ImageGalleryComponent } from './image-gallery.component';
 import { GalleryViewComponent } from './gallery-view/gallery-view.component';
 import { CommentBoxDesktopModule } from '../comment/comment-desktop/comment-box-desktop.module';
+import { CommentModule } from '../../comment/comment.module';
 
 
 @NgModule({
   imports: [
     CommonModule,
     CommentBoxDesktopModule,
+    CommentModule,
     MatProgressSpinnerModule,
   ],
   exports: [

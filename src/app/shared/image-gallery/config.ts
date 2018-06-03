@@ -20,6 +20,8 @@ export interface GalleryConf {
 export interface GalleryImage {
   _cached?: boolean;
   url: string;
+  id?: string;
+  albumId?: string;
   thumbnailUrl?: string;
   altText?: string;
   title?: string;

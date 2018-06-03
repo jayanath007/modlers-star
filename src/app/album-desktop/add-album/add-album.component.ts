@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { AlbumService } from '../../album-core/service/album.service';
 import { Album } from '../../models/models';
+import { uuid } from '../../shared/util/uid';
 
 @Component({
   selector: 'app-add-album',
@@ -33,7 +34,8 @@ export class AddAlbumComponent implements OnInit {
     const storageRef = firebase.storage().ref(`images/${key}`);
     storageRef.put(file)
       .then((uploadTask) => {
-        this.album.imageUrls.push(uploadTask.downloadURL);
+        const uid = uuid();
+        this.album.imageUrls.push({ id: uid, url: uploadTask.downloadURL });
       });
   }
 

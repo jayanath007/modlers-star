@@ -3,9 +3,7 @@
     <!-- images -->
     <div class="images-container" (swiperight)="prev()" (swipeleft)="next()">
         <!-- images array -->
-        <div class="image" *ngFor="let image of images; let i = index;"
-         [class.active]="!loading && (i == activeImageIndex)" 
-         [ngStyle]="{top: conf.imageOffset, bottom: conf.imageOffset}">
+        <div class="image" *ngFor="let image of images; let i = index;" [class.active]="!loading && (i == activeImageIndex)" [ngStyle]="{top: conf.imageOffset, bottom: conf.imageOffset}">
             <img class="image-view" *ngIf="i == activeImageIndex" [src]="image.url" [alt]="image.altText || ''" [style.cursor]="conf.imagePointer?  'pointer':'default'"
                 [style.borderRadius]="conf.imageBorderRadius" (click)="clickOnImage(activeImageIndex)" />
         </div>
@@ -15,7 +13,11 @@
     </div>
     <!-- info and thumbnails -->
     <div class="info-container">
-        <app-comment-box [commentMaxHieght]="commentBoxMaxHieght" ></app-comment-box>
+        <app-comment
+        [documentRef]='"/albums/"+ images[this.activeImageIndex]?.albumId 
+         + "/photoComments/"+ images[this.activeImageIndex]?.id' 
+        [commentMaxHieght]=commentBoxMaxHieght>
+      </app-comment>
     </div>
 </div>
 
@@ -30,4 +32,3 @@
         <div class="feedback"></div>
     </div>
 </div>
-

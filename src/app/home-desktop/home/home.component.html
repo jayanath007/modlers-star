@@ -9,7 +9,7 @@
 
   <div fxLayout="row"   class="bounds" style="overflow: hidden;">
     <div fxFlex="0 1 auto" class="sec1" fxLayoutAlign="start center" *ngFor="let item of album.imageUrls; let i = index">
-      <img class="example-card" [src]="item" alt="album image profile" (click)="openGallery(i, album.imageUrls)">
+      <img class="example-card" [src]="item.url" alt="album image profile" (click)="openGallery(i, album)">
     </div>
   </div>
   <mat-card-content>
@@ -18,9 +18,6 @@
       [commentMaxHieght]='500'>
     </app-comment>
 
-    <!-- <app-star-review [albumId]="album.id" [userId]="(auth.user | async )?.uid">
-    </app-star-review> -->
-    <!-- <app-comment-box></app-comment-box> -->
   </mat-card-content>
 
 </mat-card>

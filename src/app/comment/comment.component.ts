@@ -1,5 +1,5 @@
 import { User } from './../models/models';
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, SimpleChanges, OnChanges } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import {
   AngularFirestore,
@@ -17,7 +17,7 @@ import { AuthService } from '../core/auth.service';
   templateUrl: './comment.component.html',
   styleUrls: ['./comment.component.scss']
 })
-export class CommentComponent implements OnInit, OnDestroy {
+export class CommentComponent implements OnInit, OnDestroy, OnChanges {
 
 
   @Input() documentRef: string;
@@ -37,21 +37,27 @@ export class CommentComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    this.documentRef$ = this.afs.doc(this.documentRef);
-    this.documentRef$.valueChanges().takeUntil(this.unsubscribe)
-      .subscribe((data) => {
-        if (data) {
-          this.totalComent = data.commentCount;
-          this.comments$.next(data.recentComments);
-        }
-      });
-    this.commentsCollectionRef = this.documentRef$.collection('comments', ref => ref.orderBy('createdAt', 'desc'));
   }
 
 
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.documentRef) {
+      this.totalComent = null;
+      this.comments$.next([]);
+      this.afs.doc(this.documentRef).valueChanges().takeUntil(this.unsubscribe)
+        .subscribe((data) => {
+          if (data) {
+            this.totalComent = data['commentCount'];
+            this.comments$.next(data['recentComments']);
+          }
+        });
+
+    }
+  }
+
 
   addComment(user) {
-    this.commentsCollectionRef.add({
+    this.afs.doc(this.documentRef).collection('comments').add({
       content: this.formValue, createdAt: new Date(),
       userName: user.displayName, photoURL: user.photoURL
     });
@@ -63,7 +69,8 @@ export class CommentComponent implements OnInit, OnDestroy {
 
     this.unsubscribe.next();
     this.unsubscribe.complete();
-    this.commentsCollectionRef
+
+    this.afs.doc(this.documentRef).collection('comments')
       .valueChanges().takeUntil(this.unsubscribeAllcoment)
       .subscribe((data) => {
         this.comments$.next(data);

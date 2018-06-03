@@ -7,11 +7,17 @@ export interface User {
   displayName?: string;
 }
 
+
+export interface ImageInfo {
+  id: string;
+  url: string;
+}
+
 export interface Album {
   key: string;
   name: string;
   category: Array<string>;
-  imageUrls: Array<string>;
+  imageUrls: Array<ImageInfo>;
   modler: string;
   likes: number;
   rating: number;
