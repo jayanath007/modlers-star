@@ -13,9 +13,9 @@
     </div>
   </div>
   <mat-card-content>
-
-    <app-comment [album]='album' [commentMaxHieght]='500'>
-
+    <app-comment
+      [documentRef]='"/albums/"+album.id + "/photoComments/abc"' 
+      [commentMaxHieght]='500'>
     </app-comment>
 
     <!-- <app-star-review [albumId]="album.id" [userId]="(auth.user | async )?.uid">

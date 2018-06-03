@@ -3,7 +3,7 @@
     <div fxFlex>
       <button class="comment-count " mat-button color="primary" fxlayout="row" fxlayoutalign="start center" (click)="loadMore()">
         {{ totalComent }} comments
-        <mat-icon [hidden]="(totalComent === (comments$ | async)?.length || totalComent < 6)">keyboard_arrow_down</mat-icon>
+        <mat-icon [hidden]="(totalComent === (comments$ | async)?.length || !totalComent || totalComent < 6)">keyboard_arrow_down</mat-icon>
       </button>
     </div>
   </div>

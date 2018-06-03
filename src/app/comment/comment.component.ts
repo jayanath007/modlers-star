@@ -20,40 +20,41 @@ import { AuthService } from '../core/auth.service';
 export class CommentComponent implements OnInit, OnDestroy {
 
 
-  @Input() album: Album;
+  @Input() documentRef: string;
   @Input() commentMaxHieght;
-  totalComent: number;
-  pageSiez: number;
 
-  albumRef$: AngularFirestoreDocument<any>;
-  commentsRef: AngularFirestoreCollection<any>;
+  pageSiez: number;
+  totalComent: number;
+  documentRef$: AngularFirestoreDocument<any>;
+  commentsCollectionRef: AngularFirestoreCollection<any>;
   comments$ = new BehaviorSubject([]);
   private unsubscribe: Subject<void> = new Subject();
   private unsubscribeAllcoment: Subject<void> = new Subject();
 
   formValue: string;
 
-  constructor(private afs: AngularFirestore , public auth: AuthService) { }
+  constructor(private afs: AngularFirestore, public auth: AuthService) { }
 
   ngOnInit() {
 
-    this.pageSiez = 5;
-    this.totalComent = this.album.commentCount;
-    this.comments$.next(this.album.recentComments);
-    this.albumRef$ = this.afs.doc('/albums/' + this.album.id);
-
-    this.albumRef$.valueChanges().takeUntil(this.unsubscribe)
-      .subscribe((data: Album) => {
-        if (this.totalComent !== data.commentCount) {
+    this.documentRef$ = this.afs.doc(this.documentRef);
+    this.documentRef$.valueChanges().takeUntil(this.unsubscribe)
+      .subscribe((data) => {
+        if (data) {
           this.totalComent = data.commentCount;
           this.comments$.next(data.recentComments);
         }
       });
-    this.commentsRef = this.albumRef$.collection('comments', ref => ref.orderBy('createdAt', 'desc'));
+    this.commentsCollectionRef = this.documentRef$.collection('comments', ref => ref.orderBy('createdAt', 'desc'));
   }
 
+
+
   addComment(user) {
-    this.commentsRef.add({ content: this.formValue, createdAt: new Date() , userName : user.displayName , photoURL:user.photoURL });
+    this.commentsCollectionRef.add({
+      content: this.formValue, createdAt: new Date(),
+      userName: user.displayName, photoURL: user.photoURL
+    });
     this.formValue = '';
   }
 
@@ -62,7 +63,7 @@ export class CommentComponent implements OnInit, OnDestroy {
 
     this.unsubscribe.next();
     this.unsubscribe.complete();
-    this.commentsRef
+    this.commentsCollectionRef
       .valueChanges().takeUntil(this.unsubscribeAllcoment)
       .subscribe((data) => {
         this.comments$.next(data);
