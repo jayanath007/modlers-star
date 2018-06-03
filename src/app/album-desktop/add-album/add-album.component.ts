@@ -11,7 +11,11 @@ import { Album } from '../../models/models';
 })
 export class AddAlbumComponent implements OnInit {
 
-  album = { name: '', modler: 'lushan', likes: 0, rating: 0, commentTotal: 0, rank: 0, imageUrls: [] } as Album;
+  album = {
+    name: '',
+    modler: 'lushan', likes: 0, rating: 0, commentCount: 0, rank: 0,
+    imageUrls: [], id: ''
+  } as Album;
   constructor(private albumService: AlbumService) {
 
   }

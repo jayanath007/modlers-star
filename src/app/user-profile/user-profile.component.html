@@ -29,7 +29,6 @@
       <h3> Upload your latest image and become a famous modler </h3>
       <img [src]="user.photoURL">
       <p>UID: {{ user.uid }}</p>
-      <p>Favorite Color: {{ user?.favoriteColor }} </p>
       <mat-card-actions align="left">
         <button mat-raised-button (click)="auth.signOut()">Logout</button>
       </mat-card-actions>

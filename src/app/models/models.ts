@@ -15,10 +15,19 @@ export interface Album {
   modler: string;
   likes: number;
   rating: number;
-  commentTotal: number;
   rank: number;
   userId: string;
+  id?: string;
+  commentCount: number;
+  recentComments: Comment[];
 }
+export interface Comment {
+  content: string;
+  createdAt: Date;
+  photoURL: string;
+  userName: string;
+}
+
 
 export interface Reaction {
   albumId: string;

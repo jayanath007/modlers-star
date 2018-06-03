@@ -2,20 +2,25 @@
   <mat-card-header>
     <div mat-card-avatar class="example-header-image"></div>
     <mat-card-title>modler name </mat-card-title>
-    <mat-card-subtitle>  </mat-card-subtitle>
+    <mat-card-subtitle> </mat-card-subtitle>
   </mat-card-header>
   <mat-divider></mat-divider>
 
-  <div fxLayout="row" style="overflow: hidden;">
+
+  <div fxLayout="row"   class="bounds" style="overflow: hidden;">
     <div fxFlex="0 1 auto" class="sec1" fxLayoutAlign="start center" *ngFor="let item of album.imageUrls; let i = index">
       <img class="example-card" [src]="item" alt="album image profile" (click)="openGallery(i, album.imageUrls)">
     </div>
   </div>
   <mat-card-content>
-    <!-- {{album.id}} -->
+
+    <app-comment [album]='album' [commentMaxHieght]='500'>
+
+    </app-comment>
+
     <!-- <app-star-review [albumId]="album.id" [userId]="(auth.user | async )?.uid">
     </app-star-review> -->
-    <app-comment-box></app-comment-box>
+    <!-- <app-comment-box></app-comment-box> -->
   </mat-card-content>
 
 </mat-card>
@@ -25,9 +30,6 @@
     <mat-spinner *ngIf="page.loading | async"></mat-spinner>
   </div>
 </div>
-
-
-
 
 <app-image-gallery>
 </app-image-gallery>

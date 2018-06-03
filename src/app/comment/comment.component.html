@@ -1,36 +1,36 @@
-<div *ngIf="post$ | async as post">
-
-  <h1>{{ post.title }}</h1>
-
-  <p>{{ post.content }}</p>
-
-  <p>Last Comment: {{ post.lastActivity }}</p><br>
-  <p>Total Comments: {{ post.commentCount }}</p>
-
-  <h3>Add your Comment</h3>
-
-  <input [(ngModel)]="formValue" (keyup.enter)="addComment()">
-
-  <h3>Recent Comments</h3>
-
-  <!-- Aggregated comments on the post document -->
-  <ng-container *ngIf="!comments$">
-    <div *ngFor="let comment of post.recentComments">
-      <p>{{ comment.content }}</p>
-      <em>posted {{ comment.createdAt }}</em>
-      <hr>
+<div class="comment-contener">
+  <div fxLayout="row">
+    <div fxFlex>
+      <button class="comment-count " mat-button color="primary" fxlayout="row" fxlayoutalign="start center" (click)="loadMore()">
+        {{ totalComent }} comments
+        <mat-icon [hidden]="(totalComent === (comments$ | async)?.length || totalComent < 6)">keyboard_arrow_down</mat-icon>
+      </button>
     </div>
-  </ng-container>
-
-  <!-- Firestore comment documents from the subcollection -->
-  <div *ngFor="let comment of comments$ | async">
-      <p>{{ comment.content }}</p>
-      <em>posted {{ comment.createdAt }}</em>
-      <hr>
   </div>
-
-  <button (click)="loadMore()">
-    Load all {{ post.commentCount }} comments
-  </button>
-
+  <div class="comment-content" [style.max-height.px]="commentMaxHieght -200">
+    <div class="content" fxLayout="row" fxFlexFill *ngFor="let comment of comments$ | async">
+      <div fxFlex class="image-container">
+        <img class="avatar" [src]="comment.photoURL">
+      </div>
+      <div fxFlex=" 1 1 auto" fxLayoutAlign="start center" class="sec2">
+        <div fxlayout="column">
+          <div fxlayout="row" fxlayoutalign="start center">
+            <span class="username">{{ comment.userName }} </span>
+            <span class="time">{{ comment.createdAt | date :'dd/MM/yyyy h:mm a' }}</span>
+          </div>
+          <div class="message"> {{ comment.content }} </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="comment-box" fxLayout="row" fxFlexFill *ngIf="auth.user | async as user">
+    <div fxFlex class="image-container">
+      <img class="avatar" [src]="user.photoURL">
+    </div>
+    <div fxFlex=" 1 1 auto" fxLayoutAlign="start center" class="sec2">
+      <mat-form-field class="example-full-width">
+        <textarea matInput placeholder="Leave a comment" [(ngModel)]="formValue" (keyup.enter)="addComment(user)"></textarea>
+      </mat-form-field>
+    </div>
+  </div>
 </div>

@@ -21,7 +21,7 @@ export class AuthService {
     uid: this.tempUid,
     email: 'testuser@yahoo.com',
     // tslint:disable-next-line:max-line-length
-    photoURL: 'https://firebasestorage.googleapis.com/v0/b/modlers-star.appspot.com/o/tempUser%2Fif_user-2_430127.svg?alt=media&token=b496813b-c194-4602-af8e-5a8b3a0b93bd',
+    photoURL: 'assets/avatars/profile.jpg',
     displayName: 'anonymous user',
   };
 
