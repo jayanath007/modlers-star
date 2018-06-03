@@ -24,6 +24,7 @@ import { AngularFirestore, AngularFirestoreModule } from 'angularfire2/firestore
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { ScrollableDirective } from './shared/scrollable.directive';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { AppDatePipe } from './shared/date.pipe';
 
 // Initialize Firebase
 const firebaseConfig = {
@@ -34,11 +35,12 @@ const firebaseConfig = {
   storageBucket: 'modlers-star.appspot.com',
   messagingSenderId: '268108510880'
 };
+// AppDatePipe
 
 @NgModule({
   declarations: [
     AppComponent,
-    ScrollableDirective
+    ScrollableDirective,
   ],
   imports: [
     AppRouteRoutes,

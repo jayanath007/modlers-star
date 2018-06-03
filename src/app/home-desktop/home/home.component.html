@@ -13,11 +13,11 @@
     </div>
   </div>
   <mat-card-content>
+      <app-star-review [albumId]="album.id" [userId]="(auth.user | async )?.uid"> </app-star-review>
     <app-comment
-      [documentRef]='"/albums/"+album.id + "/photoComments/abc"' 
+      [documentRef]='"/albums/"+album.id' 
       [commentMaxHieght]='500'>
     </app-comment>
-
   </mat-card-content>
 
 </mat-card>

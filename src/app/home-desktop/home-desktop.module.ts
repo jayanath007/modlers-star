@@ -14,7 +14,6 @@ import { HomeCoreModule } from '../home-core/home-core.module';
 import { ImageGalleryModule } from '../shared/image-gallery/image-gallery.module';
 import { CommentBoxDesktopModule } from '../shared/comment/comment-desktop/comment-box-desktop.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { StarReviewModule } from '../star-review/star-review.module';
 import { CommentModule } from '../comment/comment.module';
@@ -38,7 +37,6 @@ const routes = [
     ImageGalleryModule,
     CommentBoxDesktopModule,
     FlexLayoutModule,
-    InfiniteScrollModule,
     MatProgressSpinnerModule,
     StarReviewModule,
     CommentModule,
