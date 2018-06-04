@@ -24,7 +24,6 @@ import { AngularFirestore, AngularFirestoreModule } from 'angularfire2/firestore
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { ScrollableDirective } from './shared/scrollable.directive';
 import { UserProfileComponent } from './user-profile/user-profile.component';
-import { AppDatePipe } from './shared/date.pipe';
 
 // Initialize Firebase
 const firebaseConfig = {

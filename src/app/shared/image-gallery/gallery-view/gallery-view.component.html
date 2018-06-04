@@ -1,5 +1,5 @@
 <!-- images and image information container -->
-<div class="galleria" mouseWheel (mouseWheelDown)="mouseWheelDown()" (mouseWheelUp)="mouseWheelUp()" (contextmenu)="rightClickOnImage($event)">
+<div class="galleria"  (contextmenu)="rightClickOnImage($event)">
     <!-- images -->
     <div class="images-container" (swiperight)="prev()" (swipeleft)="next()">
         <!-- images array -->

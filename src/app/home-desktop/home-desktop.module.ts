@@ -40,6 +40,7 @@ const routes = [
     MatProgressSpinnerModule,
     StarReviewModule,
     CommentModule,
+    // StarRatingModule.forRoot()
   ],
   declarations: [
     HomeComponent,

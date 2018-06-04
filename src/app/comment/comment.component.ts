@@ -56,6 +56,11 @@ export class CommentComponent implements OnInit, OnDestroy, OnChanges {
   }
 
 
+  dateformat(timestamp) {
+    return new Date(timestamp * 1000);
+  }
+
+
   addComment(user) {
     this.afs.doc(this.documentRef).collection('comments').add({
       content: this.formValue, createdAt: new Date(),

@@ -1,6 +1,5 @@
 <div>
-    <div class="galleria" fxLayout="column" fxFlexFill mouseWheel (mouseWheelDown)="mouseWheelDown()" (mouseWheelUp)="mouseWheelUp()"
-        (contextmenu)="rightClickOnImage($event)">
+    <div class="galleria" fxLayout="column" fxFlexFill  (contextmenu)="rightClickOnImage($event)">
         <div fxFlex="1" class="images-container">
             <div class="image" *ngFor="let image of images; let i = index;" [class.active]="!loading
              && (i == activeImageIndex)" [ngStyle]="{top: conf.imageOffset, bottom: conf.imageOffset}">
