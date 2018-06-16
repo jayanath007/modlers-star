@@ -1,3 +1,4 @@
+import { LikeModule } from './../like/like.module';
 import { CreateAlbumComponent } from '../album-desktop/create-album/create-album.component';
 import { RouterModule } from '@angular/router';
 import { NgModule, Component } from '@angular/core';
@@ -38,8 +39,9 @@ const routes = [
     CommentBoxDesktopModule,
     FlexLayoutModule,
     MatProgressSpinnerModule,
-    StarReviewModule,
     CommentModule,
+    StarReviewModule,
+    LikeModule,
     // StarRatingModule.forRoot()
   ],
   declarations: [

@@ -47,3 +47,11 @@ export interface Star {
   value: number;
 }
 
+export interface Like {
+  userId: string;
+  albumId: string;
+  value: number;
+}
+
+
+

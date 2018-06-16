@@ -21,7 +21,6 @@ export class AuthService {
   tempUser: User = {
     uid: this.tempUid,
     email: 'testuser@yahoo.com',
-    // tslint:disable-next-line:max-line-length
     photoURL: 'assets/avatars/profile.jpg',
     displayName: 'anonymous user',
   };
@@ -29,17 +28,13 @@ export class AuthService {
   constructor(private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
     private router: Router) {
-
-    //// Get auth data, then get firestore user document || null
-    this.user = this.afAuth.authState
-      .switchMap(user => {
-        if (user) {
-          return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
-        } else {
-          return of(this.tempUser);
-          // return Observable.of(this.tempUser);
-        }
-      });
+    this.user = this.afAuth.authState.map((user) => {
+      if (user) {
+        return user;
+      } else {
+        return this.tempUser;
+      }
+    });
   }
 
 

@@ -7,17 +7,16 @@
   <mat-divider></mat-divider>
 
 
-  <div fxLayout="row"   class="bounds" style="overflow: hidden;">
+  <div fxLayout="row" class="bounds" style="overflow: hidden;">
     <div fxFlex="0 1 auto" class="sec1" fxLayoutAlign="start center" *ngFor="let item of album.imageUrls; let i = index">
       <img class="example-card" [src]="item.url" alt="album image profile" (click)="openGallery(i, album)">
     </div>
   </div>
   <mat-card-content>
 
-      <app-star-review [albumId]="album.id" [userId]="(auth.user | async )?.uid"> </app-star-review>
-    <app-comment
-      [documentRef]='"/albums/"+album.id' 
-      [commentMaxHieght]='500'>
+    <app-like [albumId]="album.id" [userId]="(auth.user | async )?.uid"> </app-like>
+    <app-star-review [albumId]="album.id" [userId]="(auth.user | async )?.uid"> </app-star-review>
+    <app-comment [documentRef]='"/albums/"+album.id' [commentMaxHieght]='500'>
     </app-comment>
   </mat-card-content>
 

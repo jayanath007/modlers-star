@@ -23,6 +23,7 @@ export class AppComponent {
         { path: 'user', loadChildren: 'app/user-profile/user-profile.module#UserProfileModule' },
       ]);
     }
+  
   }
 
 }

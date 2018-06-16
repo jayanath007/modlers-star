@@ -15,6 +15,8 @@ import { ImageGalleryModule } from '../shared/image-gallery/image-gallery.module
 import { CommentBoxDesktopModule } from '../shared/comment/comment-desktop/comment-box-desktop.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CommentModule } from '../comment/comment.module';
+import { LikeModule } from '../like/like.module';
+import { StarReviewModule } from '../star-review/star-review.module';
 
 
 const routes = [
@@ -38,6 +40,8 @@ const routes = [
     FlexLayoutModule,
     MatProgressSpinnerModule,
     CommentModule,
+    StarReviewModule,
+    LikeModule,
   ],
   declarations: [
     HomeComponent,

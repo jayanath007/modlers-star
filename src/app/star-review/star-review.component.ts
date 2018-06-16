@@ -20,17 +20,8 @@ export class StarReviewComponent implements OnInit {
 
   ngOnInit() {
     this.stars = this.starService.getMovieStars(this.albumId);
-    // this.avgRating = this.stars.map(arr => {
-    //   const ratings = arr.map(v => v.value);
-    //   return ratings.length ?
-    //    ratings.reduce((total, val) => total + val)
-    //    / arr.length : 'not reviewed';
-    // });
   }
 
-  starHandler(value) {
-    this.starService.setStar(this.userId, this.albumId, value);
-  }
 
   onRatingChange(event) {
     this.starService.setStar(this.userId, this.albumId, event.rating);
