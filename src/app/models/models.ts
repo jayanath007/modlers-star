@@ -48,6 +48,7 @@ export interface Star {
 }
 
 export interface Like {
+  key: string;
   userId: string;
   albumId: string;
   value: number;

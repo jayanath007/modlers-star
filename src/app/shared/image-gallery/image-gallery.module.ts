@@ -10,6 +10,7 @@ import { ImageGalleryComponent } from './image-gallery.component';
 import { GalleryViewComponent } from './gallery-view/gallery-view.component';
 import { CommentBoxDesktopModule } from '../comment/comment-desktop/comment-box-desktop.module';
 import { CommentModule } from '../../comment/comment.module';
+import { LikeModule } from '../../like/like.module';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { CommentModule } from '../../comment/comment.module';
     CommentBoxDesktopModule,
     CommentModule,
     MatProgressSpinnerModule,
+    LikeModule,
   ],
   exports: [
     ImageGalleryComponent,

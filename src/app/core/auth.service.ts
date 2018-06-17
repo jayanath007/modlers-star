@@ -16,23 +16,34 @@ import { of } from 'rxjs/internal/observable/of';
 @Injectable()
 export class AuthService {
   user: Observable<User>;
-  tempUid: string = uuid();
+  tempUid: string;
 
-  tempUser: User = {
-    uid: this.tempUid,
-    email: 'testuser@yahoo.com',
-    photoURL: 'assets/avatars/profile.jpg',
-    displayName: 'anonymous user',
-  };
+  constructor(private afAuth: AngularFireAuth, private afs: AngularFirestore, private router: Router) {
 
-  constructor(private afAuth: AngularFireAuth,
-    private afs: AngularFirestore,
-    private router: Router) {
     this.user = this.afAuth.authState.map((user) => {
       if (user) {
         return user;
       } else {
-        return this.tempUser;
+
+        const tempUserString = localStorage.getItem('tempUser');
+        if (tempUserString) {
+          const tempUser = JSON.parse(tempUserString);
+          this.tempUid = tempUser.uid;
+          return tempUser;
+
+        } else {
+
+          this.tempUid = uuid();
+          const newTempUser: User = {
+            uid: this.tempUid,
+            email: 'testuser@yahoo.com',
+            photoURL: 'assets/avatars/profile.jpg',
+            displayName: 'anonymous user',
+          };
+
+          localStorage.setItem('tempUser', JSON.stringify(newTempUser));
+          return newTempUser;
+        }
       }
     });
   }

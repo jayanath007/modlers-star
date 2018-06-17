@@ -1,5 +1,5 @@
 <!-- images and image information container -->
-<div class="galleria"  (contextmenu)="rightClickOnImage($event)">
+<div class="galleria" (contextmenu)="rightClickOnImage($event)">
     <!-- images -->
     <div class="images-container" (swiperight)="prev()" (swipeleft)="next()">
         <!-- images array -->
@@ -13,11 +13,10 @@
     </div>
     <!-- info and thumbnails -->
     <div class="info-container">
-        <app-comment
-        [documentRef]='"/albums/"+ images[this.activeImageIndex]?.albumId 
-         + "/photoComments/"+ images[this.activeImageIndex]?.id' 
-        [commentMaxHieght]=commentBoxMaxHieght>
-      </app-comment>
+        <app-like [albumId]="images[this.activeImageIndex]?.albumId " [key]="images[this.activeImageIndex]?.id"> </app-like>
+        <app-comment [documentRef]='"/albums/"+ images[this.activeImageIndex]?.albumId 
+         + "/photoComments/"+ images[this.activeImageIndex]?.id' [commentMaxHieght]=commentBoxMaxHieght>
+        </app-comment>
     </div>
 </div>
 

@@ -11,6 +11,7 @@ import {MatListModule} from '@angular/material/list';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { DynamicFormModule } from '../shared/dynamic-form/dynamic-form.module';
+import { StarRatingModule } from 'angular-star-rating';
 
 
 
@@ -34,6 +35,8 @@ const routes = [
     MatSelectModule,
     MatListModule,
     FormsModule,
+    // ImageUploadModule,
+    StarRatingModule,
   ],
   declarations: [
     AddAlbumComponent,

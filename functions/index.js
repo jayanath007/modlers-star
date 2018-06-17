@@ -1,13 +1,4 @@
 
-
-// // Create and Deploy Your First Cloud Functions
-// // https://firebase.google.com/docs/functions/write-firebase-functions
-//
-// exports.helloWorld = functions.https.onRequest((request, response) => {
-//  response.send("Hello from Firebase!");
-// });
-
-
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 admin.initializeApp(functions.config().firebase);
@@ -87,10 +78,39 @@ exports.aggregatePhotoComments = functions.firestore
 
                 // data to update on the document
                 const data = { commentCount, recentComments, lastActivity }
-                admin.firestore().collection('albums').doc(albumId).update( { lastActivity });
+                admin.firestore().collection('albums').doc(albumId).update({ lastActivity });
 
                 return docRef.set(data)
 
             })
             .catch(err => console.log(err))
+    });
+
+
+
+exports.aggregateLike = functions.firestore
+    .document('likes/{likesId}')
+    .onUpdate(event => {
+
+        console.log(event);
+        console.log(event.data);
+        console.log(event.data.val());
+
+        const likesId = event.params.likesId;
+        const like = event.data.val();
+        const albumRef = admin.firestore().collection('albums').doc(like.albumId);
+
+        return albumRef.get((album) => {
+            console.log(album);
+            if (album) {
+                const rateValue = like.value;
+                if (album.rateValue) {
+                    rateValue = album.rateValue + rateValue;
+                }
+                albumRef.set({ rateValue: rateValue });
+            }
+            return albumRef.update(data)
+
+        }).catch(err => console.log(err));
+
     });

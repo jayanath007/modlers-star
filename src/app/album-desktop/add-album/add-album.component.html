@@ -1,13 +1,15 @@
 <h1>insert your images</h1>
 <mat-card>
-
-    <div>
-        <input type="file" (change)="uploadFile($event)">
-        <img width="200px" *ngFor="let item of album.imageUrls" [src]="item.url" alt="album image profile">
-    </div>
-    <!-- <mat-input-container>
+        <!-- <mat-input-container>
             <input matInput placeholder="Name" [(ngModel)]="album.name">
         </mat-input-container> -->
+    <div>
+        <input type="file" (change)="uploadFile($event)">
+        <img width="200px" *ngFor="let item of album.imageUrls" [src]="item" alt="album image profile">
+    </div>
+
+
+
     <!-- <div *ngIf="!isNewContact">
         <mat-select placeholder="company" [(ngModel)]="selectedCompany">
             <mat-option *ngFor="let company of companies$ | async" [value]="company">{{company.name}}</mat-option>

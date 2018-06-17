@@ -2,7 +2,9 @@
     <button #like mat-icon-button (click)="onLike(like)" [color]="((likes$ | async)?.value === 2) ? 'primary' : ''">
         <mat-icon>thumb_up</mat-icon>
     </button>
+    {{(totalLikes$ | async)}}
     <button #unLike mat-icon-button (click)="onUnLike(unLike)" [color]="((likes$ | async)?.value === 1) ? 'primary' : ''">
         <mat-icon>thumb_down</mat-icon>
     </button>
+    {{(totalUnLikes$ | async)}}
 </div>
