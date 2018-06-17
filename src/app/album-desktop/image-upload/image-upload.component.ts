@@ -1,8 +1,6 @@
 import { Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild } from '@angular/core';
 import { Headers, Response } from '@angular/http';
 import { UploadMetadata } from './before-upload.interface';
-
-import { ImageService } from './image.service';
 import { Style } from './style';
 
 export class FileHolder {

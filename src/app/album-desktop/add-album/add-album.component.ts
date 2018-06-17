@@ -1,19 +1,20 @@
-import * as firebase from 'firebase/app'; // typings only
-import { Component, OnInit } from '@angular/core';
 
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AlbumService } from '../../album-core/service/album.service';
 import { Album, Upload } from '../../models/models';
-import { uuid } from '../../shared/util/uid';
-import { UploadService } from '../upload.service';
-import * as _ from 'lodash';
-import { forEach } from '@angular/router/src/utils/collection';
+import 'rxjs/add/observable/forkJoin';
+import { AuthService } from '../../core/auth.service';
+import { Subject, Observable } from 'rxjs';
+import { FormControl } from '@angular/forms';
+import { startWith, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-add-album',
   templateUrl: './add-album.component.html',
   styleUrls: ['./add-album.component.css']
 })
-export class AddAlbumComponent implements OnInit {
+
+export class AddAlbumComponent implements OnDestroy , OnInit {
 
   album = {
     name: '',
@@ -22,49 +23,67 @@ export class AddAlbumComponent implements OnInit {
   } as Album;
 
   selectedFiles: FileList;
-  currentUpload: Upload;
-  removedFile: File[] = [];
+  fileUploading = false;
+  uploadFile: File[] = [];
 
-  constructor(private albumService: AlbumService) {
+  private unsubscribe: Subject<void> = new Subject();
+  myControl: FormControl = new FormControl();
+
+
+  constructor(private albumService: AlbumService,
+     private auth: AuthService) {
 
   }
+
+  options = [
+    'One',
+    'Two',
+    'Three'
+  ];
+
+  filteredOptions: Observable<string[]>;
+
+  ngOnInit() {
+    this.filteredOptions = this.myControl.valueChanges
+      .pipe(
+        startWith(''),
+        map(val => this.filter(val))
+      );
+  }
+
+  filter(val: string): string[] {
+    return this.options.filter(option =>
+      option.toLowerCase().includes(val.toLowerCase()));
+  }
+
 
   saveAlbum(album: Album) {
-    this.removefiels();
-    album.rating = Math.random() * 100;
-    this.albumService.saveAlbum(album);
-  }
+    this.fileUploading = true;
 
-  onUploadFileChange(event) {
-    const files = event;
-    const filesIndex = _.range(files.length);
-    _.each(filesIndex, (idx) => {
-      this.currentUpload = new Upload(files[idx]);
-      const id = uuid();
-      const name = files[idx].name;
-      this.albumService.pushUpload(this.currentUpload, id).then((snapshot) => {
-        snapshot.ref.getDownloadURL().then(url => {
-          this.album.imageUrls.push({ id: id, name: name, url: url });
+    this.auth.user.takeUntil(this.unsubscribe).subscribe((user) => {
+      album.userName = user.displayName;
+      album.userId = user.uid;
+      this.albumService.saveAlbum(this.uploadFile, album)
+      .takeUntil(this.unsubscribe)
+        .subscribe(() => {
+          this.fileUploading = false;
         });
-      });
     });
   }
 
-  onRemovedFile($event) {
-    this.removedFile.push($event.file);
+  onUploadFileChange($event) {
+    for (const item of $event) {
+      this.uploadFile.push(item);
+    }
   }
 
-  removefiels() {
-    for (let index = 0; index < this.removedFile.length; index++) {
-      const file = this.removedFile[index];
-      console.log(this.album.imageUrls);
-      console.log(file.name);
-      this.album.imageUrls = this.album.imageUrls.filter((item) => item.name !== file.name);
-      const image = this.album.imageUrls.filter((item) => item.name === file.name)[0];
-      if (image) {
-        this.albumService.deleteFileStorage(image.id);
-      }
-    }
+  onRemovedFile($event) {
+    this.uploadFile = this.uploadFile.filter((item) => item.name !== $event.file.name);
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe.next();
+    this.unsubscribe.complete();
   }
 
 

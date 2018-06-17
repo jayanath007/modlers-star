@@ -12,7 +12,6 @@ export interface User {
 export interface ImageInfo {
   id: string;
   url: string;
-  name: string;
 }
 
 export interface Album {
@@ -25,6 +24,7 @@ export interface Album {
   rating: number;
   rank: number;
   userId: string;
+  userName: string;
   id?: string;
   commentCount: number;
   recentComments: Comment[];
@@ -64,8 +64,11 @@ export class Upload {
   name: string;
   url: string;
   progress: number;
+  id: string;
   createdAt: Date = new Date();
   constructor(file: File) {
+    this.name = file.name;
+    this.id = uuid();
     this.file = file;
   }
 }

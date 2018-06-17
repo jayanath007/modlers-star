@@ -1,14 +1,12 @@
-import { CreateAlbumComponent } from '../album-desktop/create-album/create-album.component';
+
 import { RouterModule } from '@angular/router';
-import { NgModule, Component } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule, MatButtonModule, MatProgressSpinnerModule } from '@angular/material';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatListModule} from '@angular/material/list';
 import { FormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
-import { DynamicFormModule } from '../shared/dynamic-form/dynamic-form.module';
 import { HomeComponent } from './home/home.component';
 import { HomeCoreModule } from '../home-core/home-core.module';
 import { ImageGalleryModule } from '../shared/image-gallery/image-gallery.module';

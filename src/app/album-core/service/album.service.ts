@@ -1,7 +1,5 @@
-
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { Album, Upload } from '../../models/models';
@@ -21,36 +19,54 @@ export class AlbumService {
 
 
 
+    saveAlbum(uploadFile: File[], album: Album , ) {
+        const uploadPromise = [];
+        const fileDataList: Upload[] = [];
+        for (const item of uploadFile) {
+            const fileData = new Upload(item);
+            fileDataList.push(fileData);
+            const observable = this.pushUpload(fileData);
+            uploadPromise.push(observable);
+        }
 
-    pushUpload(upload: Upload, id) {
+       return Observable.forkJoin(uploadPromise)
+            .switchMap((snapshotList) => {
+                const DownloadURLPromiseList = snapshotList.map((snapshot) => {
+                    return snapshot.ref.getDownloadURL();
+                });
+                return Observable.forkJoin(DownloadURLPromiseList);
+            }).switchMap((imageUrls) => {
+                for (let _i = 0; _i < imageUrls.length; _i++) {
+                    const url = imageUrls[_i];
+                    const fileData = fileDataList[_i];
+                    album.imageUrls.push({ url: url, id: fileData.id });
+                }
+                return this.albumsCol.add(album);
+            });
+
+    }
+
+
+
+
+    pushUpload(upload: Upload) {
         const storageRef = firebase.storage().ref();
-        const uploadTask = storageRef.child(`${this.basePath}/${id}`).put(upload.file);
-
+        const uploadTask = storageRef.child(`${this.basePath}/${upload.id}`).put(upload.file);
         uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
             (snapshot: any) => {
-                // upload in progress
                 upload.progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
             },
             (error) => {
-                // upload failed
                 console.log(error);
-            },
-            () => {
-                // upload success
             }
         );
-
+        
         return uploadTask;
     }
 
 
     getAlbum() {
         return this.albums$ = this.albumsCol.valueChanges();
-    }
-
-    saveAlbum(album: Album) {
-        return this.albumsCol.add(album)
-            .then(_ => console.log('album success'));
     }
 
 
