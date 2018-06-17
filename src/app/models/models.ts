@@ -1,3 +1,4 @@
+import { uuid } from "../shared/util/uid";
 
 
 export interface User {
@@ -11,6 +12,7 @@ export interface User {
 export interface ImageInfo {
   id: string;
   url: string;
+  name: string;
 }
 
 export interface Album {
@@ -52,6 +54,20 @@ export interface Like {
   userId: string;
   albumId: string;
   value: number;
+}
+
+
+export class Upload {
+
+  $key: string;
+  file: File;
+  name: string;
+  url: string;
+  progress: number;
+  createdAt: Date = new Date();
+  constructor(file: File) {
+    this.file = file;
+  }
 }
 
 
