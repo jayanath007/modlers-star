@@ -54,18 +54,18 @@ export class AddAlbumComponent implements OnInit {
     this.removedFile.push($event.file);
   }
 
-  // removefiels() {
-  //   for (let index = 0; index < this.removedFile.length; index++) {
-  //     const file = this.removedFile[index];
-  //     console.log(this.album.imageUrls);
-  //     console.log(file.name);
-  //     this.album.imageUrls = this.album.imageUrls.filter((item) => item.name !== file.name);
-  //     const image = this.album.imageUrls.filter((item) => item.name === file.name)[0];
-  //     if (image) {
-  //       this.albumService.deleteFileStorage(image.id);
-  //     }
-  //   }
-  // }
+  removefiels() {
+    for (let index = 0; index < this.removedFile.length; index++) {
+      const file = this.removedFile[index];
+      console.log(this.album.imageUrls);
+      console.log(file.name);
+      this.album.imageUrls = this.album.imageUrls.filter((item) => item.name !== file.name);
+      const image = this.album.imageUrls.filter((item) => item.name === file.name)[0];
+      if (image) {
+        this.albumService.deleteFileStorage(image.id);
+      }
+    }
+  }
 
 
 }
