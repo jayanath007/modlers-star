@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AlbumService } from './service/album.service';
+import { TagService } from './service/tag.service';
 
 
 
@@ -10,6 +11,7 @@ import { AlbumService } from './service/album.service';
   ],
   providers: [
     AlbumService,
+    TagService
   ],
 })
 export class AlbumCoreModule { }

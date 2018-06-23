@@ -1,12 +1,12 @@
-
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AlbumService } from '../../album-core/service/album.service';
-import { Album, Upload } from '../../models/models';
+import { Album } from '../../models/models';
 import 'rxjs/add/observable/forkJoin';
 import { AuthService } from '../../core/auth.service';
-import { Subject, Observable } from 'rxjs';
-import { FormControl } from '@angular/forms';
-import { startWith, map } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { ErrorStateMatcher, MatSnackBar } from '@angular/material';
+
 
 @Component({
   selector: 'app-add-album',
@@ -14,62 +14,83 @@ import { startWith, map } from 'rxjs/operators';
   styleUrls: ['./add-album.component.css']
 })
 
-export class AddAlbumComponent implements OnDestroy , OnInit {
+export class AddAlbumComponent implements OnDestroy, OnInit {
 
+
+  albumFrom: any;
   album = {
     name: '',
+    description: '',
     modler: 'lushan', likes: 0, rating: 0, commentCount: 0, rank: 0,
     imageUrls: [], id: ''
   } as Album;
 
+  clickSave = false;
   selectedFiles: FileList;
   fileUploading = false;
   uploadFile: File[] = [];
+  tags = ['sri lanka'];
+  saved = false;
+
 
   private unsubscribe: Subject<void> = new Subject();
-  myControl: FormControl = new FormControl();
 
+  albumNameControl = new FormControl('', [
+    Validators.required,
+  ]);
 
+  albumDescriptionControl = new FormControl('', [
+    Validators.required,
+  ]);
+
+  matcher = new MyErrorStateMatcher();
   constructor(private albumService: AlbumService,
-     private auth: AuthService) {
-
+    private auth: AuthService,
+    private snackBar: MatSnackBar) {
   }
 
-  options = [
-    'One',
-    'Two',
-    'Three'
-  ];
+  saveAlbum(album: Album, event: any) {
+    this.clickSave = true;
 
-  filteredOptions: Observable<string[]>;
-
-  ngOnInit() {
-    this.filteredOptions = this.myControl.valueChanges
-      .pipe(
-        startWith(''),
-        map(val => this.filter(val))
-      );
-  }
-
-  filter(val: string): string[] {
-    return this.options.filter(option =>
-      option.toLowerCase().includes(val.toLowerCase()));
-  }
+    if (event.keyCode !== 13 && (this.uploadFile.length >= 3)
+      && this.albumNameControl.valid
+      && this.albumDescriptionControl.valid
+    ) {
 
 
-  saveAlbum(album: Album) {
-    this.fileUploading = true;
 
-    this.auth.user.takeUntil(this.unsubscribe).subscribe((user) => {
-      album.userName = user.displayName;
-      album.userId = user.uid;
-      this.albumService.saveAlbum(this.uploadFile, album)
-      .takeUntil(this.unsubscribe)
-        .subscribe(() => {
-          this.fileUploading = false;
+      this.fileUploading = true;
+
+      this.auth.user.takeUntil(this.unsubscribe).subscribe((user) => {
+        album.userName = user.displayName;
+        album.userId = user.uid;
+
+        const tags = {};
+        this.tags.forEach((item) => {
+          tags[item] = true;
         });
+
+        album.tags = tags;
+        this.albumService.saveAlbum(this.uploadFile, album)
+          .takeUntil(this.unsubscribe)
+          .subscribe(() => {
+            this.fileUploading = false;
+
+            this.openSnackBar();
+            this.saved = true;
+          });
+      });
+    }
+  }
+
+  openSnackBar() {
+    const snackBarRef = this.snackBar.open('your album is upload please go to immage galery ', 'go', {
+      duration: 3000,
+    });
+    snackBarRef.onAction().subscribe(() => {
     });
   }
+
 
   onUploadFileChange($event) {
     for (const item of $event) {
@@ -77,14 +98,29 @@ export class AddAlbumComponent implements OnDestroy , OnInit {
     }
   }
 
-  onRemovedFile($event) {
-    this.uploadFile = this.uploadFile.filter((item) => item.name !== $event.file.name);
+  onTagListUpdated($event) {
+    this.tags = $event;
   }
 
+  onRemovedFile($event) {
+    this.uploadFile = this.uploadFile.filter((item) => item.name !== $event.file.name);
+
+  }
+
+  ngOnInit() {
+
+  }
   ngOnDestroy() {
     this.unsubscribe.next();
     this.unsubscribe.complete();
   }
 
 
+}
+
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
 }

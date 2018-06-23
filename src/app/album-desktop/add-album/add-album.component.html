@@ -2,35 +2,43 @@
 
 <mat-card>
 
-
     <form class="example-form">
 
         <mat-form-field class="example-full-width">
-            <input matInput placeholder="Favorite food">
+            <input name="name" [formControl]="albumNameControl" [errorStateMatcher]="matcher" [(ngModel)]="album.name"
+             matInput placeholder="Album Name" maxlength="400" minlength="5" >
+            <mat-error *ngIf="albumNameControl.hasError('required')">
+                Album Name is
+                <strong>required</strong>
+            </mat-error>
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
-            <input type="text" placeholder="Pick one" 
-            aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto">
-            <mat-autocomplete #auto="matAutocomplete">
-                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                    {{ option }}
-                </mat-option>
-            </mat-autocomplete>
+  
+            <textarea name="description" [(ngModel)]="album.description" matInput placeholder="Album Description"
+             [errorStateMatcher]="matcher"  [formControl]="albumDescriptionControl" maxlength="400" minlength="5" ></textarea>
+
+            <mat-error *ngIf="albumDescriptionControl.hasError('required')">
+                    Album Description is
+                <strong>required</strong>
+            </mat-error>
         </mat-form-field>
 
-
+        <app-tag-input-component [tags]="tags" (tagListUpdated)="onTagListUpdated($event)"></app-tag-input-component>
 
         <mat-progress-bar *ngIf="fileUploading" mode="buffer"></mat-progress-bar>
         <app-image-upload [max]="30" [buttonCaption]="'Select Images'" [dropBoxMessage]="'Drop your images here!'" (removed)="onRemovedFile($event)"
             (fileChange)="onUploadFileChange($event)">
         </app-image-upload>
 
-
-        <mat-card-actions align="right">
-            <button mat-button (click)="saveAlbum(album)" [disabled]="fileUploading">Save</button>
+        
+        <p *ngIf="uploadFile.length < 3 && clickSave"> you neet to add altes 3 images to crate album </p>
+        <mat-card-actions align="right ">
+            <button mat-button (click)="saveAlbum(album ,$event) " [disabled]=" saved || fileUploading || !this.albumNameControl.valid 
+            || !this.albumDescriptionControl.valid">Save</button>
         </mat-card-actions>
-
+        
+        <button mat-button (click)="openSnackBar()">openSnackBar</button>
     </form>
 
 </mat-card>

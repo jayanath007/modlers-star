@@ -12,6 +12,7 @@ export class AlbumService {
     albumsCol: AngularFirestoreCollection<Album>;
     albums$: Observable<Album[]>;
     private basePath = '/uploads';
+ 
 
     constructor(private afs: AngularFirestore) {
         this.albumsCol = this.afs.collection('albums');
@@ -19,7 +20,7 @@ export class AlbumService {
 
 
 
-    saveAlbum(uploadFile: File[], album: Album , ) {
+    saveAlbum(uploadFile: File[], album: Album, ) {
         const uploadPromise = [];
         const fileDataList: Upload[] = [];
         for (const item of uploadFile) {
@@ -29,7 +30,7 @@ export class AlbumService {
             uploadPromise.push(observable);
         }
 
-       return Observable.forkJoin(uploadPromise)
+        return Observable.forkJoin(uploadPromise)
             .switchMap((snapshotList) => {
                 const DownloadURLPromiseList = snapshotList.map((snapshot) => {
                     return snapshot.ref.getDownloadURL();
@@ -60,7 +61,7 @@ export class AlbumService {
                 console.log(error);
             }
         );
-        
+
         return uploadTask;
     }
 

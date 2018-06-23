@@ -1,5 +1,4 @@
-import { uuid } from "../shared/util/uid";
-
+import { uuid } from '../shared/util/uid';
 
 export interface User {
   uid: string;
@@ -17,6 +16,7 @@ export interface ImageInfo {
 export interface Album {
   key: string;
   name: string;
+  description: string;
   category: Array<string>;
   imageUrls: Array<ImageInfo>;
   modler: string;
@@ -28,6 +28,7 @@ export interface Album {
   id?: string;
   commentCount: number;
   recentComments: Comment[];
+  tags: object;
 }
 export interface Comment {
   content: string;
@@ -56,6 +57,10 @@ export interface Like {
   value: number;
 }
 
+export interface Tag {
+  name: string;
+}
+
 
 export class Upload {
 
@@ -71,6 +76,12 @@ export class Upload {
     this.id = uuid();
     this.file = file;
   }
+
+
+
+
+
+
 }
 
 
