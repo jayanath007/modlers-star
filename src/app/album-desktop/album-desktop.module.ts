@@ -48,6 +48,6 @@ const routes = [
     TagInputComponentComponent
   ],
   providers: [{ provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher },
-    {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}}],
+   ],
 })
 export class AlbumDesktopModule { }

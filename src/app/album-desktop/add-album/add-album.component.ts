@@ -6,6 +6,7 @@ import { AuthService } from '../../core/auth.service';
 import { Subject } from 'rxjs';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher, MatSnackBar } from '@angular/material';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -46,7 +47,8 @@ export class AddAlbumComponent implements OnDestroy, OnInit {
   matcher = new MyErrorStateMatcher();
   constructor(private albumService: AlbumService,
     private auth: AuthService,
-    private snackBar: MatSnackBar) {
+    private snackBar: MatSnackBar,
+    private router: Router) {
   }
 
   saveAlbum(album: Album, event: any) {
@@ -85,9 +87,11 @@ export class AddAlbumComponent implements OnDestroy, OnInit {
 
   openSnackBar() {
     const snackBarRef = this.snackBar.open('your album is upload please go to immage galery ', 'go', {
-      duration: 3000,
+      duration: 6000,
+      verticalPosition: 'top'
     });
     snackBarRef.onAction().subscribe(() => {
+      this.router.navigateByUrl('/');
     });
   }
 
