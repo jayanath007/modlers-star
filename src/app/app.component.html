@@ -1,27 +1,57 @@
-<mat-toolbar color="primary" layout="row" style="position: fixed;">
-  <button mat-icon-button class="menu-icon">
-    <mat-icon (click)="sidenav.toggle()" class="mat-24" aria-label="Menu">menu</mat-icon>
-  </button>
-  <a mat-button [routerLink]="['/home']">
-    <h2>Photo Gallery</h2>
-  </a>
-  <span class="toolbar-spacer"></span>
+<mat-toolbar color="primary" layout="row" style="position: fixed; padding: 10px">
+  <div fxLayout="row" fxFlexFill>
 
-  <span mat-icon-button [matMenuTriggerFor]="appMenu">
+    <div fxFlex.lg="5" fxFlex.md="5" fxFlex.sm="5" fxFlex.xs="10"  style="padding-left: 10px">
+      <button mat-icon-button class="menu-icon">
+        <mat-icon (click)="sidenav.toggle()" class="mat-24" aria-label="Menu">menu</mat-icon>
+      </button>
+    </div>
+
+    <div fxFlex.lg="10" fxFlex.md="15" [ngStyle.sm]="{ display: 'none'}" [ngStyle.xs]="{ display: 'none'}">
+      <a mat-button [routerLink]="['/home']">
+        <h2>Photo Gallery</h2>
+      </a>
+    </div>
+
+    <div fxFlex.lg="75" fxFlex.md="70" fxFlex.sm="95" fxFlex.xs="90">
+      <app-search-box></app-search-box>
+    </div>
+    <div fxFlex.lg="10" fxFlex.md="10" [ngStyle.sm]="{ display: 'none'}" [ngStyle.xs]="{ display: 'none'}">
+      <div div fxLayout="row" fxLayoutAlign="start center">
+
+        <a [routerLink]="['/user']" mat-button mat-icon-button>
+          <img class="avatar" [src]="(auth.user | async )?.photoURL">
+        </a>
+
+        <a [routerLink]="['/album/AddAlbum']" mat-button mat-icon-button>
+          <mat-icon aria-label="upload your photo album">photo_album</mat-icon>
+        </a>
+
+      </div>
+    </div>
+
+  </div>
+</mat-toolbar>
+
+
+<!-- <span mat-icon-button [matMenuTriggerFor]="appMenu">
     <mat-icon class="toolbar-icon">settings</mat-icon>
   </span>
   <mat-menu #appMenu="matMenu">
     <a mat-menu-item [routerLink]="['/home']">home</a>
     <a mat-menu-item [routerLink]="['/user']">user</a>
     <a mat-menu-item [routerLink]="['album/AddAlbum']">upload your images</a>
-  </mat-menu>
+  </mat-menu> -->
 
-</mat-toolbar>
-<mat-sidenav-container   class="example-container" fullscreen style="margin-top: 62px ">
+
+
+
+
+<mat-sidenav-container class="example-container" fullscreen style="margin-top: 62px ">
   <mat-sidenav #sidenav class="sidenav">
     <h4 class="subheader">Menu</h4>
   </mat-sidenav>
-  <div id='mail-app-content'   class="content">
+  <div id='mail-app-content' class="content">
     <div fxFlexOffset.gt-sm="15%" fxFlex.gt-sm="70%">
       <router-outlet></router-outlet>
     </div>

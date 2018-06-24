@@ -5,25 +5,22 @@ import 'hammerjs';
 import 'firebase/storage'; // global firebase storage js;
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { AngularFireModule } from 'angularfire2';
 import { AppComponent } from './app.component';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { AngularFireAuthModule } from 'angularfire2/auth';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRouteRoutes } from './app-route.routing';
 import {
   MatButtonModule,
   MatToolbarModule,
   MatCardModule, MatFormFieldModule, MatSelectModule, MatIconModule,
-  MatMenuModule, MatSidenavModule, MatListModule
+  MatMenuModule, MatSidenavModule, MatListModule ,MatInputModule
 } from '@angular/material';
 
 import { PaginationService } from './shared/pagination.service';
-import { AngularFirestore, AngularFirestoreModule } from 'angularfire2/firestore';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { ScrollableDirective } from './shared/scrollable.directive';
-import { UserProfileComponent } from './user-profile/user-profile.component';
+import { SearchBarComponent } from './search-bar/search-bar.component';
+import { SearchBoxComponent } from './search-box/search-box.component';
 
 // Initialize Firebase
 const firebaseConfig = {
@@ -40,7 +37,9 @@ const firebaseConfig = {
   declarations: [
     AppComponent,
     ScrollableDirective,
-  ],
+    SearchBarComponent,
+    SearchBoxComponent
+],
   imports: [
     AppRouteRoutes,
     BrowserAnimationsModule,
@@ -58,6 +57,7 @@ const firebaseConfig = {
     MatSidenavModule,
     MatListModule,
     HttpClientModule,
+    MatInputModule,
   ],
   providers: [UtilsService,
     PaginationService],

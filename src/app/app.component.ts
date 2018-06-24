@@ -1,9 +1,8 @@
-import { DomSanitizer } from '@angular/platform-browser';
-import { MatIconRegistry } from '@angular/material';
-import { Component, HostListener, ElementRef } from '@angular/core';
-import { Observable } from 'rxjs';
+
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { UtilsService } from './shared/Utils.service';
+import { AuthService } from './core/auth.service';
 
 
 @Component({
@@ -15,7 +14,7 @@ export class AppComponent {
 
   links: Array<{ text: string, path: string }> = [];
 
-  constructor(private router: Router, utilsService: UtilsService, public el: ElementRef) {
+  constructor(private router: Router, utilsService: UtilsService, public auth: AuthService) {
     if (utilsService.isMobile.any()) {
       this.router.resetConfig([
         { path: '', loadChildren: 'app/home-mobile/home-mobile.module#HomeMobileModule' },
@@ -23,7 +22,6 @@ export class AppComponent {
         { path: 'user', loadChildren: 'app/user-profile/user-profile.module#UserProfileModule' },
       ]);
     }
-  
   }
 
 }
