@@ -1,30 +1,29 @@
 <mat-toolbar color="primary" layout="row" style="position: fixed; padding: 10px">
   <div fxLayout="row" fxFlexFill>
 
-    <div fxFlex.lg="5" fxFlex.md="5" fxFlex.sm="5" fxFlex.xs="10"  style="padding-left: 10px">
+    <div fxFlex.lg="5" fxFlex.md="5" fxFlex.sm="5" fxFlex.xs="10" style="padding-left: 10px ;">
       <button mat-icon-button class="menu-icon">
         <mat-icon (click)="sidenav.toggle()" class="mat-24" aria-label="Menu">menu</mat-icon>
       </button>
     </div>
 
-    <div fxFlex.lg="10" fxFlex.md="15" [ngStyle.sm]="{ display: 'none'}" [ngStyle.xs]="{ display: 'none'}">
+    <div fxFlex.lg="13" fxFlex.md="20" fxFlex.sm="25" >
       <a mat-button [routerLink]="['/home']">
         <h2>Photo Gallery</h2>
       </a>
     </div>
 
-    <div fxFlex.lg="75" fxFlex.md="70" fxFlex.sm="95" fxFlex.xs="90">
+    <div fxFlex.lg="70" fxFlex.md="65" fxFlex.sm="55"   [ngStyle.xs]="{ display: 'none'}">
       <app-search-box></app-search-box>
     </div>
-    <div fxFlex.lg="10" fxFlex.md="10" [ngStyle.sm]="{ display: 'none'}" [ngStyle.xs]="{ display: 'none'}">
-      <div div fxLayout="row" fxLayoutAlign="start center">
-
-        <a [routerLink]="['/user']" mat-button mat-icon-button>
-          <img class="avatar" [src]="(auth.user | async )?.photoURL">
+    <div fxFlex.lg="12" fxFlex.md="10" fxFlex.sm="15" >
+      <div div fxLayout="row" fxLayoutAlign="center center">
+        <a [routerLink]="['/album/AddAlbum']" mat-button mat-icon-button >
+          <mat-icon aria-label="upload your photo album">photo_album</mat-icon>
         </a>
 
-        <a [routerLink]="['/album/AddAlbum']" mat-button mat-icon-button>
-          <mat-icon aria-label="upload your photo album">photo_album</mat-icon>
+        <a [routerLink]="['/user']" mat-button mat-icon-button >
+          <img class="avatar" [src]="(auth.user | async )?.photoURL">
         </a>
 
       </div>
@@ -49,7 +48,9 @@
 
 <mat-sidenav-container class="example-container" fullscreen style="margin-top: 62px ">
   <mat-sidenav #sidenav class="sidenav">
-    <h4 class="subheader">Menu</h4>
+    <a mat-button [routerLink]="['/home']">home</a>
+    <a mat-button [routerLink]="['/user']">user</a>
+    <a mat-button [routerLink]="['album/AddAlbum']">upload your images</a>
   </mat-sidenav>
   <div id='mail-app-content' class="content">
     <div fxFlexOffset.gt-sm="15%" fxFlex.gt-sm="70%">
