@@ -13,15 +13,15 @@ import {
   MatButtonModule,
   MatToolbarModule,
   MatCardModule, MatFormFieldModule, MatSelectModule, MatIconModule,
-  MatMenuModule, MatSidenavModule, MatListModule ,MatInputModule
+  MatMenuModule, MatSidenavModule, MatListModule, MatInputModule
 } from '@angular/material';
 
 import { PaginationService } from './shared/pagination.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ScrollableDirective } from './shared/scrollable.directive';
-import { SearchBarComponent } from './search-bar/search-bar.component';
 import { SearchBoxComponent } from './search-box/search-box.component';
-
+import { SearchFromComponent } from './search-from/search-from.component';
+import {MatRadioModule} from '@angular/material/radio';
 // Initialize Firebase
 const firebaseConfig = {
   apiKey: 'AIzaSyDO4WN4ugiloTsArr1KktR-nVZyJP8s1G8',
@@ -37,8 +37,8 @@ const firebaseConfig = {
   declarations: [
     AppComponent,
     ScrollableDirective,
-    SearchBarComponent,
-    SearchBoxComponent
+    SearchBoxComponent,
+    SearchFromComponent
 ],
   imports: [
     AppRouteRoutes,
@@ -58,6 +58,7 @@ const firebaseConfig = {
     MatListModule,
     HttpClientModule,
     MatInputModule,
+    MatRadioModule,
   ],
   providers: [UtilsService,
     PaginationService],

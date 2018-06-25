@@ -1,6 +1,18 @@
 
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
+const os = require('os');
+const path = require('path');
+const spawn = require('child-process-promise').spawn;
+const exec = require('child_process').exec;
+const fs = require('fs');
+const storage = require('@google-cloud/storage')();
+const vision = require('@google-cloud/vision').v1p1beta1;
+const client = new vision.ImageAnnotatorClient();
+
+
+
+
 admin.initializeApp(functions.config().firebase);
 
 exports.aggregateComments = functions.firestore
@@ -114,3 +126,129 @@ exports.aggregateLike = functions.firestore
         }).catch(err => console.log(err));
 
     });
+
+
+
+    
+    exports.onFileChange= functions.storage.object().onChange(event => {
+        // ...
+        // Extract object data - left out to focus on the other parts of the function
+    
+        if (object.resourceState === 'not_exists') {
+            console.log('We deleted a file, exit...');
+            return;
+        }
+    
+        if (path.basename(filePath).startsWith('resized-')) {
+            console.log('We already renamed that file!');
+            return;
+        }
+    
+        const destBucket = gcs.bucket(bucket);
+        const tmpFilePath = path.join(os.tmpdir(), path.basename(filePath));
+        const metadata = { contentType: contentType };
+        return destBucket.file(filePath).download({
+            destination: tmpFilePath
+        }).then(() => {
+            return spawn('convert', [tmpFilePath, '-thumbnail', '200x200>', tmpFilePath]);
+        }).then(() => {
+            return destBucket.upload(tmpFilePath, {
+                destination: 'resized-' + path.basename(filePath),
+                metadata: metadata
+            })
+        });
+    });
+
+  
+
+
+
+
+// Blurs uploaded images that are flagged as Adult or Violence.
+exports.blurOffensiveImages = (event) => {
+    const object = event.data;
+  
+    // Exit if this is a deletion or a deploy event.
+    if (object.resourceState === 'not_exists') {
+      console.log('This is a deletion event.');
+      return;
+    } else if (!object.name) {
+      console.log('This is a deploy event.');
+      return;
+    }
+  
+    const file = storage.bucket(object.bucket).file(object.name);
+    const filePath = `gs://${object.bucket}/${object.name}`;
+  
+    console.log(`Analyzing ${file.name}.`);
+  
+    return client.safeSearchDetection(filePath)
+      .catch((err) => {
+        console.error(`Failed to analyze ${file.name}.`, err);
+        return Promise.reject(err);
+      })
+      .then(([result]) => {
+        const detections = result.safeSearchAnnotation;
+  
+        if (detections.adult === 'VERY_LIKELY' ||
+            detections.violence === 'VERY_LIKELY') {
+          console.log(`The image ${file.name} has been detected as inappropriate.`);
+          return blurImage(file);
+        } else {
+          console.log(`The image ${file.name} has been detected as OK.`);
+        }
+      });
+  };
+
+
+
+    // Blurs the given file using ImageMagick.
+function blurImage (file) {
+    const tempLocalFilename = `/tmp/${path.parse(file.name).base}`;
+  
+    // Download file from bucket.
+    return file.download({ destination: tempLocalFilename })
+      .catch((err) => {
+        console.error('Failed to download file.', err);
+        return Promise.reject(err);
+      })
+      .then(() => {
+        console.log(`Image ${file.name} has been downloaded to ${tempLocalFilename}.`);
+  
+        // Blur the image using ImageMagick.
+        return new Promise((resolve, reject) => {
+          exec(`convert ${tempLocalFilename} -channel RGBA -blur 0x24 ${tempLocalFilename}`, { stdio: 'ignore' }, (err, stdout) => {
+            if (err) {
+              console.error('Failed to blur image.', err);
+              reject(err);
+            } else {
+              resolve(stdout);
+            }
+          });
+        });
+      })
+      .then(() => {
+        console.log(`Image ${file.name} has been blurred.`);
+  
+        // Upload the Blurred image back into the bucket.
+        return file.bucket.upload(tempLocalFilename, { destination: file.name })
+          .catch((err) => {
+            console.error('Failed to upload blurred image.', err);
+            return Promise.reject(err);
+          });
+      })
+      .then(() => {
+        console.log(`Blurred image has been uploaded to ${file.name}.`);
+  
+        // Delete the temporary file.
+        return new Promise((resolve, reject) => {
+          fs.unlink(tempLocalFilename, (err) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve();
+            }
+          });
+        });
+      });
+  }
