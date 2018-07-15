@@ -1,33 +1,36 @@
-<mat-card *ngFor="let album of page.data | async">
-  <mat-card-header>
-    <div mat-card-avatar class="example-header-image"></div>
-    <mat-card-title>modler name </mat-card-title>
-    <mat-card-subtitle></mat-card-subtitle>
-  </mat-card-header>
-  <mat-divider></mat-divider>
+<div>
+  <mat-card *ngFor="let album of page.data | async">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>modler name </mat-card-title>
+      <mat-card-subtitle></mat-card-subtitle>
+    </mat-card-header>
+    <mat-divider></mat-divider>
 
-  <div class="bounds">
-    <div class="content" fxLayout="row" fxLayoutAlign="center center" fxFlexFill>
-      <div fxFlex="50" class="sec1">
-        <img [src]="album.imageUrls[0].url" (click)="openGallery(0, album)" alt="Photo of a Shiba Inu">
-        <img *ngIf="album.imageUrls.length > 1" [src]="album.imageUrls[1].url" (click)="openGallery(1, album)" alt="Photo of a Shiba Inu">
-      </div>
-      <div *ngIf="album.imageUrls.length > 2" fxFlex="50" class="sec2">
-        <img [src]="album.imageUrls[2].url" (click)="openGallery(2, album)" alt="Photo of a Shiba Inu">
-        <img *ngIf="album.imageUrls.length > 3" [src]="album.imageUrls[3].url" (click)="openGallery(3, album)" alt="Photo of a Shiba Inu">
+    <div class="bounds">
+      <div class="content" fxLayout="row" fxLayoutAlign="center center" fxFlexFill>
+        <div fxFlex="50">
+          <img style="padding-right:5px" [src]="album.imageUrls[0].url.replace('uploads', 'resized')" (click)="openGallery(0, album)">
+          <img style="padding-right:5px" *ngIf="album.imageUrls.length > 1" [src]="album.imageUrls[1].url.replace('uploads', 'resized')"
+            (click)="openGallery(1, album)">
+        </div>
+        <div *ngIf="album.imageUrls.length > 2" fxFlex="50">
+          <img style="padding-left:5px" [src]="album.imageUrls[2].url.replace('uploads', 'resized')" (click)="openGallery(2, album)">
+          <img style="padding-left:5px" *ngIf="album.imageUrls.length > 3" [src]="album.imageUrls[3].url.replace('uploads', 'resized')"
+            (click)="openGallery(3, album)">
+        </div>
       </div>
     </div>
-  </div>
 
-  <mat-card-content>
-    <app-like [albumId]="album.id" [key]="album.id"> </app-like>
-    <app-star-review [albumId]="album.id" [userId]="(auth.user | async )?.uid">
-    </app-star-review>
-    <app-comment [documentRef]='"/albums/"+album.id' [commentMaxHieght]='500'>
-    </app-comment>
-  </mat-card-content>
-</mat-card>
-
+    <mat-card-content>
+      <app-like [albumId]="album.id" [key]="album.id"> </app-like>
+      <app-star-review [albumId]="album.id" [userId]="(auth.user | async )?.uid">
+      </app-star-review>
+      <app-comment [documentRef]='"/albums/"+album.id' [commentMaxHieght]='500'>
+      </app-comment>
+    </mat-card-content>
+  </mat-card>
+</div>
 
 <div fxLayout="column">
   <div fxLayoutAlign="space-around center">

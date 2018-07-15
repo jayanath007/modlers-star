@@ -40,7 +40,10 @@ exports.onFileChange= functions.storage.object().onChange(event => {
     return destBucket.file(filePath).download({
         destination: tmpFilePath
     }).then(() => {
-        return spawn('convert', [tmpFilePath,'-resize','200x200^',"\"", '-gravity','center','-extent', '200x200', tmpFilePath]);
+        // [tmpFilePath,'-resize','200x200^','\\', '-gravity','center','-extent', '200x200', tmpFilePath]
+        // ,'\\'
+        return spawn('convert',
+        [tmpFilePath,'-resize','200x200^', '-gravity','center','-extent', '200x200', tmpFilePath] );
     }).then(() => {
         return destBucket.upload(tmpFilePath, {
             destination: 'resized/' + path.basename(filePath),
@@ -48,10 +51,6 @@ exports.onFileChange= functions.storage.object().onChange(event => {
         })
     });
 });
-
-
-// -resize 64x64^ \
-//           -gravity center -extent 64x64
 
 
 
@@ -66,33 +65,29 @@ exports.aggregateComments = functions.firestore
         const commentId = event.params.commentId;
         const postId = event.params.postId;
 
-        // ref to the parent document
         const docRef = admin.firestore().collection('albums').doc(postId);
 
-        // get all comments and aggregate
         return docRef.collection('comments').orderBy('createdAt', 'desc')
             .get()
             .then(querySnapshot => {
 
-                // get the total comment count
                 const commentCount = querySnapshot.size
 
                 const recentComments = []
 
-                // add data from the 5 most recent comments to the array
+        
                 querySnapshot.forEach(doc => {
                     recentComments.push(doc.data())
                 });
 
                 recentComments.splice(5)
 
-                // record last comment timestamp
+        
                 const lastActivity = recentComments[0].createdAt
 
-                // data to update on the document
                 const data = { commentCount, recentComments, lastActivity }
 
-                // run update
+    
                 return docRef.update(data)
             })
             .catch(err => console.log(err))
@@ -108,31 +103,27 @@ exports.aggregatePhotoComments = functions.firestore
         const photoCommentId = event.params.photoCommentId;
         const commentId = event.params.commentId;
 
-        // ref to the parent document
         const docRef = admin.firestore().collection('albums').doc(albumId)
             .collection('photoComments').doc(photoCommentId);
 
-        // get all comments and aggregate
         return docRef.collection('comments').orderBy('createdAt', 'desc')
             .get()
             .then(querySnapshot => {
 
-                // get the total comment count
                 const commentCount = querySnapshot.size
 
                 const recentComments = []
 
-                // add data from the 5 most recent comments to the array
+         
                 querySnapshot.forEach(doc => {
                     recentComments.push(doc.data())
                 });
 
                 recentComments.splice(5)
 
-                // record last comment timestamp
                 const lastActivity = recentComments[0].createdAt
 
-                // data to update on the document
+           
                 const data = { commentCount, recentComments, lastActivity }
                 admin.firestore().collection('albums').doc(albumId).update({ lastActivity });
 
@@ -182,13 +173,10 @@ exports.aggregateLike = functions.firestore
   
 
 
-
-
-// Blurs uploaded images that are flagged as Adult or Violence.
 exports.blurOffensiveImages = (event) => {
     const object = event.data;
   
-    // Exit if this is a deletion or a deploy event.
+
     if (object.resourceState === 'not_exists') {
       console.log('This is a deletion event.');
       return;
@@ -222,11 +210,10 @@ exports.blurOffensiveImages = (event) => {
 
 
 
-    // Blurs the given file using ImageMagick.
 function blurImage (file) {
     const tempLocalFilename = `/tmp/${path.parse(file.name).base}`;
   
-    // Download file from bucket.
+
     return file.download({ destination: tempLocalFilename })
       .catch((err) => {
         console.error('Failed to download file.', err);
@@ -234,8 +221,7 @@ function blurImage (file) {
       })
       .then(() => {
         console.log(`Image ${file.name} has been downloaded to ${tempLocalFilename}.`);
-  
-        // Blur the image using ImageMagick.
+
         return new Promise((resolve, reject) => {
           exec(`convert ${tempLocalFilename} -channel RGBA -blur 0x24 ${tempLocalFilename}`, { stdio: 'ignore' }, (err, stdout) => {
             if (err) {
@@ -250,7 +236,7 @@ function blurImage (file) {
       .then(() => {
         console.log(`Image ${file.name} has been blurred.`);
   
-        // Upload the Blurred image back into the bucket.
+
         return file.bucket.upload(tempLocalFilename, { destination: file.name })
           .catch((err) => {
             console.error('Failed to upload blurred image.', err);
@@ -260,7 +246,7 @@ function blurImage (file) {
       .then(() => {
         console.log(`Blurred image has been uploaded to ${file.name}.`);
   
-        // Delete the temporary file.
+
         return new Promise((resolve, reject) => {
           fs.unlink(tempLocalFilename, (err) => {
             if (err) {

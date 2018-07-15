@@ -11,6 +11,8 @@ export class HomeBase implements OnInit, OnDestroy, AfterContentInit {
 
 
   private unsubscribe: Subject<void> = new Subject();
+  allbumCardWidth = 0;
+  @ViewChild('allbumCard', { read: ElementRef }) allbumCard: ElementRef;
 
   constructor(public page: PaginationService) {
   }
@@ -25,7 +27,13 @@ export class HomeBase implements OnInit, OnDestroy, AfterContentInit {
     mousedown$.subscribe(this.scrollHandler,
       e => console.log(`error: ${e}`),
       () => console.log('complete!'));
+
+      if (this.allbumCard && this.allbumCard.nativeElement && this.allbumCard.nativeElement.offsetWidth) {
+        this.allbumCardWidth = this.allbumCard.nativeElement.offsetWidth + 200 - 50;
+    }
   }
+
+
 
 
   scrollHandler = (event) =>  {
