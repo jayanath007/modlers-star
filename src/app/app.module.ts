@@ -13,7 +13,8 @@ import {
   MatButtonModule,
   MatToolbarModule,
   MatCardModule, MatFormFieldModule, MatSelectModule, MatIconModule,
-  MatMenuModule, MatSidenavModule, MatListModule, MatInputModule
+  MatMenuModule, MatSidenavModule, MatListModule, MatInputModule,
+  MatAutocompleteModule
 } from '@angular/material';
 
 import { PaginationService } from './shared/pagination.service';
@@ -22,6 +23,10 @@ import { ScrollableDirective } from './shared/scrollable.directive';
 import { SearchBoxComponent } from './search-box/search-box.component';
 import { SearchFromComponent } from './search-from/search-from.component';
 import {MatRadioModule} from '@angular/material/radio';
+import { SerachUserService } from './search-box/serach-user.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { FacebookModule } from 'ngx-facebook';
 // Initialize Firebase
 const firebaseConfig = {
   apiKey: 'AIzaSyDO4WN4ugiloTsArr1KktR-nVZyJP8s1G8',
@@ -32,7 +37,6 @@ const firebaseConfig = {
   messagingSenderId: '268108510880'
 };
 // AppDatePipe
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,8 +63,14 @@ const firebaseConfig = {
     HttpClientModule,
     MatInputModule,
     MatRadioModule,
+    MatAutocompleteModule,
+    FormsModule,
+    ReactiveFormsModule,
+    CommonModule,
+    FacebookModule.forRoot()
   ],
   providers: [UtilsService,
+    SerachUserService,
     PaginationService],
 
   bootstrap: [AppComponent]

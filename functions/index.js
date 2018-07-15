@@ -1,19 +1,63 @@
 
+
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
-const os = require('os');
-const path = require('path');
-const spawn = require('child-process-promise').spawn;
 const exec = require('child_process').exec;
 const fs = require('fs');
-const storage = require('@google-cloud/storage')();
 const vision = require('@google-cloud/vision').v1p1beta1;
 const client = new vision.ImageAnnotatorClient();
 
 
+const storage = require('@google-cloud/storage')();
+const os = require('os');
+const path = require('path');
+const spawn = require('child-process-promise').spawn;
+
 
 
 admin.initializeApp(functions.config().firebase);
+
+exports.onFileChange= functions.storage.object().onChange(event => {
+    const object = event.data;
+    const bucket = object.bucket;
+    const contentType = object.contentType;
+    const filePath = object.name;
+    console.log('File change detected, function execution started');
+
+    if (object.resourceState === 'not_exists') {
+        console.log('We deleted a file, exit...');
+        return;
+    }
+
+    if (path.basename(filePath).startsWith('resized-')) {
+        console.log('We already renamed that file!');
+        return;
+    }
+
+    const destBucket = storage.bucket(bucket);
+    const tmpFilePath = path.join(os.tmpdir(), path.basename(filePath));
+    const metadata = { contentType: contentType };
+    return destBucket.file(filePath).download({
+        destination: tmpFilePath
+    }).then(() => {
+        return spawn('convert', [tmpFilePath,'-resize','200x200^',"\"", '-gravity','center','-extent', '200x200', tmpFilePath]);
+    }).then(() => {
+        return destBucket.upload(tmpFilePath, {
+            destination: 'resized/' + path.basename(filePath),
+            metadata: metadata
+        })
+    });
+});
+
+
+// -resize 64x64^ \
+//           -gravity center -extent 64x64
+
+
+
+
+
+
 
 exports.aggregateComments = functions.firestore
     .document('albums/{postId}/comments/{commentId}')
@@ -113,14 +157,16 @@ exports.aggregateLike = functions.firestore
         const albumRef = admin.firestore().collection('albums').doc(like.albumId);
 
         return albumRef.get((album) => {
-            console.log(album);
+           
             if (album) {
                 const rateValue = like.value;
                 if (album.rateValue) {
                     rateValue = album.rateValue + rateValue;
                 }
                 albumRef.set({ rateValue: rateValue });
+             
             }
+            console.log('rateValue', album);
             return albumRef.update(data)
 
         }).catch(err => console.log(err));
@@ -129,35 +175,9 @@ exports.aggregateLike = functions.firestore
 
 
 
+
     
-    exports.onFileChange= functions.storage.object().onChange(event => {
-        // ...
-        // Extract object data - left out to focus on the other parts of the function
-    
-        if (object.resourceState === 'not_exists') {
-            console.log('We deleted a file, exit...');
-            return;
-        }
-    
-        if (path.basename(filePath).startsWith('resized-')) {
-            console.log('We already renamed that file!');
-            return;
-        }
-    
-        const destBucket = gcs.bucket(bucket);
-        const tmpFilePath = path.join(os.tmpdir(), path.basename(filePath));
-        const metadata = { contentType: contentType };
-        return destBucket.file(filePath).download({
-            destination: tmpFilePath
-        }).then(() => {
-            return spawn('convert', [tmpFilePath, '-thumbnail', '200x200>', tmpFilePath]);
-        }).then(() => {
-            return destBucket.upload(tmpFilePath, {
-                destination: 'resized-' + path.basename(filePath),
-                metadata: metadata
-            })
-        });
-    });
+
 
   
 

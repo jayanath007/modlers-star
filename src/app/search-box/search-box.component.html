@@ -1,8 +1,17 @@
 <div fxLayout="row" fxFlexFill fxLayoutAlign="start center" class="searchFormWrapper">
-    <button mat-icon-button class="searchSubmitButton">
-        <mat-icon aria-label="Search">search</mat-icon>
-    </button>
-    <div fxFlex class="inputWrapper ">
-        <input matInput style='width:100%' placeholder="Search Google Express" class="searchInput">
-    </div>
+  <button mat-icon-button class="searchSubmitButton">
+    <mat-icon aria-label="Search">search</mat-icon>
+  </button>
+  <div fxFlex class="inputWrapper ">
+    <!-- <input matInput style='width:100%'  class="searchInput"> -->
+
+    <input style='width:100%' class="searchInput" type="text" placeholder="Search" aria-label="Number" matInput [formControl]="myControl"
+      [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+        {{option}}
+      </mat-option>
+    </mat-autocomplete>
+
+  </div>
 </div>

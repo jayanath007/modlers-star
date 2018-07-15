@@ -57,7 +57,9 @@ export class AuthService {
 
   facebookLogin() {
     const provider = new firebase.auth.FacebookAuthProvider();
-    return this.oAuthLogin(provider);
+    return this.oAuthLogin(provider).then((item) => {
+     return item;
+    });
   }
 
 
@@ -66,6 +68,8 @@ export class AuthService {
     return this.afAuth.auth.signInWithPopup(provider)
       .then((credential) => {
         this.updateUserData(credential.user);
+      }).catch((credential) => {
+     
       });
   }
 

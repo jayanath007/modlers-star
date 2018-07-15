@@ -21,9 +21,17 @@ export class HomeComponent extends HomeBase {
     super(page);
   }
 
+
+  // getUrl(item) {
+  //   return item.url.replace('uploads', 'resized');
+  // }
+
   openGallery(index, album: Album) {
+
+
     const galleryImages: GalleryImage[] = album.imageUrls.map((item) => {
-      return { url: item.url , albumId : album.id , id : item.id};
+
+      return { url: item.url, albumId: album.id, id: item.id };
     });
     this.imageGalleryComponent.openGallery(index, galleryImages);
   }
