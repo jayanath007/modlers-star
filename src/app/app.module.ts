@@ -3,7 +3,7 @@ import { UtilsService } from './shared/Utils.service';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import 'hammerjs';
 import 'firebase/storage'; // global firebase storage js;
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, BrowserTransferStateModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AngularFireModule } from 'angularfire2';
 import { AppComponent } from './app.component';
@@ -52,7 +52,6 @@ const firebaseConfig = {
     MatToolbarModule,
     MatButtonModule,
     MatCardModule,
-    BrowserModule,
     FlexLayoutModule,
     MatIconModule,
     MatFormFieldModule,
@@ -67,7 +66,9 @@ const firebaseConfig = {
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
-    FacebookModule.forRoot()
+    FacebookModule.forRoot(),
+    BrowserModule.withServerTransition({ appId: 'modlers-star' }), // <-- here
+    BrowserTransferStateModule
   ],
   providers: [UtilsService,
     SerachUserService,
