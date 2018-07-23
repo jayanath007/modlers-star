@@ -67,7 +67,8 @@ const firebaseConfig = {
     ReactiveFormsModule,
     CommonModule,
     FacebookModule.forRoot(),
-    BrowserModule.withServerTransition({ appId: 'modlers-star' }), // <-- here
+    BrowserModule
+    .withServerTransition({ appId: 'photo-gallery' }),
     BrowserTransferStateModule
   ],
   providers: [UtilsService,
