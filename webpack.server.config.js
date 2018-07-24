@@ -1,25 +1,19 @@
 const path = require('path');
 const webpack = require('webpack');
 
-const APP_NAME = 'base6';
-
 module.exports = {
-  entry: { server: './server.ts' },
+  entry: {  server: './server.ts' },
   resolve: { extensions: ['.js', '.ts'] },
-  mode: 'none',
+  mode: 'development',
   target: 'node',
   externals: [/(node_modules|main\..*\.js)/],
   output: {
-    path: path.join(__dirname, `dist/${APP_NAME}`),
+    path: path.join(__dirname, 'dist'),
     filename: '[name].js'
   },
   module: {
     rules: [
-      { test: /\.ts$/, loader: 'ts-loader' },
-      {
-        test: /(\\|\/)@angular(\\|\/)core(\\|\/).+\.js$/,
-        parser: { system: true }
-      }
+      { test: /\.ts$/, loader: 'ts-loader' }
     ]
   },
   plugins: [
@@ -34,4 +28,4 @@ module.exports = {
       {}
     )
   ]
-};
+}

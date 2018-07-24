@@ -59,5 +59,4 @@ app.get('*', (req, res) => {
 // Start Express Server
 app.listen(PORT, () => {
   console.log(`Node Express server listening on http://localhost:${PORT}`);
-});
-
+})
