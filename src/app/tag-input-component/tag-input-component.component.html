@@ -8,7 +8,7 @@
       {{tag}}
       <mat-icon matChipRemove *ngIf="tag !== 'sri lanka'" >cancel</mat-icon>
     </mat-chip>
-    <input
+    <input tabindex="-1"
       [placeholder]="placeholder"
       #tagInput
       [formControl]="tagCtrl"

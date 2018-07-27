@@ -29,7 +29,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { FacebookModule } from 'ngx-facebook';
 import { TagModule } from './tag-input-component/tag.module';
-
+import {MatCheckboxModule} from '@angular/material/checkbox';
 // Initialize Firebase
 const firebaseConfig = {
   apiKey: 'AIzaSyDO4WN4ugiloTsArr1KktR-nVZyJP8s1G8',
@@ -72,7 +72,8 @@ const firebaseConfig = {
     FacebookModule.forRoot(),
     BrowserModule.withServerTransition({ appId: 'photo-gallery' }),
     BrowserTransferStateModule,
-    TagModule
+    TagModule,
+    MatCheckboxModule
   ],
   providers: [UtilsService,
     SerachUserService,

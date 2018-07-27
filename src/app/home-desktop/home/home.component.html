@@ -11,7 +11,7 @@
     <div fxLayout="row" class="bounds" style="overflow: hidden;">
       <div fxFlex="0 1 auto" class="sec1" fxLayoutAlign="start center"
        *ngFor="let item of album.imageUrls; let i = index">
-        <img *ngIf="(i+1)*200 < allbumCardWidth" class="example-card"
+        <img style="min-width: 200px; min-height: 200px" *ngIf="(i+1)*200 < allbumCardWidth" class="example-card"
          [src]="item.url.replace('uploads', 'resized')" alt="album image profile"
           (click)="openGallery(i, album)">
       </div>

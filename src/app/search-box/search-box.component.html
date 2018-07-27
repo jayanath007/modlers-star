@@ -2,7 +2,7 @@
 
   <div fxFlex class="inputWrapper ">
     <!-- <input matInput style='width:100%'  class="searchInput"> -->
-    <input style='width:100%' class="searchInput" type="text" placeholder="Search" aria-label="Number" matInput [formControl]="myControl"
+    <input style='width:100%' class="searchInput" type="text" placeholder="Search" tabindex="-1" aria-label="Number" matInput [formControl]="myControl"
       [matAutocomplete]="auto">
     <mat-autocomplete #auto="matAutocomplete">
       <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
@@ -11,7 +11,7 @@
     </mat-autocomplete>
   </div>
 
-  <button mat-icon-button class="searchSubmitButton">
+  <button mat-icon-button class="searchSubmitButton" tabindex="-1">
       <mat-icon aria-label="Search">search</mat-icon>
     </button>
 </div>

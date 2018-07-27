@@ -11,6 +11,9 @@ export class SearchFromComponent implements OnInit {
   tags = [];
   disabalePlaceholder = 'You can select only one tag for search';
   enabalePlaceholder = 'Select tag';
+  weekStars = false;
+  mail = true;
+  femail = true;
 
   ngOnInit() {
   }

@@ -1,19 +1,38 @@
 <form class="example-form">
 
-  <app-search-box></app-search-box>
+
+  <section class="example-section" style="padding-top: 10px;">
+    <app-search-box></app-search-box>
+  </section>
+
+  <section class="example-section" style="padding-top: 10px;">
+    <app-tag-input-component [tags]="tags" [maxTags]="1" [addTag]="false" [disabalePlaceholder]="disabalePlaceholder" [enabalePlaceholder]="enabalePlaceholder"
+      (tagListUpdated)="onTagListUpdated($event)"></app-tag-input-component>
+  </section>
+
+  <section class="example-section" style="padding-top: 15px;">
+    <mat-checkbox name="weekStarsName" class="example-margin" [(ngModel)]="weekStars">last week </mat-checkbox>
+  </section>
+
+  <section class="example-section" style="padding-top: 20px;">
+    <mat-checkbox name="mailName" style="padding-right: 10px;" class="example-margin" [(ngModel)]="mail">Mail Models</mat-checkbox>
+    <mat-checkbox name="femailName" class="example-margin" [(ngModel)]="femail">Femail Models</mat-checkbox>
+  </section>
 
 
-  <app-tag-input-component [tags]="tags" [maxTags]="1" 
-  [disabalePlaceholder]="disabalePlaceholder" [enabalePlaceholder]="enabalePlaceholder" 
-  (tagListUpdated)="onTagListUpdated($event)"></app-tag-input-component>
 
 
-  
-  <mat-form-field class="example-full-width">
-    <input matInput placeholder="Favorite food" value="Sushi">
-  </mat-form-field>
+  <section class="example-section" style="padding-top: 20px;">
+    <button mat-button [matMenuTriggerFor]="menu">
+      <mat-icon>
+        sort
+      </mat-icon>
+      SORT BY</button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>Most popular (Ratting)</button>
+      <button mat-menu-item>Date added (Olders)</button>
+      <button mat-menu-item>Date added (Olders)</button>
+    </mat-menu>
+  </section>
 
-  <mat-form-field class="example-full-width">
-    <textarea matInput placeholder="Leave a comment"></textarea>
-  </mat-form-field>
 </form>

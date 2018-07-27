@@ -21,7 +21,7 @@ export class TagInputComponentComponent implements OnInit {
   @Input() maxTags = 5;
   @Input() disabalePlaceholder = 'You can add only 5 tags';
   @Input() enabalePlaceholder = 'Add Tag your album';
-
+  @Input() addTag = true;
 
   visible = true;
   selectable = true;
@@ -91,7 +91,9 @@ export class TagInputComponentComponent implements OnInit {
     if ((this.tags.filter((item) => item === value).length === 0)
       || this.tags.length < this.maxTags) {
       const tagValue = value.toLowerCase().trim();
-      this.tagService.saveTag({ name: tagValue });
+      if (this.addTag) {
+        this.tagService.saveTag({ name: tagValue });
+      }
       this.tags.push(value.trim());
       this.tagListUpdated.emit(this.tags);
     }
