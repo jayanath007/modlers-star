@@ -1,4 +1,4 @@
-import { LikeModule } from './../like/like.module';
+import { LikeModule } from '../like/like.module';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';

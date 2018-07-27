@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
-import { Tag } from '../../models/models';
+import { Tag } from '../models/models';
 
 @Injectable()
 export class TagService {

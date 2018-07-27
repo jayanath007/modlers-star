@@ -1,25 +1,19 @@
-<!-- 
-<div class="example-container">
+<form class="example-form">
+
+  <app-search-box></app-search-box>
+
+
+  <app-tag-input-component [tags]="tags" [maxTags]="1" 
+  [disabalePlaceholder]="disabalePlaceholder" [enabalePlaceholder]="enabalePlaceholder" 
+  (tagListUpdated)="onTagListUpdated($event)"></app-tag-input-component>
+
 
   
-    <mat-form-field
-        [hideRequiredMarker]="options.value.hideRequired"
-        [floatLabel]="options.value.floatLabel">
-      <input matInput placeholder="Simple placeholder" required>
-    </mat-form-field>
-  
-    <mat-form-field [floatLabel]="options.value.floatLabel">
-      <mat-label>Both a label and a placeholder</mat-label>
-      <input matInput placeholder="Simple placeholder">
-    </mat-form-field>
-  
-    <mat-form-field
-        [hideRequiredMarker]="options.value.hideRequired"
-        [floatLabel]="options.value.floatLabel">
-      <mat-select required>
-        <mat-option>-- None --</mat-option>
-        <mat-option value="option">Option</mat-option>
-      </mat-select>
-      <mat-label><mat-icon>favorite</mat-icon> <b> Fancy</b> <i> label</i></mat-label>
-    </mat-form-field>
-  </div> -->
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Favorite food" value="Sushi">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <textarea matInput placeholder="Leave a comment"></textarea>
+  </mat-form-field>
+</form>

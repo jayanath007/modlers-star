@@ -1,4 +1,4 @@
-import { Album } from './../../models/models';
+import { Album } from '../../models/models';
 import { ViewChild, Component, AfterViewInit, ElementRef } from '@angular/core';
 import { ImageGalleryComponent } from '../../shared/image-gallery/image-gallery.component';
 import { PaginationService } from '../../shared/pagination.service';
@@ -6,6 +6,7 @@ import { GalleryImage } from '../../shared/image-gallery/config';
 import { HomeBase } from '../../home-core/home.base';
 import { AuthService } from '../../core/auth.service';
 import { ImageInfo } from '../../models/models';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -15,17 +16,19 @@ import { ImageInfo } from '../../models/models';
 })
 export class HomeComponent extends HomeBase {
 
-   
+
     @ViewChild(ImageGalleryComponent) imageGalleryComponent: ImageGalleryComponent;
 
-    constructor(public page: PaginationService, public auth: AuthService) {
+    constructor(public page: PaginationService, public auth: AuthService,
+        private route: ActivatedRoute) {
         super(page);
     }
 
 
+
+
     openGallery(index, album: Album) {
         const galleryImages: GalleryImage[] = album.imageUrls.map((item) => {
-
             return { url: item.url, albumId: album.id, id: item.id };
         });
         this.imageGalleryComponent.openGallery(index, galleryImages);

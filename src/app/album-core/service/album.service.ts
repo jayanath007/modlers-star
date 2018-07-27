@@ -3,7 +3,7 @@ import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/fires
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { Album, Upload } from '../../models/models';
-import * as firebase from 'firebase/app';
+import * as firebase from 'firebase';
 
 @Injectable()
 export class AlbumService {

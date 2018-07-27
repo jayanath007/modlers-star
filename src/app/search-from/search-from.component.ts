@@ -8,8 +8,15 @@ import { Component, OnInit } from '@angular/core';
 export class SearchFromComponent implements OnInit {
 
   constructor() { }
+  tags = [];
+  disabalePlaceholder = 'You can select only one tag for search';
+  enabalePlaceholder = 'Select tag';
 
   ngOnInit() {
+  }
+
+  onTagListUpdated($event) {
+    this.tags = $event;
   }
 
 }

@@ -1,4 +1,4 @@
-import { UtilsService } from './../Utils.service';
+import { UtilsService } from '../Utils.service';
 import { GalleryViewMobileComponent } from './gallery-view-mobile/gallery-view-mobile.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { GalleryViewComponent } from './gallery-view/gallery-view.component';

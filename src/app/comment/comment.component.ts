@@ -1,4 +1,4 @@
-import { User } from './../models/models';
+import { User } from '../models/models';
 import { Component, OnInit, Input, OnDestroy, SimpleChanges, OnChanges } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import {

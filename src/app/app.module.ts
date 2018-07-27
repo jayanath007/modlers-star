@@ -1,3 +1,4 @@
+
 import { CoreModule } from './core/core.module';
 import { UtilsService } from './shared/Utils.service';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -14,7 +15,7 @@ import {
   MatToolbarModule,
   MatCardModule, MatFormFieldModule, MatSelectModule, MatIconModule,
   MatMenuModule, MatSidenavModule, MatListModule, MatInputModule,
-  MatAutocompleteModule
+  MatAutocompleteModule, MatChipsModule
 } from '@angular/material';
 
 import { PaginationService } from './shared/pagination.service';
@@ -27,6 +28,8 @@ import { SerachUserService } from './search-box/serach-user.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { FacebookModule } from 'ngx-facebook';
+import { TagModule } from './tag-input-component/tag.module';
+
 // Initialize Firebase
 const firebaseConfig = {
   apiKey: 'AIzaSyDO4WN4ugiloTsArr1KktR-nVZyJP8s1G8',
@@ -42,7 +45,7 @@ const firebaseConfig = {
     AppComponent,
     ScrollableDirective,
     SearchBoxComponent,
-    SearchFromComponent
+    SearchFromComponent,
 ],
   imports: [
     AppRouteRoutes,
@@ -67,9 +70,9 @@ const firebaseConfig = {
     ReactiveFormsModule,
     CommonModule,
     FacebookModule.forRoot(),
-    BrowserModule
-    .withServerTransition({ appId: 'photo-gallery' }),
-    BrowserTransferStateModule
+    BrowserModule.withServerTransition({ appId: 'photo-gallery' }),
+    BrowserTransferStateModule,
+    TagModule
   ],
   providers: [UtilsService,
     SerachUserService,

@@ -1,11 +1,12 @@
 import { Component, OnInit, ViewChild, ElementRef, EventEmitter, Output, Input } from '@angular/core';
-import { TagService } from '../../album-core/service/tag.service';
+
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { startWith, switchMap } from 'rxjs/operators';
 import { MatAutocompleteSelectedEvent, MatChipInputEvent } from '@angular/material';
-import { Tag } from '../../models/models';
+import { TagService } from './tag.service';
+
 
 @Component({
   selector: 'app-tag-input-component',
@@ -17,12 +18,15 @@ export class TagInputComponentComponent implements OnInit {
 
   @Output() tagListUpdated = new EventEmitter<string[]>();
   @Input() tags: string[];
+  @Input() maxTags = 5;
+  @Input() disabalePlaceholder = 'You can add only 5 tags';
+  @Input() enabalePlaceholder = 'Add Tag your album';
 
 
   visible = true;
   selectable = true;
   addOnBlur = false;
-
+  placeholder = '';
   separatorKeysCodes = [ENTER, COMMA];
 
   tagCtrl: FormControl = new FormControl();
@@ -30,7 +34,7 @@ export class TagInputComponentComponent implements OnInit {
   filteredtags: Observable<string[]>;
 
 
-  placeholder = 'tag your album';
+
 
   @ViewChild('tagInput') tagInput: ElementRef;
 
@@ -69,9 +73,9 @@ export class TagInputComponentComponent implements OnInit {
       this.tags.splice(index, 1);
       this.tagListUpdated.emit(this.tags);
     }
-    if (this.tags.length < 5) {
+    if (this.tags.length < this.maxTags) {
       this.tagCtrl.enable();
-      this.placeholder = 'Tag your album';
+      this.placeholder = this.enabalePlaceholder;
     }
   }
 
@@ -85,20 +89,21 @@ export class TagInputComponentComponent implements OnInit {
 
   addNewTag(value) {
     if ((this.tags.filter((item) => item === value).length === 0)
-      || this.tags.length < 5) {
+      || this.tags.length < this.maxTags) {
       const tagValue = value.toLowerCase().trim();
       this.tagService.saveTag({ name: tagValue });
       this.tags.push(value.trim());
       this.tagListUpdated.emit(this.tags);
     }
-    if (this.tags.length >= 5) {
+    if (this.tags.length === this.maxTags) {
       this.tagCtrl.disable();
-      this.placeholder = 'You can tagged only 5 tags';
+      this.placeholder = this.disabalePlaceholder;
     }
   }
 
 
   ngOnInit() {
+    this.placeholder = this.enabalePlaceholder;
   }
 
 }

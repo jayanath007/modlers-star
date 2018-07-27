@@ -15,7 +15,9 @@ import { ImageUploadComponent } from './image-upload/image-upload.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatChipsModule } from '@angular/material/chips';
-import { TagInputComponentComponent } from './tag-input-component/tag-input-component.component';
+import { TagInputComponentComponent } from '../tag-input-component/tag-input-component.component';
+import { TagModule } from '../tag-input-component/tag.module';
+
 
 const routes = [
   { path: '', pathMatch: 'full', redirectTo: 'addImages' },
@@ -37,15 +39,14 @@ const routes = [
     MatProgressBarModule,
     MatAutocompleteModule,
     ReactiveFormsModule,
-    MatChipsModule,
     MatIconModule,
     MatSnackBarModule,
+    TagModule,
   ],
   declarations: [
     AddAlbumComponent,
     ImageUploadComponent,
     FileDropDirective,
-    TagInputComponentComponent
   ],
   providers: [{ provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher },
    ],
