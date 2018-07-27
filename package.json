@@ -10,7 +10,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "build:ssr": "ng build --prod && ng run photo-gallery:server && npm run webpack:server",
-    "serve:ssr": "node dist/photo-gallery/server.js",
+    "serve:ssr": "node dist/photo-gallery-server/server.js",
     "webpack:server": "webpack --config webpack.server.config.js"
   },
   "private": true,

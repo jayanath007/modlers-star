@@ -16,7 +16,7 @@ import { join } from 'path';
 
 const PORT = process.env.PORT || 4000;
 const DIST_FOLDER = join(process.cwd(), 'dist');
-const APP_NAME = 'base6';
+const APP_NAME = 'photo-gallery';
 
 const {
   AppServerModuleNgFactory,
