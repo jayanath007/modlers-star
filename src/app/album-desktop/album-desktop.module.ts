@@ -21,9 +21,7 @@ import { TagModule } from '../tag-input-component/tag.module';
 
 const routes = [
   { path: '', pathMatch: 'full', redirectTo: 'addImages' },
-
-  { path: 'addImages', component: AddAlbumComponent },
-  { path: 'AddAlbum', component: AddAlbumComponent }
+  { path: 'addAlbum', component: AddAlbumComponent }
 ];
 
 @NgModule({

@@ -6,6 +6,7 @@ import { GalleryImage } from '../../shared/image-gallery/config';
 import { HomeBase } from '../../home-core/home.base';
 import { Album } from '../../models/models';
 import { AuthService } from '../../core/auth.service';
+import { ActivatedRoute } from '../../../../node_modules/@angular/router';
 
 
 @Component({
@@ -17,13 +18,13 @@ export class HomeComponent extends HomeBase {
 
   @ViewChild(ImageGalleryComponent) imageGalleryComponent: ImageGalleryComponent;
 
-  constructor(public page: PaginationService , public auth: AuthService) {
-    super(page);
+  constructor(public page: PaginationService, public auth: AuthService, public route: ActivatedRoute) {
+    super(page, route);
   }
 
   openGallery(index, album: Album) {
     const galleryImages: GalleryImage[] = album.imageUrls.map((item) => {
-      return { url: item.url , albumId : album.id , id : item.id};
+      return { url: item.url, albumId: album.id, id: item.id };
     });
     this.imageGalleryComponent.openGallery(index, galleryImages);
   }

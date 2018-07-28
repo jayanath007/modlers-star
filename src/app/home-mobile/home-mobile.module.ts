@@ -18,8 +18,8 @@ import { StarReviewModule } from '../star-review/star-review.module';
 
 
 const routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'home' },
-  { path: 'home', component: HomeComponent },
+  { path: '', pathMatch: 'full', redirectTo: 'index' },
+  { path: 'index/:search', component: HomeComponent },
 ];
 
 @NgModule({

@@ -1,18 +1,21 @@
 <div #allbumCard>
 
   <mat-card *ngFor="let album of page.data | async">
-    <mat-card-header>
-      <div mat-card-avatar class="example-header-image"></div>
-      <mat-card-title>modler name </mat-card-title>
-      <mat-card-subtitle> </mat-card-subtitle>
-    </mat-card-header>
+      <mat-card-header>
+          <div mat-card-avatar class="example-header-image" >
+              <img class="avatar" [src]="album.userPhotoURL">
+          </div>
+          <mat-card-title>{{album.name}}</mat-card-title>
+          <mat-card-subtitle>{{album.description}}</mat-card-subtitle>
+        </mat-card-header>
     <mat-divider></mat-divider>
 
+    <!-- [src]="item.url.replace('uploads', 'resized')" -->
     <div fxLayout="row" class="bounds" style="overflow: hidden;">
       <div fxFlex="0 1 auto" class="sec1" fxLayoutAlign="start center"
        *ngFor="let item of album.imageUrls; let i = index">
         <img style="min-width: 200px; min-height: 200px" *ngIf="(i+1)*200 < allbumCardWidth" class="example-card"
-         [src]="item.url.replace('uploads', 'resized')" alt="album image profile"
+         [src]="item.url" alt="album image profile"
           (click)="openGallery(i, album)">
       </div>
     </div>

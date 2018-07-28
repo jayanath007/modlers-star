@@ -17,9 +17,13 @@ import { StarReviewModule } from '../star-review/star-review.module';
 import { CommentModule } from '../comment/comment.module';
 
 const routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'home' },
-  { path: 'home', component: HomeComponent },
+  { path: '', pathMatch: 'full', component: HomeComponent  },
+  { path: 'modler', component: HomeComponent },
+  { path: 'modler/:user', component: HomeComponent },
+  { path: 'modler/:user/:album', component: HomeComponent },
 ];
+
+
 
 @NgModule({
   imports: [

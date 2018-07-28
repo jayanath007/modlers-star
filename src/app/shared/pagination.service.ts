@@ -41,9 +41,28 @@ export class PaginationService {
     };
 
     const first = this.afs.collection(this.query.path, ref => {
-      return ref
-        .orderBy(this.query.field, this.query.reverse ? 'desc' : 'asc')
+
+      if (opts.params.album && opts.params.user) {
+        return ref.where('searchUserName', '==', opts.params.user)
+          .where('searchName', '==', opts.params.album)
+          .orderBy(this.query.field, this.query.reverse ? 'desc' : 'asc')
+          .limit(this.query.limit);
+      }
+      if (opts.params.user) {
+        return ref.where('searchUserName', '==', opts.params.user)
+          .orderBy(this.query.field, this.query.reverse ? 'desc' : 'asc')
+          .limit(this.query.limit);
+      }
+      if (opts.params.album) {
+        return ref.where('searchName', '==', opts.params.album)
+          .orderBy(this.query.field, this.query.reverse ? 'desc' : 'asc')
+          .limit(this.query.limit);
+      }
+
+      return ref.orderBy(this.query.field, this.query.reverse ? 'desc' : 'asc')
         .limit(this.query.limit);
+
+
     });
 
     this.mapAndUpdate(first);
@@ -96,7 +115,7 @@ export class PaginationService {
         let values = arr.map(snap => {
           const data = snap.payload.doc.data();
           const doc = snap.payload.doc;
-          return { ...data, doc , id : snap.payload.doc.id };
+          return { ...data, doc, id: snap.payload.doc.id };
         });
 
         // If prepending, reverse the batch order

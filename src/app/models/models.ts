@@ -24,11 +24,15 @@ export interface Album {
   rating: number;
   rank: number;
   userId: string;
+  userPhotoURL: string;
   userName: string;
+  searchUserName: string;
+  searchName: string;
   id?: string;
   commentCount: number;
   recentComments: Comment[];
   tags: object;
+  date: Date;
 }
 export interface Comment {
   content: string;

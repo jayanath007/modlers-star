@@ -8,7 +8,7 @@
     </div>
 
     <div fxFlex.lg="13" fxFlex.md="20" fxFlex.sm="25" >
-      <a mat-button [routerLink]="['/home']">
+      <a mat-button [routerLink]="['/']">
         <h2>Photo Gallery</h2>
       </a>
     </div>
@@ -24,7 +24,7 @@
             <img class="avatar" [src]="(auth.user | async )?.photoURL">
           </a>
 
-        <a [routerLink]="['/album/AddAlbum']" mat-button mat-icon-button style="margin-right: 20px;">
+        <a [routerLink]="['/album/addAlbum']" mat-button mat-icon-button style="margin-right: 20px;">
           <mat-icon aria-label="upload your photo album">photo_album</mat-icon>
         </a>
 

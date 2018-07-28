@@ -7,10 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { MatSelectModule, MatInputModule, MatButtonModule, MatCardModule, MatListModule, MatIconModule } from '@angular/material';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { FlexLayoutModule } from '@angular/flex-layout';
-// const routes = [
-//   { path: '', pathMatch: 'full', redirectTo: 'home' },
-//   { path: 'home', component: HomeComponent },
-// ];
+
 
 @NgModule({
   imports: [

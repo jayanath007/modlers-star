@@ -19,9 +19,8 @@ export class HomeComponent extends HomeBase {
 
     @ViewChild(ImageGalleryComponent) imageGalleryComponent: ImageGalleryComponent;
 
-    constructor(public page: PaginationService, public auth: AuthService,
-        private route: ActivatedRoute) {
-        super(page);
+    constructor(public page: PaginationService, public auth: AuthService,  public route: ActivatedRoute) {
+        super(page , route);
     }
 
 

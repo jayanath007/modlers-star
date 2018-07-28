@@ -5,7 +5,7 @@
     <form class="example-form">
 
         <mat-form-field class="example-full-width">
-            <input name="name" [formControl]="albumNameControl" [errorStateMatcher]="matcher" [(ngModel)]="album.name"
+            <input name="name" [formControl]="albumNameControl" (keypress)="checkValue($event)" [errorStateMatcher]="matcher" [(ngModel)]="album.name"
              matInput placeholder="Album Name" maxlength="400" minlength="5" >
             <mat-error *ngIf="albumNameControl.hasError('required')">
                 Album Name is

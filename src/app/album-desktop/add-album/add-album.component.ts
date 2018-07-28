@@ -50,6 +50,11 @@ export class AddAlbumComponent implements OnDestroy, OnInit {
     private snackBar: MatSnackBar,
     private router: Router) {
   }
+  checkValue(event: KeyboardEvent) {
+    if (event.key === '.') {
+      event.preventDefault();
+    }
+  }
 
   saveAlbum(album: Album, event: any) {
     this.clickSave = true;
@@ -66,6 +71,7 @@ export class AddAlbumComponent implements OnDestroy, OnInit {
       this.auth.user.takeUntil(this.unsubscribe).subscribe((user) => {
         album.userName = user.displayName;
         album.userId = user.uid;
+        album.userPhotoURL = user.photoURL;
 
         const tags = {};
         this.tags.forEach((item) => {
@@ -73,6 +79,10 @@ export class AddAlbumComponent implements OnDestroy, OnInit {
         });
 
         album.tags = tags;
+
+        album.searchUserName = album.userName.replace(' ', '.').toLowerCase();
+        album.searchName = album.name.replace(' ', '.').toLowerCase();
+        album.date = new Date();
         this.albumService.saveAlbum(this.uploadFile, album)
           .takeUntil(this.unsubscribe)
           .subscribe(() => {

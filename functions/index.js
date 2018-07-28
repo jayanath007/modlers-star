@@ -17,7 +17,7 @@ const spawn = require('child-process-promise').spawn;
 
 admin.initializeApp(functions.config().firebase);
 
-exports.onFileChange= functions.storage.object().onChange(event => {
+exports.onFileChange= functions.storage.object().onWrite(event => {
     const object = event.data;
     const bucket = object.bucket;
     const contentType = object.contentType;
