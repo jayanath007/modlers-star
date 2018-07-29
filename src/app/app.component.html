@@ -14,7 +14,7 @@
     </div>
 
     <div fxFlex.lg="70" fxFlex.md="65" fxFlex.sm="55"   [ngStyle.xs]="{ display: 'none'}">
-      <app-search-box></app-search-box>
+      <app-search-box (searchTextChange)="searchOnChange($event)" ></app-search-box>
     </div>
     <div fxFlex.lg="12" fxFlex.md="10" fxFlex.sm="15" >
       <div div fxLayout="row" fxLayoutAlign="end center">

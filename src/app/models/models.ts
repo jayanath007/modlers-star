@@ -7,6 +7,11 @@ export interface User {
   displayName?: string;
 }
 
+export interface Search {
+  searchText: string;
+  urlPath: string;
+}
+
 
 export interface ImageInfo {
   id: string;

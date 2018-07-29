@@ -31,6 +31,10 @@ export class PaginationService {
   // Initial query sets options and defines the Observable
   // passing opts will override the defaults
   init(path: string, field: string, opts?: any) {
+
+    this._data.next([]);
+    this._done.next(false);
+
     this.query = {
       path,
       field,
@@ -48,16 +52,16 @@ export class PaginationService {
           .orderBy(this.query.field, this.query.reverse ? 'desc' : 'asc')
           .limit(this.query.limit);
       }
-      if (opts.params.user) {
-        return ref.where('searchUserName', '==', opts.params.user)
-          .orderBy(this.query.field, this.query.reverse ? 'desc' : 'asc')
-          .limit(this.query.limit);
-      }
-      if (opts.params.album) {
-        return ref.where('searchName', '==', opts.params.album)
-          .orderBy(this.query.field, this.query.reverse ? 'desc' : 'asc')
-          .limit(this.query.limit);
-      }
+      // if (opts.params.user) {
+      //   return ref.where('searchUserName', '==', opts.params.user)
+      //     .orderBy(this.query.field, this.query.reverse ? 'desc' : 'asc')
+      //     .limit(this.query.limit);
+      // }
+      // if (opts.params.album) {
+      //   return ref.where('searchName', '==', opts.params.album)
+      //     .orderBy(this.query.field, this.query.reverse ? 'desc' : 'asc')
+      //     .limit(this.query.limit);
+      // }
 
       return ref.orderBy(this.query.field, this.query.reverse ? 'desc' : 'asc')
         .limit(this.query.limit);

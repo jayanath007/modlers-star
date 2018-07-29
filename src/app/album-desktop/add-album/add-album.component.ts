@@ -51,7 +51,7 @@ export class AddAlbumComponent implements OnDestroy, OnInit {
     private router: Router) {
   }
   checkValue(event: KeyboardEvent) {
-    if (event.key === '.') {
+    if (event.key === '.' || event.key === '-') {
       event.preventDefault();
     }
   }
@@ -80,9 +80,10 @@ export class AddAlbumComponent implements OnDestroy, OnInit {
 
         album.tags = tags;
 
-        album.searchUserName = album.userName.replace(' ', '.').toLowerCase();
-        album.searchName = album.name.replace(' ', '.').toLowerCase();
+        album.searchUserName = album.userName.trim().replace(' ', '.').toLowerCase();
+        album.searchName = album.name.trim().replace(' ', '.').toLowerCase();
         album.date = new Date();
+
         this.albumService.saveAlbum(this.uploadFile, album)
           .takeUntil(this.unsubscribe)
           .subscribe(() => {
@@ -91,6 +92,8 @@ export class AddAlbumComponent implements OnDestroy, OnInit {
             this.openSnackBar();
             this.saved = true;
           });
+
+
       });
     }
   }
@@ -117,18 +120,18 @@ export class AddAlbumComponent implements OnDestroy, OnInit {
   }
 
   onRemovedFile($event) {
-    this.uploadFile = this.uploadFile.filter((item) => item.name !== $event.file.name);
-
+    this.uploadFile = this.uploadFile
+    .filter((item) => item.name !== $event.file.name);
   }
 
   ngOnInit() {
 
   }
+
   ngOnDestroy() {
     this.unsubscribe.next();
     this.unsubscribe.complete();
   }
-
 
 }
 

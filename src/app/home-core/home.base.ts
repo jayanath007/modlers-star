@@ -16,12 +16,11 @@ export class HomeBase implements OnInit, OnDestroy, AfterContentInit {
   @ViewChild('allbumCard', { read: ElementRef }) allbumCard: ElementRef;
 
   constructor(protected page: PaginationService, protected route: ActivatedRoute) {
-  }
-  ngOnInit() {
-
     this.route.params.subscribe((params) => {
       this.page.init('albums', 'date', { reverse: false, prepend: false , params});
     });
+  }
+  ngOnInit() {
 
   }
 

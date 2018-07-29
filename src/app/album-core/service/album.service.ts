@@ -1,8 +1,9 @@
+import { SerachUserService } from './../../search-box/serach-user.service';
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
-import { Album, Upload } from '../../models/models';
+import { Album, Upload, Search } from '../../models/models';
 import * as firebase from 'firebase';
 
 @Injectable()
@@ -12,9 +13,9 @@ export class AlbumService {
     albumsCol: AngularFirestoreCollection<Album>;
     albums$: Observable<Album[]>;
     private basePath = '/uploads';
- 
 
-    constructor(private afs: AngularFirestore) {
+
+    constructor(private afs: AngularFirestore, private serachUserService: SerachUserService) {
         this.albumsCol = this.afs.collection('albums');
     }
 
@@ -42,6 +43,8 @@ export class AlbumService {
                     const fileData = fileDataList[_i];
                     album.imageUrls.push({ url: url, id: fileData.id });
                 }
+
+                this.serachUserService.saveSearchByAlbum(album);
                 return this.albumsCol.add(album);
             });
 
