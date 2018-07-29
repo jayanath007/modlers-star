@@ -37,9 +37,15 @@ export class SearchBoxComponent implements OnInit {
   selected(event) {
     if (event.option.value) {
       const values = event.option.value.split('-');
-      const search = values[1].trim().replace(' ', '.').toLowerCase() + '/'
-      +  values[0].trim().replace(' ', '.').toLowerCase();
-      this.searchTextChange.emit(search);
+
+      if (values.length === 2) {
+        const search = values[1].trim().replace(' ', '.').toLowerCase() + '/'
+          + values[0].trim().replace(' ', '.').toLowerCase();
+        this.searchTextChange.emit(search);
+      } else {
+        this.searchTextChange.emit(event.option.value.trim().replace(' ', '.').toLowerCase());
+      }
+
     }
   }
 }

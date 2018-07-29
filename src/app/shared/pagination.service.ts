@@ -52,11 +52,11 @@ export class PaginationService {
           .orderBy(this.query.field, this.query.reverse ? 'desc' : 'asc')
           .limit(this.query.limit);
       }
-      // if (opts.params.user) {
-      //   return ref.where('searchUserName', '==', opts.params.user)
-      //     .orderBy(this.query.field, this.query.reverse ? 'desc' : 'asc')
-      //     .limit(this.query.limit);
-      // }
+      if (opts.params.user) {
+        return ref.where('searchUserName', '==', opts.params.user)
+          .orderBy(this.query.field, this.query.reverse ? 'desc' : 'asc')
+          .limit(this.query.limit);
+      }
       // if (opts.params.album) {
       //   return ref.where('searchName', '==', opts.params.album)
       //     .orderBy(this.query.field, this.query.reverse ? 'desc' : 'asc')

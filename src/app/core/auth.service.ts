@@ -10,6 +10,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
 import { uuid } from '../shared/util/uid';
 import { of } from 'rxjs/internal/observable/of';
+import { SerachUserService } from '../search-box/serach-user.service';
 
 
 
@@ -18,7 +19,8 @@ export class AuthService {
   user: Observable<User>;
   tempUid: string;
 
-  constructor(private afAuth: AngularFireAuth, private afs: AngularFirestore, private router: Router) {
+  constructor(private afAuth: AngularFireAuth,
+    private afs: AngularFirestore, private router: Router, private serachUserService: SerachUserService) {
 
     this.user = this.afAuth.authState.map((user) => {
       if (user) {
@@ -58,7 +60,7 @@ export class AuthService {
   facebookLogin() {
     const provider = new firebase.auth.FacebookAuthProvider();
     return this.oAuthLogin(provider).then((item) => {
-     return item;
+      return item;
     });
   }
 
@@ -69,22 +71,21 @@ export class AuthService {
       .then((credential) => {
         this.updateUserData(credential.user);
       }).catch((credential) => {
-     
+
       });
   }
 
 
   private updateUserData(user) {
     // Sets user data to firestore on login
-
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
-
     const data: User = {
       uid: user.uid,
       email: user.email,
       displayName: user.displayName,
       photoURL: user.photoURL
     };
+    this.serachUserService.saveUser(data);
     return userRef.set(data, { merge: true });
 
   }

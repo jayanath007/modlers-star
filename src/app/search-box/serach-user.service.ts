@@ -36,17 +36,17 @@ export class SerachUserService {
 
     saveUser(user: User) {
         const search: Search = {
-            searchText: user.displayName,
+            searchText: user.displayName.toLowerCase(),
             urlPath: user.displayName.replace(' ', '.').toLowerCase(),
         };
-        const searchPath = `searchs/${user.displayName}`;
+        const searchPath = `searchs/${search.searchText}`;
         return this.afs.doc(searchPath).set(search);
     }
 
     saveSearchByAlbum(album: Album) {
         const search: Search = {
-            searchText: album.name + ' - ' + album.userName ,
-            urlPath: album.searchUserName + '/' + album.searchName
+            searchText: album.name + ' - ' + album.userName.toLowerCase() ,
+            urlPath: album.searchUserName + '/' + album.searchName.toLowerCase()
         };
         const searchPath = `searchs/${search.searchText}`;
         this.afs.doc(searchPath).set(search);
