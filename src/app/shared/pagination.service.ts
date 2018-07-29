@@ -17,6 +17,7 @@ export class PaginationService {
   private _data = new BehaviorSubject([]);
 
   private query: QueryConfig;
+  private opts?: any;
 
   // Observable data
   data: Observable<any>;
@@ -32,9 +33,9 @@ export class PaginationService {
   // passing opts will override the defaults
   init(path: string, field: string, opts?: any) {
 
+    this.opts = opts;
     this._data.next([]);
     this._done.next(false);
-
     this.query = {
       path,
       field,
@@ -45,29 +46,9 @@ export class PaginationService {
     };
 
     const first = this.afs.collection(this.query.path, ref => {
-
-      if (opts.params.album && opts.params.user) {
-        return ref.where('searchUserName', '==', opts.params.user)
-          .where('searchName', '==', opts.params.album)
-          .orderBy(this.query.field, this.query.reverse ? 'desc' : 'asc')
-          .limit(this.query.limit);
-      }
-      if (opts.params.user) {
-        return ref.where('searchUserName', '==', opts.params.user)
-          .orderBy(this.query.field, this.query.reverse ? 'desc' : 'asc')
-          .limit(this.query.limit);
-      }
-      // if (opts.params.album) {
-      //   return ref.where('searchName', '==', opts.params.album)
-      //     .orderBy(this.query.field, this.query.reverse ? 'desc' : 'asc')
-      //     .limit(this.query.limit);
-      // }
-
-      return ref.orderBy(this.query.field, this.query.reverse ? 'desc' : 'asc')
-        .limit(this.query.limit);
-
-
+      return this.getQuery(ref);
     });
+
 
     this.mapAndUpdate(first);
 
@@ -78,19 +59,17 @@ export class PaginationService {
       });
   }
 
-
   // Retrieves additional data from firestore
   more() {
     const cursor = this.getCursor();
 
     const more = this.afs.collection(this.query.path, ref => {
-      return ref
-        .orderBy(this.query.field, this.query.reverse ? 'desc' : 'asc')
-        .limit(this.query.limit)
-        .startAfter(cursor);
+      return this.getQuery(ref).startAfter(cursor);
     });
     this.mapAndUpdate(more);
   }
+
+
 
 
   // Determines the doc snapshot to paginate query
@@ -137,6 +116,27 @@ export class PaginationService {
       .take(1)
       .subscribe();
 
+  }
+
+  private getQuery(ref) {
+
+    if (this.opts.params.user === 'category') {
+      return ref.where('tags.' + this.opts.params.album, '>', 0)
+        .orderBy('tags.' + this.opts.params.album, 'desc')
+        .limit(this.query.limit);
+    }
+    if (this.opts.params.album && this.opts.params.user) {
+      return ref.where('searchUserName', '==', this.opts.params.user)
+        .where('searchName', '==', this.opts.params.album)
+        .limit(this.query.limit);
+    }
+    if (this.opts.params.user) {
+      return ref.where('searchUserName', '==', this.opts.params.user)
+        .orderBy(this.query.field, 'desc')
+        .limit(this.query.limit);
+    }
+    return ref.orderBy(this.query.field, 'desc')
+      .limit(this.query.limit);
   }
 
 }

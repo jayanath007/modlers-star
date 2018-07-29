@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-search-from',
@@ -7,7 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchFromComponent implements OnInit {
 
-  constructor() { }
+
+  @Output() searchTextChange = new EventEmitter<string>();
+  @Output() tagValueChange = new EventEmitter<string>();
+
   tags = [];
   disabalePlaceholder = 'You can select only one tag for search';
   enabalePlaceholder = 'Select tag';
@@ -15,11 +18,19 @@ export class SearchFromComponent implements OnInit {
   mail = true;
   femail = true;
 
+  constructor() { }
+
   ngOnInit() {
   }
 
   onTagListUpdated($event) {
-    this.tags = $event;
+    if ($event.length > 0) {
+      this.tagValueChange.emit($event[0]);
+    }
+  }
+
+  searchOnChange(event) {
+    this.searchTextChange.emit(event);
   }
 
 }

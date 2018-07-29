@@ -18,9 +18,9 @@ import { CommentModule } from '../comment/comment.module';
 
 const routes = [
   { path: '', pathMatch: 'full', component: HomeComponent  },
-  { path: 'modler', component: HomeComponent },
   { path: 'modler/:user', component: HomeComponent },
   { path: 'modler/:user/:album', component: HomeComponent },
+  { path: 'modler/category/:category', component: HomeComponent },
 ];
 
 

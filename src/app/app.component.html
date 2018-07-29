@@ -39,7 +39,7 @@
 
 <mat-sidenav-container class="example-container" fullscreen style="margin-top: 62px ">
   <mat-sidenav #sidenav class="sidenav">
-<app-search-from></app-search-from>
+<app-search-from (searchTextChange)="searchOnChange($event)" (tagValueChange)="tagValueOnChange($event)" ></app-search-from>
   </mat-sidenav>
   <div id='mail-app-content' class="content">
     <div fxFlexOffset.gt-sm="15%" fxFlex.gt-sm="70%">

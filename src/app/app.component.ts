@@ -39,7 +39,9 @@ export class AppComponent {
   searchOnChange(event) {
     this.router.navigate(['/modler/' + event]);
   }
-
+  tagValueOnChange(event) {
+    this.router.navigate(['/modler/category/' + event]);
+  }
 
 
 }
