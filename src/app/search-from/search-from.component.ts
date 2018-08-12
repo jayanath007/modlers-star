@@ -1,4 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { TagService } from '../tag-input-component/tag.service';
+import { AngularFirestore } from '../../../node_modules/angularfire2/firestore';
 
 @Component({
   selector: 'app-search-from',
@@ -17,8 +19,19 @@ export class SearchFromComponent implements OnInit {
   weekStars = false;
   mail = true;
   femail = true;
+  popularTags = [];
+  popularUsers = [];
 
-  constructor() { }
+  constructor(private tagService: TagService, private afs: AngularFirestore) {
+
+    this.tagService.getPopularTags().subscribe((data) => {
+      this.popularTags = data;
+    });
+    this.getPopularUsers().subscribe((data) => {
+      this.popularUsers = data;
+    });
+
+  }
 
   ngOnInit() {
   }
@@ -28,9 +41,23 @@ export class SearchFromComponent implements OnInit {
       this.tagValueChange.emit($event[0]);
     }
   }
-
+  selectTag(value){
+    this.tagValueChange.emit(value);
+  }
+  selectUser(value){
+    this.searchTextChange.emit(value.trim().replace(' ', '.').toLowerCase());
+  }
+  
   searchOnChange(event) {
     this.searchTextChange.emit(event);
+  }
+
+
+  getPopularUsers() {
+    return this.afs.collection('users', ref =>
+      ref.orderBy('rating', 'desc')
+        .limit(10)
+    ).valueChanges();
   }
 
 }

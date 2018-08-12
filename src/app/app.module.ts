@@ -74,7 +74,7 @@ const firebaseConfig = {
     BrowserTransferStateModule,
     TagModule,
     MatCheckboxModule,
-
+    MatChipsModule,
   ],
   providers: [UtilsService,
     SerachUserService,

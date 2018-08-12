@@ -2,13 +2,32 @@
 
 
   <section class="example-section" style="padding-top: 10px;">
-    <app-search-box (searchTextChange)="searchOnChange($event)" ></app-search-box>
+    <app-search-box (searchTextChange)="searchOnChange($event)"></app-search-box>
   </section>
 
   <section class="example-section" style="padding-top: 10px;">
     <app-tag-input-component [tags]="tags" [maxTags]="1" [addTag]="false" [disabalePlaceholder]="disabalePlaceholder" [enabalePlaceholder]="enabalePlaceholder"
       (tagListUpdated)="onTagListUpdated($event)"></app-tag-input-component>
   </section>
+
+
+  <div style="padding: 10px">
+    <h3> TOP 10 CATEGORY LISTS</h3>
+    <mat-chip-list>
+      <mat-chip *ngFor="let item of popularTags" (click)="selectTag(item.name)" color="primary" selected>{{item.name}}</mat-chip>
+    </mat-chip-list>
+  </div>
+
+
+  <mat-divider></mat-divider>
+
+  <div style="padding: 10px">
+    <h3> TOP 10 MODLES LISTS</h3>
+    <mat-chip-list>
+      <mat-chip *ngFor="let item of popularUsers" (click)="selectUser(item.displayName)" color="accent" selected>{{item.displayName}}</mat-chip>
+    </mat-chip-list>
+  </div>
+
 
 
 </form>
