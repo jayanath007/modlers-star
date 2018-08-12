@@ -14,14 +14,25 @@ export class HomeBase implements OnInit, OnDestroy, AfterContentInit {
   private unsubscribe: Subject<void> = new Subject();
   allbumCardWidth = 0;
   @ViewChild('allbumCard', { read: ElementRef }) allbumCard: ElementRef;
+  isHomePage = true;
 
   constructor(protected page: PaginationService, protected route: ActivatedRoute) {
     this.route.params.subscribe((params) => {
-      this.page.init('albums', 'date', { reverse: false, prepend: false , params});
+      this.isHomePage = this.isEmptyObject(params);
+      this.page.init('albums', 'date', { reverse: false, prepend: false, params });
     });
   }
   ngOnInit() {
 
+  }
+
+  isEmptyObject(obj) {
+    for (const prop in obj) {
+      if (Object.prototype.hasOwnProperty.call(obj, prop)) {
+        return false;
+      }
+    }
+    return true;
   }
 
   ngAfterContentInit() {

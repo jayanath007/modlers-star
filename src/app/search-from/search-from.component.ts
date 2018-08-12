@@ -41,13 +41,13 @@ export class SearchFromComponent implements OnInit {
       this.tagValueChange.emit($event[0]);
     }
   }
-  selectTag(value){
+  selectTag(value) {
     this.tagValueChange.emit(value);
   }
-  selectUser(value){
+  selectUser(value) {
     this.searchTextChange.emit(value.trim().replace(' ', '.').toLowerCase());
   }
-  
+
   searchOnChange(event) {
     this.searchTextChange.emit(event);
   }
