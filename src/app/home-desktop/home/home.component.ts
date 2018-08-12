@@ -24,13 +24,4 @@ export class HomeComponent extends HomeBase {
     }
 
 
-
-
-    openGallery(index, album: Album) {
-        const galleryImages: GalleryImage[] = album.imageUrls.map((item) => {
-            return { url: item.url, albumId: album.id, id: item.id };
-        });
-        this.imageGalleryComponent.openGallery(index, galleryImages);
-    }
-
 }

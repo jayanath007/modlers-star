@@ -1,4 +1,4 @@
-import { SerachUserService } from './../../search-box/serach-user.service';
+import { SerachUserService } from '../../search-box/serach-user.service';
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
@@ -79,4 +79,11 @@ export class AlbumService {
         storageRef.child(`${this.basePath}/${id}`).delete();
     }
 
+
+    getLastWeekPopularAlbums() {
+        return this.afs.collection('albums', ref =>
+            ref.orderBy('rating', 'desc')
+                .limit(3)
+        ).valueChanges();
+    }
 }

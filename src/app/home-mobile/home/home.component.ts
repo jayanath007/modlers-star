@@ -6,7 +6,7 @@ import { GalleryImage } from '../../shared/image-gallery/config';
 import { HomeBase } from '../../home-core/home.base';
 import { Album } from '../../models/models';
 import { AuthService } from '../../core/auth.service';
-import { ActivatedRoute } from '../../../../node_modules/@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({

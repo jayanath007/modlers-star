@@ -5,7 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 import 'rxjs/add/observable/fromEvent';
 import 'rxjs/add/operator/takeUntil';
 import { PaginationService } from '../shared/pagination.service';
-import { ActivatedRoute } from '../../../node_modules/@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 
 export class HomeBase implements OnInit, OnDestroy, AfterContentInit {

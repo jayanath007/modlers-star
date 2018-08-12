@@ -5,6 +5,7 @@ export interface User {
   email: string;
   photoURL?: string;
   displayName?: string;
+  rating?: number;
 }
 
 export interface Search {
@@ -68,6 +69,7 @@ export interface Like {
 
 export interface Tag {
   name: string;
+  rating: number;
 }
 
 

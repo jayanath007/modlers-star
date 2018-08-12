@@ -1,30 +1,20 @@
+<app-carousel [allbumCardWidth]="allbumCardWidth"
+[imageGalleryComponent]="imageGalleryComponent">
+</app-carousel>
+
 <div #allbumCard>
 
   <mat-card *ngFor="let album of page.data | async">
-      <mat-card-header>
-          <div mat-card-avatar class="example-header-image" >
-              <img class="avatar" [src]="album.userPhotoURL">
-          </div>
-          <mat-card-title>{{album.name}}</mat-card-title>
-          <mat-card-subtitle>{{album.description}}</mat-card-subtitle>
-        </mat-card-header>
-    <mat-divider></mat-divider>
 
-    <!-- [src]="item.url.replace('uploads', 'resized')" -->
-    <div fxLayout="row" class="bounds" style="overflow: hidden;">
-      <div fxFlex="0 1 auto" class="sec1" fxLayoutAlign="start center"
-       *ngFor="let item of album.imageUrls; let i = index">
-        <img style="min-width: 200px; min-height: 200px" *ngIf="(i+1)*200 < allbumCardWidth" class="example-card"
-         [src]="item.url.replace('uploads', 'resized')" alt="album image profile"
-          (click)="openGallery(i, album)">
-      </div>
-    </div>
+    <app-desktop-album-container [album]="album" [allbumCardWidth]="allbumCardWidth"
+     [imageGalleryComponent]="imageGalleryComponent" >
+    </app-desktop-album-container>
+    
     <mat-card-content>
-
       <app-like [albumId]="album.id" [key]="album.id"> </app-like>
       <app-star-review [albumId]="album.id" [userId]="(auth.user | async )?.uid"> </app-star-review>
-      <!-- <app-comment [documentRef]='"/albums/"+album.id' [commentMaxHieght]='500'>
-      </app-comment> -->
+      <app-comment [documentRef]='"/albums/"+album.id' [commentMaxHieght]='500'>
+      </app-comment>
     </mat-card-content>
 
   </mat-card>

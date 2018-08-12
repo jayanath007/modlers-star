@@ -92,7 +92,7 @@ export class TagInputComponentComponent implements OnInit {
       || this.tags.length < this.maxTags) {
       const tagValue = value.toLowerCase().trim();
       if (this.addTag) {
-        this.tagService.saveTag({ name: tagValue });
+        this.tagService.saveTag({ name: tagValue, rating: 0 });
       }
       this.tags.push(value.trim());
       this.tagListUpdated.emit(this.tags);

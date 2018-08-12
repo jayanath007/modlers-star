@@ -73,7 +73,8 @@ const firebaseConfig = {
     BrowserModule.withServerTransition({ appId: 'photo-gallery' }),
     BrowserTransferStateModule,
     TagModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+
   ],
   providers: [UtilsService,
     SerachUserService,

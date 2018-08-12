@@ -2,36 +2,18 @@
        max-height: 200px;
        padding: 5px 5px 0px 0px;
     }
-    mat-card {
-      margin-top:25px;
-    }
+   
     .example-header-image {
       background-size: cover;
     }
-
-
+    mat-card {
+      margin-top:25px;
+    }
+  
     .container {
       overflow-y: scroll;
     }
-
-    // .bounds {
-    //   background-color: #09020f;
-    //   }
-
+  
     p {
       font-family: Lato;
     }
-    .avatar {
-  
-      width: 45px;
-      min-width: 45px;
-      height: 45px;
-      line-height: 45px;
-      margin: 0 8px 0 0;
-      border-radius: 50%;
-      font-size: 17px;
-      font-weight: 500;
-      text-align: center;
-      color: #fff;
-    }
-  

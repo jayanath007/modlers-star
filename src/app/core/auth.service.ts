@@ -41,6 +41,7 @@ export class AuthService {
             email: 'testuser@yahoo.com',
             photoURL: 'assets/avatars/profile.jpg',
             displayName: 'anonymous user',
+            rating: 0,
           };
 
           localStorage.setItem('tempUser', JSON.stringify(newTempUser));

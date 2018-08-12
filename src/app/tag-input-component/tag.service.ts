@@ -39,4 +39,11 @@ export class TagService {
         return this.afs.doc(likePath).set(tag);
     }
 
+    getPopularTags() {
+        return this.afs.collection('tags', ref =>
+            ref.orderBy('rating', 'desc')
+                .limit(10)
+        ).valueChanges();
+    }
+
 }

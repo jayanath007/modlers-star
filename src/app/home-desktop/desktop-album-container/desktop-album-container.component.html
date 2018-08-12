@@ -1,0 +1,16 @@
+<mat-card-header>
+  <div mat-card-avatar class="example-header-image">
+    <img class="avatar" [src]="album.userPhotoURL">
+  </div>
+  <mat-card-title>{{album.name}}</mat-card-title>
+  <mat-card-subtitle>{{album.description}}</mat-card-subtitle>
+</mat-card-header>
+
+
+<div fxLayout="row" style="overflow: hidden; padding-top: 5px">
+  <div fxFlex="0 1 auto" class="image-contaner" fxLayoutAlign="start center" *ngFor="let item of album.imageUrls; let i = index">
+    <img style="min-width: 200px; min-height: 200px" *ngIf="(i+1)*200 < allbumCardWidth" class="example-card"
+     [src]="item.url.replace('uploads', 'resized')"
+      alt="album image profile" (click)="openGallery(i, album)">
+  </div>
+</div>

@@ -1,0 +1,41 @@
+<mat-card class="carousel-card">
+    <!-- <div fxLayout="column" *ngIf="albums.length === 0">
+        <div fxLayoutAlign="space-around center">
+            <mat-spinner></mat-spinner>
+        </div>
+    </div> -->
+    <ngu-carousel [inputs]="carouselBanner">
+
+        <ngu-item NguCarouselItem bannerStyle *ngFor="let album of albums" >
+            <mat-card-header class="mat-card-header">
+                <mat-card-title class="mat-card-title">
+                    Best album of the week first palse
+                </mat-card-title>
+            </mat-card-header>
+            <div style="padding-top: 10px">
+                <app-desktop-album-container [album]="album" [allbumCardWidth]="allbumCardWidth"
+                 [imageGalleryComponent]="imageGalleryComponent">
+                </app-desktop-album-container>
+            </div>
+        </ngu-item>
+
+        <!-- 
+        <ngu-item NguCarouselItem class="bannerStyle">
+
+            <p>2</p>
+        </ngu-item>
+
+        <ngu-item NguCarouselItem class="bannerStyle">
+
+            <p>3</p>
+        </ngu-item> -->
+
+
+        <button NguCarouselPrev mat-fab class='leftRs'>
+            <mat-icon color="primary">keyboard_arrow_left</mat-icon>
+        </button>
+        <button NguCarouselNext mat-fab class='rightRs'>
+            <mat-icon color="primary">keyboard_arrow_right</mat-icon>
+        </button>
+    </ngu-carousel>
+</mat-card>
