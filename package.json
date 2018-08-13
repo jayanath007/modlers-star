@@ -28,6 +28,8 @@
     "@angular/platform-browser-dynamic": "6.0.3",
     "@angular/platform-server": "6.0.3",
     "@angular/router": "6.0.3",
+    "@google-cloud/storage": "^1.7.0",
+    "@google-cloud/vision": "^0.21.0",
     "@ngu/carousel": "^1.4.8",
     "@nguniversal/express-engine": "^6.0.0",
     "@nguniversal/module-map-ngfactory-loader": "^6.0.0",
