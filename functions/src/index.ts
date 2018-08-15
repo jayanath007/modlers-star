@@ -159,8 +159,8 @@ function updateRating(albumId, newValue) {
             updateUserRating(album, newValue);
 
             Object.keys(album.tag).forEach((key) => {
-                album.tag[key]
-                updateTagRating(album, newValue);
+                album.tag[key] = newValue;
+                updateTagRating(album.tag[key], newValue);
             });
 
 
