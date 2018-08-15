@@ -70,21 +70,13 @@ exports.aggregateComments = functions.firestore
             .then(querySnapshot => {
 
                 const commentCount = querySnapshot.size
-
                 const recentComments = []
-
-
                 querySnapshot.forEach(doc => {
                     recentComments.push(doc.data())
                 });
-
                 recentComments.splice(5)
-
-
-                const lastActivity = recentComments[0].createdAt
-
-                const data = { commentCount, recentComments, lastActivity }
-
+                const lastActivity = recentComments[0].createdAt;
+                const data = { commentCount, recentComments, lastActivity };
 
                 return docRef.update(data)
             })
@@ -109,22 +101,14 @@ exports.aggregatePhotoComments = functions.firestore
             .then(querySnapshot => {
 
                 const commentCount = querySnapshot.size
-
                 const recentComments = []
-
-
                 querySnapshot.forEach(doc => {
                     recentComments.push(doc.data())
                 });
-
                 recentComments.splice(5)
-
                 const lastActivity = recentComments[0].createdAt
-
-
                 const data = { commentCount, recentComments, lastActivity }
                 admin.firestore().collection('albums').doc(albumId).update({ lastActivity });
-
                 return docRef.set(data)
 
             })
@@ -136,10 +120,6 @@ exports.aggregatePhotoComments = functions.firestore
 exports.aggregateLike = functions.firestore
     .document('likes/{likesId}')
     .onUpdate((event: any) => {
-
-        console.log(event);
-        console.log(event.data);
-        console.log(event.data.val());
 
         const likesId = event.params.likesId;
         const like = event.data.val();
@@ -164,9 +144,77 @@ exports.aggregateLike = functions.firestore
 
 
 
+function updateRating(albumId, newValue) {
+
+    const albumRef = admin.firestore().collection('albums').doc(albumId);
+
+    return albumRef.get().then((album: any) => {
+        if (album) {
+            let rating = newValue;
+            if (album.rating) {
+                rating = album.rating + newValue;
+            }
+            albumRef.set({ rating: rating });
+
+            updateUserRating(album, newValue);
+
+            Object.keys(album.tag).forEach((key) => {
+                album.tag[key]
+                updateTagRating(album, newValue);
+            });
+
+
+            console.log('album rate update', album);
+        }
+        return albumRef.update(album)
+    }).catch(err => console.log(err));
+
+
+}
+
+
+function updateUserRating(userId, newValue) {
+
+    const userRef = admin.firestore().collection('users').doc(userId);
+    return userRef.get().then((user: any) => {
+
+        if (user) {
+            let rating = newValue;
+            if (user.rating) {
+                rating = user.rating + newValue;
+            }
+            userRef.set({ rating: rating });
+        }
+        console.log('user rate update', user);
+        return userRef.update(user);
+    }).catch(err => console.log(err));
+
+}
+
+function updateTagRating(album, newValue) {
+
+    const tagRef = admin.firestore().collection('tags').doc(album.albumId);
+    return tagRef.get().then((tag: any) => {
+
+        if (tag) {
+            let rating = newValue;
+            if (tag.rating) {
+                rating = tag.rating + newValue;
+            }
+            tagRef.set({ rating: rating });
+        }
+        console.log('tag rate update', tag);
+        return tagRef.update(tag)
+    }).catch(err => console.log(err));
+
+}
+
+
+
+
+
 exports.blurOffensiveImages = (event) => {
     const object = event.data;
-
 
     if (object.resourceState === 'not_exists') {
         console.log('This is a deletion event.');
@@ -178,9 +226,7 @@ exports.blurOffensiveImages = (event) => {
 
     const file = storage.bucket(object.bucket).file(object.name);
     const filePath = `gs://${object.bucket}/${object.name}`;
-
     console.log(`Analyzing ${file.name}.`);
-
     return client.safeSearchDetection(filePath)
         .catch((err) => {
             console.error(`Failed to analyze ${file.name}.`, err);
@@ -203,8 +249,6 @@ exports.blurOffensiveImages = (event) => {
 
 function blurImage(file) {
     const tempLocalFilename = `/tmp/${path.parse(file.name).base}`;
-
-
     return file.download({ destination: tempLocalFilename })
         .catch((err) => {
             console.error('Failed to download file.', err);
@@ -212,7 +256,6 @@ function blurImage(file) {
         })
         .then(() => {
             console.log(`Image ${file.name} has been downloaded to ${tempLocalFilename}.`);
-
             return new Promise((resolve, reject) => {
                 exec(`convert ${tempLocalFilename} -channel RGBA -blur 0x24 ${tempLocalFilename}`, { stdio: 'ignore' }, (err, stdout) => {
                     if (err) {
@@ -226,8 +269,6 @@ function blurImage(file) {
         })
         .then(() => {
             console.log(`Image ${file.name} has been blurred.`);
-
-
             return file.bucket.upload(tempLocalFilename, { destination: file.name })
                 .catch((err) => {
                     console.error('Failed to upload blurred image.', err);
@@ -236,8 +277,6 @@ function blurImage(file) {
         })
         .then(() => {
             console.log(`Blurred image has been uploaded to ${file.name}.`);
-
-
             return new Promise((resolve, reject) => {
                 fs.unlink(tempLocalFilename, (err) => {
                     if (err) {
