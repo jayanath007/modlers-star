@@ -20,7 +20,7 @@ export const helloWorld = functions.https.onRequest((request, response) => {
 
 admin.initializeApp(functions.config().firebase);
 
-exports.onFileChange = functions.storage.object().onArchive((event: any) => {
+exports.onFileChange = functions.storage.object().onFinalize((event: any) => {
     const object = event.data;
     const bucket = object.bucket;
     const contentType = object.contentType;
@@ -40,16 +40,15 @@ exports.onFileChange = functions.storage.object().onArchive((event: any) => {
     const destBucket = storage.bucket(bucket);
     const tmpFilePath = path.join(os.tmpdir(), path.basename(filePath));
     const metadata = { contentType: contentType };
+
     return destBucket.file(filePath).download({
         destination: tmpFilePath
     }).then(() => {
-        // [tmpFilePath,'-resize','200x200^','\\', '-gravity','center','-extent', '200x200', tmpFilePath]
-        // ,'\\'
         return spawn('convert',
             [tmpFilePath, '-resize', '200x200^', '-gravity', 'center', '-extent', '200x200', tmpFilePath]);
     }).then(() => {
         return destBucket.upload(tmpFilePath, {
-            destination: 'resized/' + path.basename(filePath),
+            destination: 'resized/resized-' + path.basename(filePath),
             metadata: metadata
         })
     });
