@@ -191,9 +191,9 @@ function updateUserRating(userId, newValue) {
 
 }
 
-function updateTagRating(album, newValue) {
+function updateTagRating(tagId, newValue) {
 
-    const tagRef = admin.firestore().collection('tags').doc(album.albumId);
+    const tagRef = admin.firestore().collection('tags').doc(tagId);
     return tagRef.get().then((tag: any) => {
 
         if (tag) {
