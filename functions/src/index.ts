@@ -120,26 +120,8 @@ exports.aggregatePhotoComments = functions.firestore
 exports.aggregateLike = functions.firestore
     .document('likes/{likesId}')
     .onUpdate((event: any) => {
-
-        const likesId = event.params.likesId;
         const like = event.data.val();
-        const albumRef = admin.firestore().collection('albums').doc(like.albumId);
-
-        return albumRef.get().then((album: any) => {
-
-            if (album) {
-                let rateValue = like.value;
-                if (album.rateValue) {
-                    rateValue = album.rateValue + rateValue;
-                }
-                albumRef.set({ rateValue: rateValue });
-
-            }
-            console.log('rateValue', album);
-            return albumRef.update(album)
-
-        }).catch(err => console.log(err));
-
+        updateRating(like.albumId, 3);
     });
 
 
@@ -147,6 +129,8 @@ exports.aggregateLike = functions.firestore
 function updateRating(albumId, newValue) {
 
     const albumRef = admin.firestore().collection('albums').doc(albumId);
+
+    console.log('update start');
 
     return albumRef.get().then((album: any) => {
         if (album) {
