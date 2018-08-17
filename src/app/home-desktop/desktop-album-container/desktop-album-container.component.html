@@ -1,16 +1,33 @@
-<mat-card-header>
-  <div mat-card-avatar class="example-header-image">
-    <img class="avatar" [src]="album.userPhotoURL">
+<div fxLayout="row" fxFlexFill fxLayoutAlign="space-between center">
+  <div fxFlex="0 1 auto">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image">
+        <img class="avatar" [src]="album.userPhotoURL">
+      </div>
+      <mat-card-title>{{album.name}}</mat-card-title>
+      <mat-card-subtitle>{{album.description}}</mat-card-subtitle>
+    </mat-card-header>
   </div>
-  <mat-card-title>{{album.name}}</mat-card-title>
-  <mat-card-subtitle>{{album.description}}</mat-card-subtitle>
-</mat-card-header>
+  <!--  -->
+  <div fxFlex="0 1 auto" class="album-info">
 
+    <div fxLayout="row" fxLayoutAlign="end center" >
+      <app-like [albumId]="album.id" [key]="album.id"> </app-like>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="end center">
+      <div fxFlex>
+        <div>5,107 views</div>
+      </div>
+      <div fxFlex>
+        <app-star-review [albumId]="album.id"> </app-star-review>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div fxLayout="row" style="overflow: hidden; padding-top: 5px">
   <div fxFlex="0 1 auto" class="image-contaner" fxLayoutAlign="start center" *ngFor="let item of album.imageUrls; let i = index">
-    <img style="min-width: 200px; min-height: 200px" *ngIf="(i+1)*200 < allbumCardWidth" class="example-card"
-     [src]="item.url.replace('uploads', 'resized')"
+    <img style="min-width: 200px; min-height: 200px" *ngIf="(i+1)*200 < allbumCardWidth+50" class="example-card" [src]="item.url.replace('uploads', 'resized')"
       alt="album image profile" (click)="openGallery(i, album)">
   </div>
 </div>

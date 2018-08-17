@@ -14,7 +14,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
     response.send("Hello from Firebase!");
 });
 admin.initializeApp(functions.config().firebase);
-exports.onFileChange = functions.storage.object().onArchive((event) => {
+exports.onFileChange = functions.storage.object().onFinalize((event) => {
     const object = event.data;
     const bucket = object.bucket;
     const contentType = object.contentType;
@@ -34,12 +34,10 @@ exports.onFileChange = functions.storage.object().onArchive((event) => {
     return destBucket.file(filePath).download({
         destination: tmpFilePath
     }).then(() => {
-        // [tmpFilePath,'-resize','200x200^','\\', '-gravity','center','-extent', '200x200', tmpFilePath]
-        // ,'\\'
         return spawn('convert', [tmpFilePath, '-resize', '200x200^', '-gravity', 'center', '-extent', '200x200', tmpFilePath]);
     }).then(() => {
         return destBucket.upload(tmpFilePath, {
-            destination: 'resized/' + path.basename(filePath),
+            destination: 'resized/resized-' + path.basename(filePath),
             metadata: metadata
         });
     });
@@ -92,24 +90,76 @@ exports.aggregatePhotoComments = functions.firestore
 exports.aggregateLike = functions.firestore
     .document('likes/{likesId}')
     .onUpdate((event) => {
-    console.log(event);
-    console.log(event.data);
-    console.log(event.data.val());
-    const likesId = event.params.likesId;
     const like = event.data.val();
-    const albumRef = admin.firestore().collection('albums').doc(like.albumId);
+    updateRating(like.albumId, 3);
+});
+exports.makeUppercase = functions.database.ref('/likes/{likesId}')
+    .onWrite((change, context) => {
+    // Only edit data when it is first created.
+    if (change.before.exists()) {
+        return null;
+    }
+    // Exit when the data is deleted.
+    if (!change.after.exists()) {
+        return null;
+    }
+    // Grab the current value of what was written to the Realtime Database.
+    const original = change.after.val();
+    console.log('Uppercasing', context.params.pushId, original);
+    const uppercase = original.toUpperCase();
+    // You must return a Promise when performing asynchronous tasks inside a Functions such as
+    // writing to the Firebase Realtime Database.
+    // Setting an "uppercase" sibling in the Realtime Database returns a Promise.
+    return updateRating(original.albumId, 5);
+});
+function updateRating(albumId, newValue) {
+    const albumRef = admin.firestore().collection('albums').doc(albumId);
+    console.log('update start');
     return albumRef.get().then((album) => {
         if (album) {
-            let rateValue = like.value;
-            if (album.rateValue) {
-                rateValue = album.rateValue + rateValue;
+            let rating = newValue;
+            if (album.rating) {
+                rating = album.rating + newValue;
             }
-            albumRef.set({ rateValue: rateValue });
+            albumRef.set({ rating: rating });
+            updateUserRating(album, newValue);
+            Object.keys(album.tag).forEach((key) => {
+                album.tag[key] = newValue;
+                updateTagRating(album.tag[key], newValue);
+            });
+            console.log('album rate update', album);
         }
-        console.log('rateValue', album);
         return albumRef.update(album);
     }).catch(err => console.log(err));
-});
+}
+function updateUserRating(userId, newValue) {
+    const userRef = admin.firestore().collection('users').doc(userId);
+    return userRef.get().then((user) => {
+        if (user) {
+            let rating = newValue;
+            if (user.rating) {
+                rating = user.rating + newValue;
+            }
+            userRef.set({ rating: rating });
+        }
+        console.log('user rate update', user);
+        return userRef.update(user);
+    }).catch(err => console.log(err));
+}
+function updateTagRating(tagId, newValue) {
+    const tagRef = admin.firestore().collection('tags').doc(tagId);
+    return tagRef.get().then((tag) => {
+        if (tag) {
+            let rating = newValue;
+            if (tag.rating) {
+                rating = tag.rating + newValue;
+            }
+            tagRef.set({ rating: rating });
+        }
+        console.log('tag rate update', tag);
+        return tagRef.update(tag);
+    }).catch(err => console.log(err));
+}
 exports.blurOffensiveImages = (event) => {
     const object = event.data;
     if (object.resourceState === 'not_exists') {
