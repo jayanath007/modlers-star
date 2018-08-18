@@ -13,28 +13,55 @@ const spawn = require('child-process-promise').spawn;
 
 
 
-export const helloWorld = functions.https.onRequest((request, response) => {
-    response.send("Hello from Firebase!");
-});
-
-
 admin.initializeApp(functions.config().firebase);
 
-exports.onFileChange = functions.storage.object().onFinalize((event: any) => {
-    const object = event.data;
+
+export const likeRatingCalculation = functions.database.ref('/likes/{likesId}')
+    .onWrite((change, context) => {
+        // Only edit data when it is first created.
+        console.log('like Rating Calculation get start');
+
+
+        if (change.before.exists()) {
+            console.log('Only edit data when it is first created');
+            return null;
+        }
+        // Exit when the data is deleted.
+        if (!change.after.exists()) {
+            console.log('Exit when the data is deleted');
+            return null;
+        }
+        // Grab the current value of what was written to the Realtime Database.
+        const original = change.after.val();
+        console.log('Uppercasing', context.params.pushId, original);
+        // You must return a Promise when performing asynchronous tasks inside a Functions such as
+        // writing to the Firebase Realtime Database.
+        // Setting an "uppercase" sibling in the Realtime Database returns a Promise.
+        return updateRating(original.albumId, 5);
+    });
+
+
+
+
+
+
+
+exports.onFinalize = functions.storage.object().onFinalize((object: any) => {
     const bucket = object.bucket;
     const contentType = object.contentType;
     const filePath = object.name;
-    console.log('File change detected, function execution started');
+
+    console.log(object);
+
 
     if (object.resourceState === 'not_exists') {
         console.log('We deleted a file, exit...');
-        return;
+        return null;
     }
 
-    if (path.basename(filePath).startsWith('resized-')) {
+    if (filePath.startsWith('resized')) {
         console.log('We already renamed that file!');
-        return;
+        return null;
     }
 
     const destBucket = storage.bucket(bucket);
@@ -48,7 +75,7 @@ exports.onFileChange = functions.storage.object().onFinalize((event: any) => {
             [tmpFilePath, '-resize', '200x200^', '-gravity', 'center', '-extent', '200x200', tmpFilePath]);
     }).then(() => {
         return destBucket.upload(tmpFilePath, {
-            destination: 'resized/resized-' + path.basename(filePath),
+            destination: 'resized/' + path.basename(filePath),
             metadata: metadata
         })
     });
@@ -117,34 +144,7 @@ exports.aggregatePhotoComments = functions.firestore
 
 
 
-exports.aggregateLike = functions.firestore
-    .document('likes/{likesId}')
-    .onUpdate((event: any) => {
-        const like = event.data.val();
 
-        updateRating(like.albumId, 3);
-    });
-
-
-exports.makeUppercase = functions.database.ref('/likes/{likesId}')
-    .onWrite((change, context) => {
-        // Only edit data when it is first created.
-        if (change.before.exists()) {
-            return null;
-        }
-        // Exit when the data is deleted.
-        if (!change.after.exists()) {
-            return null;
-        }
-        // Grab the current value of what was written to the Realtime Database.
-        const original = change.after.val();
-        console.log('Uppercasing', context.params.pushId, original);
-        const uppercase = original.toUpperCase();
-        // You must return a Promise when performing asynchronous tasks inside a Functions such as
-        // writing to the Firebase Realtime Database.
-        // Setting an "uppercase" sibling in the Realtime Database returns a Promise.
-        return updateRating(original.albumId , 5);
-    });
 
 
 
@@ -226,10 +226,10 @@ exports.blurOffensiveImages = (event) => {
 
     if (object.resourceState === 'not_exists') {
         console.log('This is a deletion event.');
-        return;
+        return null;
     } else if (!object.name) {
         console.log('This is a deploy event.');
-        return;
+        return null;
     }
 
     const file = storage.bucket(object.bucket).file(object.name);
