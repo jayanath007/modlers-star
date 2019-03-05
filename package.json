@@ -11,7 +11,8 @@
     "e2e": "ng e2e",
     "build:ssr": "ng build --prod && ng run photo-gallery:server && npm run webpack:server",
     "serve:ssr": "node dist/photo-gallery-server/server.js",
-    "webpack:server": "webpack --config webpack.server.config.js"
+    "webpack:server": "webpack --config webpack.server.config.js",
+    "j": "ng serve --port 4220"
   },
   "private": true,
   "dependencies": {
