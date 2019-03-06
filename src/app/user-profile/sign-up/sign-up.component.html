@@ -1,0 +1,13 @@
+<mat-card>
+  <h3>Sign up</h3>
+  <mat-card-actions class="button">
+    <button (click)="auth.googleLogin()" class="btn btn-block btn-social btn-google" type="submit" [disabled]="!g.valid">
+      <span class="fa fa-google"></span> Sign up with your Google Account</button>
+  </mat-card-actions>
+  <mat-card-actions class="button">
+    <button (click)="auth.facebookLogin()" class="btn btn-block btn-social btn-facebook" type="submit" [disabled]="!fb.valid">
+      <span class="fa fa-facebook"></span> Sign up with your Facebook Account</button>
+  </mat-card-actions>
+  <hr />
+  <h4>Upload your latest image and become a famous modler </h4>
+</mat-card>

@@ -14,14 +14,13 @@ import { FileDropDirective } from './image-upload/file-drop.directive';
 import { ImageUploadComponent } from './image-upload/image-upload.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { MatChipsModule } from '@angular/material/chips';
-import { TagInputComponentComponent } from '../tag-input-component/tag-input-component.component';
 import { TagModule } from '../tag-input-component/tag.module';
 
 
 const routes = [
   { path: '', pathMatch: 'full', redirectTo: 'addImages' },
-  { path: 'addAlbum', component: AddAlbumComponent }
+  { path: 'addAlbum', component: AddAlbumComponent },
+  { path: 'editAlbum/:albumId', component: AddAlbumComponent }
 ];
 
 @NgModule({

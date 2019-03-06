@@ -33,6 +33,7 @@
     "@ngu/carousel": "^1.4.8",
     "@nguniversal/express-engine": "^6.0.0",
     "@nguniversal/module-map-ngfactory-loader": "^6.0.0",
+    "angular-font-awesome": "^3.1.2",
     "angular-star-rating": "^4.0.0-beta.3",
     "angular2-image-upload": "^1.0.0-rc.1",
     "angularfire2": "^5.0.0-rc.10",

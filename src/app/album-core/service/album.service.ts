@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { Album, Upload, Search } from '../../models/models';
 import * as firebase from 'firebase';
+import { uuid } from '../../shared/util/uid';
 
 @Injectable()
 export class AlbumService {
@@ -43,9 +44,17 @@ export class AlbumService {
                     const fileData = fileDataList[_i];
                     album.imageUrls.push({ url: url, id: fileData.id });
                 }
+                if (album.id) {
+                    album.id = uuid();
+                }
 
                 this.serachUserService.saveSearchByAlbum(album);
-                return this.albumsCol.add(album);
+
+                const albumsPath = `albums/${album.id}`;
+
+                // Set the data, return the promise
+                return this.afs.doc(albumsPath).set(album);
+                // return this.albumsCol.add(album);
             });
 
     }
