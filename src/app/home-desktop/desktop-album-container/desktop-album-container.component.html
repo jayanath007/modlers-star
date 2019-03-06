@@ -19,7 +19,7 @@
         <div>5,107 views</div>
       </div>
       <div fxFlex>
-        <app-star-review [albumId]="album.id"> </app-star-review>
+        <!-- <app-star-review [albumId]="album.id"> </app-star-review> -->
       </div>
     </div>
   </div>
@@ -27,7 +27,8 @@
 
 <div fxLayout="row" style="overflow: hidden; padding-top: 5px">
   <div fxFlex="0 1 auto" class="image-contaner" fxLayoutAlign="start center" *ngFor="let item of album.imageUrls; let i = index">
-    <img style="min-width: 200px; min-height: 200px" *ngIf="(i+1)*200 < allbumCardWidth+50" class="example-card" [src]="item.url.replace('uploads', 'resized')"
+    <img style="min-width: 200px; min-height: 200px" *ngIf="(i+1)*200 < allbumCardWidth+50" class="example-card"
+     [src]="item.url.replace('uploads', 'resized')"
       alt="album image profile" (click)="openGallery(i, album)">
   </div>
 </div>

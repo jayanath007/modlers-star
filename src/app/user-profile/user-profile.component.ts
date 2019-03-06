@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../core/auth.service';
-import { UIParams, UIResponse, FacebookService, InitParams } from 'ngx-facebook';
+import { AngularFirestore, AngularFirestoreCollection } from '../../../node_modules/angularfire2/firestore';
+import { Observable } from '../../../node_modules/rxjs';
+import { Album } from '../models/models';
+import { Router } from '../../../node_modules/@angular/router';
 
 @Component({
   selector: 'app-user-profile',
@@ -9,38 +12,30 @@ import { UIParams, UIResponse, FacebookService, InitParams } from 'ngx-facebook'
 })
 export class UserProfileComponent implements OnInit {
 
-  constructor(public auth: AuthService, private fb: FacebookService) { 
 
-    const initParams: InitParams = {
-      appId: '1170263726357175',
-      xfbml: true,
-      version: 'v2.8'
-    };
+  albumsCol: AngularFirestoreCollection<Album>;
+  albums$: any;
 
-    fb.init(initParams);
+  constructor(private router: Router, public auth: AuthService, private afs: AngularFirestore, ) {
 
   }
+
 
   ngOnInit() {
+
+    this.albums$ = this.auth.user.switchMap((user) => {
+      return this.afs.collection('albums', ref => {
+        return ref.where('userId', '==', user.uid)
+          .orderBy('date', 'desc');
+      }).valueChanges();
+    });
+
+  }
+  editAlbum(id) {
+    this.router.navigate(['/album/editAlbum/' + id]);
   }
 
 
-  share(url: string) {
-
-    const params: UIParams = {
-      href: 'https://github.com/zyra/ngx-facebook',
-      method: 'share'
-    };
-
-    this.fb.ui(params)
-      .then((res: UIResponse) => {
-        return console.log(res);
-      }).catch((e: any) => {
-       return console.error(e);
-      }
-    );
-
-  }
 
 }
 

@@ -1,57 +1,52 @@
-<div *ngIf=" (auth.user | async ) ?.uid !== auth.tempUid; then authenticated else guest">
-  <!-- template will replace this div -->
-</div>
-
-<!-- User NOT logged in -->
-<ng-template #guest>
+<div *ngIf=" (auth.user | async ) ?.uid !== auth.tempUid;">
   <mat-card>
-    <h1>Hi GUEST</h1>
-    <h1>Login to get started...</h1>
+    <div fxLayout="row" fxFlexFill>
+      <div fxFlex="0 1 auto" class="image-section">
 
-    <mat-card-actions align="left">
-      <button mat-raised-button (click)="auth.googleLogin()">
-        <i class="fa fa-google"></i> login with Google
-      </button>
-      <button mat-raised-button (click)="auth.facebookLogin()">
-        <i class="fa fa-google"></i> login with Facebook
-      </button>
-    </mat-card-actions>
-  </mat-card>
-</ng-template>
+        <div fxLayout="column" fxFlexFill>
+          <div fxFlex>
+            <img class="avatar" [src]="(auth.user | async)?.photoURL">
+          </div>
+          <div fxFlex>
 
+          </div>
+        </div>
 
-<!-- User logged in -->
-<ng-template #authenticated>
-  <mat-card>
-    <div *ngIf="auth.user | async as user">
-      <h1>Hi {{ user.displayName }}</h1>
-      <br>
-      <h3> Upload your latest image and become a famous modler </h3>
-      <img [src]="user.photoURL">
-      <p>UID: {{ user.uid }}</p>
-      <mat-card-actions align="left">
+      </div>
+      <div fxFlex class="infor-section">
+        <p>Hi {{ (auth.user | async)?.displayName }}</p>
         <button mat-raised-button (click)="auth.signOut()">Logout</button>
-      </mat-card-actions>
+      </div>
     </div>
   </mat-card>
-</ng-template>
+</div>
 
 
-<!-- <mat-card>
-  <div>
-    <mat-card-actions align="left">
-      <fb-share [size]="'large'" [layout]="'button'" href="https://github.com/zyra/ng2-facebook-sdk/"></fb-share>
-      <button mat-raised-button (click)="share('a')">shere</button>
-    </mat-card-actions>
-  </div>
+
+
+<!-- <mat-card albums$ >
+
 </mat-card> -->
 
+<mat-card *ngFor="let album of albums$ | async">
 
-   <!--
-      <fb-comments href="https://www.facebook.com/zuck" ></fb-comments>
-      <fb-like href="https://www.facebook.com/zuck"></fb-like>
-      <fb-comment-embed href="https://www.facebook.com/zuck/posts/10102735452532991?comment_id=1070233703036185" width="500"></fb-comment-embed>
-      <fb-page href="https://facebook.com/facebook"></fb-page>
-      <fb-quote></fb-quote>
-      <fb-save uri="https://github.com/zyra/ng2-facebook-sdk/"></fb-save> 
-    -->
+  <mat-card-header>
+    <mat-card-title>{{album.name}}</mat-card-title>
+    <mat-card-subtitle>{{album.description}}</mat-card-subtitle>
+  </mat-card-header>
+  <div fxLayout="row" style="overflow: hidden; padding-top: 5px">
+    <div fxFlex="0 1 auto" class="image-contaner" fxLayoutAlign="start center" *ngFor="let item of album.imageUrls; let i = index">
+      <img style="min-width: 200px; min-height: 200px" class="example-card" [src]="item.url.replace('uploads', 'resized')" alt="album image profile">
+    </div>
+  </div>
+  <mat-card-actions>
+    <button mat-button (click)="editAlbum(album.id)" >EDIT</button>
+  </mat-card-actions>
+
+</mat-card>
+
+
+
+<div *ngIf=" (auth.user | async ) ?.uid === auth.tempUid;">
+  <app-sign-up></app-sign-up>
+</div>

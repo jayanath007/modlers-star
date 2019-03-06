@@ -34,7 +34,7 @@ export interface Album {
   userName: string;
   searchUserName: string;
   searchName: string;
-  id?: string;
+  id: string;
   commentCount: number;
   recentComments: Comment[];
   tags: object;

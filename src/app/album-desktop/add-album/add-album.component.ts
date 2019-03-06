@@ -6,7 +6,8 @@ import { AuthService } from '../../core/auth.service';
 import { Subject } from 'rxjs';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher, MatSnackBar } from '@angular/material';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { AngularFirestore } from '../../../../node_modules/angularfire2/firestore';
 
 
 @Component({
@@ -16,7 +17,6 @@ import { Router } from '@angular/router';
 })
 
 export class AddAlbumComponent implements OnDestroy, OnInit {
-
 
   albumFrom: any;
   album = {
@@ -33,23 +33,46 @@ export class AddAlbumComponent implements OnDestroy, OnInit {
   tags = ['sri lanka'];
   saved = false;
 
-
   private unsubscribe: Subject<void> = new Subject();
 
   albumNameControl = new FormControl('', [
     Validators.required,
   ]);
-
   albumDescriptionControl = new FormControl('', [
     Validators.required,
   ]);
-
   matcher = new MyErrorStateMatcher();
+  album$: any;
+  isEditMode = false;
+
+
   constructor(private albumService: AlbumService,
     private auth: AuthService,
     private snackBar: MatSnackBar,
-    private router: Router) {
+    private router: Router, protected route: ActivatedRoute, private afs: AngularFirestore) {
+      this.isEditMode = false;
+    if (window.location.href.indexOf('editAlbum') > 0) {
+      this.isEditMode = true;
+      this.route.params.switchMap((album) => {
+        return this.afs.collection('albums', ref => {
+          return ref.where('id', '==', album.albumId);
+        }).valueChanges();
+      }).subscribe((data: any) => {
+        this.album = data[0];
+        const tags = [];
+        // this.album.tags.forEach((item) => {
+        //   tags[item] = true;
+        // });
+
+      });
+    }
+
   }
+
+
+
+
+
   checkValue(event: KeyboardEvent) {
     if (event.key === '.' || event.key === '-') {
       event.preventDefault();
@@ -59,7 +82,7 @@ export class AddAlbumComponent implements OnDestroy, OnInit {
   saveAlbum(album: Album, event: any) {
     this.clickSave = true;
 
-    if (event.keyCode !== 13 && (this.uploadFile.length >= 3)
+    if (event.keyCode !== 13 && (this.uploadFile.length >= 3 ||  this.isEditMode)
       && this.albumNameControl.valid
       && this.albumDescriptionControl.valid
     ) {
@@ -121,7 +144,7 @@ export class AddAlbumComponent implements OnDestroy, OnInit {
 
   onRemovedFile($event) {
     this.uploadFile = this.uploadFile
-    .filter((item) => item.name !== $event.file.name);
+      .filter((item) => item.name !== $event.file.name);
   }
 
   ngOnInit() {
