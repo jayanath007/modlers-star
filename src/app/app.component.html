@@ -1,4 +1,4 @@
-<mat-toolbar  layout="row" style="position: fixed; padding: 10px">
+<mat-toolbar layout="row" style="position: fixed; padding: 10px">
   <div fxLayout="row" fxFlexFill>
 
     <div fxFlex.lg="5" fxFlex.md="5" fxFlex.sm="5" fxFlex.xs="10" style="padding-left: 10px ;">
@@ -7,29 +7,26 @@
       </button>
     </div>
 
-    <div fxFlex.lg="13" fxFlex.md="20" fxFlex.sm="25" >
+    <div fxFlex.lg="13" fxFlex.md="20" fxFlex.sm="25">
       <a mat-button [routerLink]="['/']">
         <h2>Photo Gallery</h2>
       </a>
     </div>
 
-    <div fxFlex.lg="70" fxFlex.md="65" fxFlex.sm="55"   [ngStyle.xs]="{ display: 'none'}">
-      <app-search-box (searchTextChange)="searchOnChange($event)" ></app-search-box>
+    <div fxFlex.lg="70" fxFlex.md="65" fxFlex.sm="55" [ngStyle.xs]="{ display: 'none'}">
+      <app-search-box (searchTextChange)="searchOnChange($event)"></app-search-box>
     </div>
-    <div fxFlex.lg="12" fxFlex.md="10" fxFlex.sm="15" >
+    <div fxFlex.lg="12" fxFlex.md="10" fxFlex.sm="15">
       <div div fxLayout="row" fxLayoutAlign="end center">
 
-
-          <a [routerLink]="['/user']" mat-button mat-icon-button style="margin-right: 10px;">
-            <img class="avatar" [src]="(auth.user | async )?.photoURL">
-          </a>
+        <a [routerLink]="['/user']" mat-button mat-icon-button style="margin-right: 10px;">
+          <img class="avatar" [src]="(auth.user | async )?.photoURL">
+        </a>
 
         <a [routerLink]="['/album/addAlbum']" mat-button mat-icon-button style="margin-right: 20px;">
           <mat-icon aria-label="upload your photo album">photo_album</mat-icon>
         </a>
-
-    
-
+        
       </div>
     </div>
 
@@ -39,7 +36,7 @@
 
 <mat-sidenav-container class="example-container" fullscreen style="margin-top: 62px ">
   <mat-sidenav #sidenav class="sidenav">
-<app-search-from (searchTextChange)="searchOnChange($event)" (tagValueChange)="tagValueOnChange($event)" ></app-search-from>
+    <app-search-from (searchTextChange)="searchOnChange($event)" (tagValueChange)="tagValueOnChange($event)"></app-search-from>
   </mat-sidenav>
   <div id='mail-app-content' class="content">
     <div fxFlexOffset.gt-sm="15%" fxFlex.gt-sm="70%">
@@ -48,4 +45,3 @@
     <div style="padding: 5px;"></div>
   </div>
 </mat-sidenav-container>
-

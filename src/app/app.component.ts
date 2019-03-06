@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { UtilsService } from './shared/Utils.service';
 import { AuthService } from './core/auth.service';
 import { FacebookService, InitParams } from 'ngx-facebook';
+import { AuthGuard } from './core/auth.guard';
 
 
 @Component({
@@ -21,7 +22,8 @@ export class AppComponent {
     if (utilsService.isMobile.any()) {
       this.router.resetConfig([
         { path: '', loadChildren: 'app/home-mobile/home-mobile.module#HomeMobileModule' },
-        { path: 'addAlbum', loadChildren: 'app/album-desktop/album-desktop.module#AlbumDesktopModule' },
+        { path: 'mobile', loadChildren: 'app/home-mobile/home-mobile.module#HomeMobileModule' },
+        { path: 'album', loadChildren: 'app/album-desktop/album-desktop.module#AlbumDesktopModule', canActivate: [AuthGuard] },
         { path: 'user', loadChildren: 'app/user-profile/user-profile.module#UserProfileModule' },
       ]);
     }
