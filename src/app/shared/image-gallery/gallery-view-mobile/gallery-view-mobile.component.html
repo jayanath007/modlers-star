@@ -12,11 +12,11 @@
             <div class="control-close"  (click)="close()"></div>
         </div>
         <div fxFlex="1" class="info-container" *ngIf="!loading" >
-                <app-comment
-                [documentRef]='"/albums/"+ images[this.activeImageIndex]?.albumId 
-                 + "/photoComments/"+ images[this.activeImageIndex]?.id' 
-                [commentMaxHieght]=commentBoxMaxHieght>
-              </app-comment>
+            <!-- <app-comment 
+            [albumId]= "images[this.activeImageIndex]?.albumId"
+            [photoId]= " images[this.activeImageIndex]?.id"
+            [commentMaxHieght]=commentBoxMaxHieght>
+           </app-comment> -->
         
         </div>
     </div>

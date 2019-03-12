@@ -14,8 +14,10 @@
     <!-- info and thumbnails -->
     <div class="info-container">
         <app-like [albumId]="images[this.activeImageIndex]?.albumId " [key]="images[this.activeImageIndex]?.id"> </app-like>
-        <app-comment [documentRef]='"/albums/"+ images[this.activeImageIndex]?.albumId 
-         + "/photoComments/"+ images[this.activeImageIndex]?.id' [commentMaxHieght]=commentBoxMaxHieght>
+        <app-comment 
+         [albumId]= "images[this.activeImageIndex]?.albumId"
+         [photoId]= "images[this.activeImageIndex]?.id"
+         [commentMaxHieght]=commentBoxMaxHieght>
         </app-comment>
     </div>
 </div>
