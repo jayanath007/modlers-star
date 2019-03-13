@@ -34,8 +34,13 @@ export class CommentComponent implements OnInit, OnChanges, OnDestroy, AfterCont
 
   }
 
-  dateformat(timestamp) {
-    return new Date(timestamp * 1000);
+  dateformat(createdAt) {
+    if (createdAt.seconds) {
+      const timestamp = createdAt.seconds;
+      return new Date(timestamp * 1000);
+    } else {
+      return createdAt;
+    }
   }
 
   ngOnChanges(changes: SimpleChanges) {

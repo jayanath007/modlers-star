@@ -20,7 +20,7 @@ export class CommentPaginationService {
   done: Observable<boolean> = this._done.asObservable();
   loading: Observable<boolean> = this._loading.asObservable();
   isAddItem = false;
-  limit = 5;
+  limit = 20;
   documentPath: string;
 
   constructor(private afs: AngularFirestore) {
@@ -28,7 +28,7 @@ export class CommentPaginationService {
     this._data.asObservable()
       .scan((acc, val) => {
         if (val.action === DataAction.Add) {
-          return { action: DataAction.Done, data: val.data.concat([]) };
+          return { action: DataAction.Done, data: val.data.concat(acc.data) };
         } else if (val.action === DataAction.Concat) {
           return { action: DataAction.Done, data: acc.data.concat(val.data) };
         } else if (val.action === DataAction.Reset) {
@@ -77,9 +77,9 @@ export class CommentPaginationService {
 
   // Determines the doc snapshot to paginate query
   private getCursor() {
-    const current = this._data.value;
-    if (current.data.length) {
-      return current[current.data.length - 1].doc;
+    const current = this._data.value.data;
+    if (current.length) {
+      return current[current.length - 1].doc;
     }
     return null;
   }
