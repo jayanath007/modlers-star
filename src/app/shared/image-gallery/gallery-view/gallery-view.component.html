@@ -1,35 +1,34 @@
 <!-- images and image information container -->
 <div class="galleria" (contextmenu)="rightClickOnImage($event)">
-    <!-- images -->
-    <div class="images-container" (swiperight)="prev()" (swipeleft)="next()">
-        <!-- images array -->
-        <div class="image" *ngFor="let image of images; let i = index;" [class.active]="!loading && (i == activeImageIndex)" [ngStyle]="{top: conf.imageOffset, bottom: conf.imageOffset}">
-            <img class="image-view" *ngIf="i == activeImageIndex" [src]="image.url" [alt]="image.altText || ''" [style.cursor]="conf.imagePointer?  'pointer':'default'"
-                [style.borderRadius]="conf.imageBorderRadius" (click)="clickOnImage(activeImageIndex)" />
-        </div>
-        <!-- loading animation -->
-        <div class="loading-animation" *ngIf="(images.length == 0) || loading">
-        </div>
+  <!-- images -->
+  <div class="images-container" (swiperight)="prev()" (swipeleft)="next()">
+    <!-- images array -->
+    <div class="image" *ngFor="let image of images; let i = index;" [class.active]="!loading && (i == activeImageIndex)"
+      [ngStyle]="{top: conf.imageOffset, bottom: conf.imageOffset}">
+      <img class="image-view" *ngIf="i == activeImageIndex" [src]="image.url" [alt]="image.altText || ''"
+        [style.cursor]="conf.imagePointer?  'pointer':'default'" [style.borderRadius]="conf.imageBorderRadius" (click)="clickOnImage(activeImageIndex)" />
     </div>
-    <!-- info and thumbnails -->
-    <div class="info-container">
-        <app-like [albumId]="images[this.activeImageIndex]?.albumId " [key]="images[this.activeImageIndex]?.id"> </app-like>
-        <app-comment 
-         [albumId]= "images[this.activeImageIndex]?.albumId"
-         [photoId]= "images[this.activeImageIndex]?.id"
-         [commentMaxHieght]=commentBoxMaxHieght>
-        </app-comment>
+    <!-- loading animation -->
+    <div class="loading-animation" *ngIf="(images.length == 0) || loading">
     </div>
+  </div>
+  <!-- info and thumbnails -->
+  <div class="info-container">
+    <app-like [albumId]="images[this.activeImageIndex]?.albumId " [key]="images[this.activeImageIndex]?.id"> </app-like>
+    <!-- <app-comment [albumId]="images[this.activeImageIndex]?.albumId" [photoId]="images[this.activeImageIndex]?.id"
+      [commentMaxHieght]=commentBoxMaxHieght>
+    </app-comment> -->
+  </div>
 </div>
 
 <!-- gallery controls -->
-<div class="control arrow left" *ngIf="conf.showArrows && (images.length > 1) && !loading" [class.dark]="conf.inline" [class.disabled]="onFirstImage"
-    (click)="prev()"></div>
-<div class="control arrow right" *ngIf="conf.showArrows && (images.length > 1) && !loading" [class.dark]="conf.inline" [class.disabled]="onLastImage"
-    (click)="next()"></div>
+<div class="control arrow left" *ngIf="conf.showArrows && (images.length > 1) && !loading" [class.dark]="conf.inline"
+  [class.disabled]="onFirstImage" (click)="prev()"></div>
+<div class="control arrow right" *ngIf="conf.showArrows && (images.length > 1) && !loading" [class.dark]="conf.inline"
+  [class.disabled]="onLastImage" (click)="next()"></div>
 
 <div class="control right-top">
-    <div class="close" [class.dark]="conf.inline" *ngIf="conf.showCloseControl" (click)="close()">
-        <div class="feedback"></div>
-    </div>
+  <div class="close" [class.dark]="conf.inline" *ngIf="conf.showCloseControl" (click)="close()">
+    <div class="feedback"></div>
+  </div>
 </div>

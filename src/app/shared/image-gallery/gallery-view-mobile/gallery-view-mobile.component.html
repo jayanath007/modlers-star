@@ -1,26 +1,32 @@
 <div>
-    <div class="galleria" fxLayout="column" fxFlexFill  (contextmenu)="rightClickOnImage($event)">
-        <div fxFlex="1" class="images-container">
-            <div class="image" *ngFor="let image of images; let i = index;" [class.active]="!loading
-             && (i == activeImageIndex)" [ngStyle]="{top: conf.imageOffset, bottom: conf.imageOffset}">
-                <img class="image-view" *ngIf="i == activeImageIndex" [src]="image.url" [alt]="image.altText || ''" [style.cursor]="conf.imagePointer?  'pointer':'default'"
-                    (click)="clickOnImage(activeImageIndex)" />
-            </div>
+  <div class="galleria" fxLayout="column" fxFlexFill (contextmenu)="rightClickOnImage($event)">
+    <div fxFlex="1" class="images-container">
+      <div class="image" *ngFor="let image of images; let i = index;" [class.active]="!loading
+             && (i == activeImageIndex)"
+        [ngStyle]="{top: conf.imageOffset, bottom: conf.imageOffset}">
+        <img class="image-view" *ngIf="i == activeImageIndex" [src]="image.url" [alt]="image.altText || ''"
+          [style.cursor]="conf.imagePointer?  'pointer':'default'" (click)="clickOnImage(activeImageIndex)" />
+      </div>
 
-            <div class="arrow-left" *ngIf="(images.length > 1) && !loading" [class.disabled]="onFirstImage" (click)="prev()"></div>
-            <div class="arrow-right" *ngIf="(images.length > 1) && !loading" [class.disabled]="onLastImage" (click)="next()"></div>
-            <div class="control-close"  (click)="close()"></div>
-        </div>
-        <div fxFlex="1" class="info-container" *ngIf="!loading" >
-            <!-- <app-comment 
-            [albumId]= "images[this.activeImageIndex]?.albumId"
-            [photoId]= " images[this.activeImageIndex]?.id"
-            [commentMaxHieght]=commentBoxMaxHieght>
-           </app-comment> -->
-        
-        </div>
+      <div class="arrow-left" *ngIf="(images.length > 1) && !loading" [class.disabled]="onFirstImage" (click)="prev()"></div>
+      <div class="arrow-right" *ngIf="(images.length > 1) && !loading" [class.disabled]="onLastImage" (click)="next()"></div>
+      <div class="control-close" (click)="close()"></div>
     </div>
-    <div class="loading-indicator" *ngIf="(images.length == 0) || loading">
-        <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+    <div fxFlex="1" class="info-container">
+
+
+
+      {{images[this.activeImageIndex]?.albumId}}
+      {{images[this.activeImageIndex]?.id}}
+      {{commentBoxMaxHieght}}
+      
+      <app-comment [albumId]="images[this.activeImageIndex]?.albumId" [photoId]="images[this.activeImageIndex]?.id"
+        [commentMaxHieght]=commentBoxMaxHieght>
+      </app-comment>
+
     </div>
+  </div>
+  <div class="loading-indicator" *ngIf="(images.length == 0) || loading">
+    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+  </div>
 </div>

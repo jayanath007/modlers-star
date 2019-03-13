@@ -9,12 +9,11 @@ import { MatListModule} from '@angular/material/list';
 import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { HomeCoreModule } from '../home-core/home-core.module';
-import { ImageGalleryModule } from '../shared/image-gallery/image-gallery.module';
-import { CommentBoxDesktopModule } from '../shared/comment/comment-desktop/comment-box-desktop.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CommentModule } from '../comment/comment.module';
 import { LikeModule } from '../like/like.module';
 import { StarReviewModule } from '../star-review/star-review.module';
+import { ImageGalleryMobileModule } from '../shared/image-gallery/image-gallery-mobile.module';
 
 
 const routes = [
@@ -36,8 +35,7 @@ const routes = [
     MatSelectModule,
     MatListModule,
     FormsModule,
-    ImageGalleryModule,
-    CommentBoxDesktopModule,
+    ImageGalleryMobileModule,
     FlexLayoutModule,
     MatProgressSpinnerModule,
     CommentModule,

@@ -11,7 +11,6 @@ import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { HomeCoreModule } from '../home-core/home-core.module';
 import { ImageGalleryModule } from '../shared/image-gallery/image-gallery.module';
-import { CommentBoxDesktopModule } from '../shared/comment/comment-desktop/comment-box-desktop.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { StarReviewModule } from '../star-review/star-review.module';
@@ -42,7 +41,6 @@ const routes = [
     MatSelectModule,
     MatListModule,
     ImageGalleryModule,
-    CommentBoxDesktopModule,
     FlexLayoutModule,
     MatProgressSpinnerModule,
     CommentModule,
