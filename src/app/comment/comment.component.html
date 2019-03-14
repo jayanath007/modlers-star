@@ -14,21 +14,29 @@
       </mat-form-field>
     </div>
   </div>
-  <div class="content" fxLayout="row" fxFlexFill *ngFor="let comment of page.data | async">
-    <div fxFlex class="image-container">
-      <img class="avatar" [src]="comment.photoURL">
-    </div>
-    <div fxFlex=" 1 1 auto" fxLayoutAlign="start center" class="sec2">
-      <div fxlayout="column">
-        <div fxlayout="row" fxlayoutalign="start center">
-          <span class="username">{{ comment.userName }} </span>
-          <span class="time">{{ dateformat(comment.createdAt) | date :'dd/MM/yyyy h:mm a' }}</span>
+
+    <div class="content" fxLayout="row" fxFlexFill *ngFor="let comment of page.data | async">
+      <div fxFlex class="image-container">
+        <img class="avatar" [src]="comment.photoURL">
+      </div>
+      <div fxFlex=" 1 1 auto" fxLayoutAlign="start center" class="sec2">
+        <div fxlayout="column">
+          <div fxlayout="row" fxlayoutalign="start center">
+            <span class="username">{{ comment.userName }} </span>
+            <span class="time">{{ dateformat(comment.createdAt) | date :'dd/MM/yyyy h:mm a' }}</span>
+          </div>
+          <div class="message"> {{ comment.content }} </div>
         </div>
-        <div class="message"> {{ comment.content }} </div>
       </div>
     </div>
-  </div>
+ 
 
+  <div fxLayout="row">
+    <div fxLayoutAlign="space-around center">
+      <mat-spinner *ngIf="page.loading | async"></mat-spinner>
+    </div>
+  </div>
+  
 </div>
 
 <!-- <div class="comment-contener">
