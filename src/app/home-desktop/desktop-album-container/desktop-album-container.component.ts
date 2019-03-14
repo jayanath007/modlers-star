@@ -1,5 +1,4 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { ImageGalleryComponent } from '../../shared/image-gallery/image-gallery.component';
 import { Album } from '../../models/models';
 import { GalleryImage } from '../../shared/image-gallery/config';
 

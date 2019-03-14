@@ -1,6 +1,6 @@
-import { ImageGallery } from './ImageGallery';
+import { ImageGallery } from '../ImageGallery';
 import { Component } from '@angular/core';
-import { UtilsService } from '../Utils.service';
+import { UtilsService } from '../../Utils.service';
 
 
 @Component({

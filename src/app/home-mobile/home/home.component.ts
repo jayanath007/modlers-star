@@ -1,6 +1,6 @@
 
 import { ViewChild, Component } from '@angular/core';
-import { ImageGalleryComponent } from '../../shared/image-gallery/image-gallery.component';
+import { ImageGalleryComponent } from '../../shared/image-gallery/image-gallery/image-gallery.component';
 import { PaginationService } from '../../shared/pagination.service';
 import { GalleryImage } from '../../shared/image-gallery/config';
 import { HomeBase } from '../../home-core/home.base';

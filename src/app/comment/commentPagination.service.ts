@@ -16,7 +16,7 @@ export class CommentPaginationService {
   private _data = new BehaviorSubject({ action: DataAction.Reset, data: [] });
 
   // Observable data
-  data = new BehaviorSubject([]);
+  data: Observable<any>;
   done: Observable<boolean> = this._done.asObservable();
   loading: Observable<boolean> = this._loading.asObservable();
   isAddItem = false;
@@ -25,7 +25,7 @@ export class CommentPaginationService {
 
   constructor(private afs: AngularFirestore) {
     // Create the observable array for consumption in components
-    this._data.asObservable()
+    this.data = this._data.asObservable()
       .scan((acc, val) => {
         if (val.action === DataAction.Add) {
           return { action: DataAction.Done, data: val.data.concat(acc.data) };
@@ -34,8 +34,8 @@ export class CommentPaginationService {
         } else if (val.action === DataAction.Reset) {
           return { action: DataAction.Done, data: [] };
         }
-      }).subscribe((data) => {
-        this.data.next(data.data);
+      }).map((data) => {
+        return data.data;
       });
   }
 
