@@ -7,6 +7,7 @@ import { HomeBase } from '../../home-core/home.base';
 import { Album } from '../../models/models';
 import { AuthService } from '../../core/auth.service';
 import { ActivatedRoute } from '@angular/router';
+import { ImageGalleryMobileComponent } from '../../shared/image-gallery/image-gallery-mobile/image-gallery-mobile.component';
 
 
 @Component({
@@ -16,7 +17,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class HomeComponent extends HomeBase {
 
-  @ViewChild(ImageGalleryComponent) imageGalleryComponent: ImageGalleryComponent;
+  @ViewChild(ImageGalleryMobileComponent) ImageGalleryMobileComponent: ImageGalleryMobileComponent;
 
   constructor(public page: PaginationService, public auth: AuthService, public route: ActivatedRoute) {
     super(page, route);
@@ -26,13 +27,7 @@ export class HomeComponent extends HomeBase {
     const galleryImages: GalleryImage[] = album.imageUrls.map((item) => {
       return { url: item.url, albumId: album.id, id: item.id };
     });
-    this.imageGalleryComponent.openGallery(index, galleryImages);
+    this.ImageGalleryMobileComponent.openGallery(index, galleryImages);
   }
 
-  // openGallery(index, imageUrls: string[]) {
-  //   const galleryImages: GalleryImage[] = imageUrls.map((url) => {
-  //     return { url: url };
-  //   });
-  //   this.imageGalleryComponent.openGallery(index, galleryImages);
-  // }
 }
