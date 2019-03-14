@@ -13,14 +13,14 @@ export class DesktopAlbumContainerComponent implements OnInit {
 
   @Input() album;
   @Input() allbumCardWidth;
-  @Input() imageGalleryComponent;
+  @Input() imageGalleryDesktopComponent;
  
 
   openGallery(index, album: Album) {
     const galleryImages: GalleryImage[] = album.imageUrls.map((item) => {
       return { url: item.url, albumId: album.id, id: item.id };
     });
-    this.imageGalleryComponent.openGallery(index, galleryImages);
+    this.imageGalleryDesktopComponent.openGallery(index, galleryImages);
   }
 
   ngOnInit() {

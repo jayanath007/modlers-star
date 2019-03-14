@@ -23,7 +23,7 @@
     </div>
 
     <mat-card-content>
-      <app-like [albumId]="album.id" [key]="album.id"> </app-like>
+      <!-- <app-like [albumId]="album.id" [key]="album.id"> </app-like> -->
       <app-star-review [albumId]="album.id" [userId]="(auth.user | async )?.uid">
       </app-star-review>
     </mat-card-content>

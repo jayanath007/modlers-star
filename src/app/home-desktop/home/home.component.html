@@ -1,16 +1,14 @@
-<app-carousel *ngIf="isHomePage" [allbumCardWidth]="allbumCardWidth"
-[imageGalleryComponent]="imageGalleryComponent">
+<app-carousel *ngIf="isHomePage" [allbumCardWidth]="allbumCardWidth" [imageGalleryDesktopComponent]="imageGalleryDesktopComponent">
 </app-carousel>
 
 <div #allbumCard>
 
   <mat-card *ngFor="let album of page.data | async">
 
-    <app-desktop-album-container [album]="album" [allbumCardWidth]="allbumCardWidth"
-     [imageGalleryComponent]="imageGalleryComponent" >
+    <app-desktop-album-container [album]="album" [allbumCardWidth]="allbumCardWidth" [imageGalleryDesktopComponent]="imageGalleryDesktopComponent">
     </app-desktop-album-container>
-    
->
+
+    >
 
   </mat-card>
 </div>
@@ -21,5 +19,5 @@
   </div>
 </div>
 
-<app-image-gallery>
-</app-image-gallery>
+<app-image-gallery-desktop>
+</app-image-gallery-desktop>

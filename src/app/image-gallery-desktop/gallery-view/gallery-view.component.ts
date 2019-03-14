@@ -1,5 +1,6 @@
 import { Component, ElementRef, Renderer2 } from '@angular/core';
-import { GalleryView } from '../gallery-view';
+import { GalleryView } from '../../shared/image-gallery/gallery-view';
+;
 
 @Component({
     // tslint:disable-next-line:component-selector

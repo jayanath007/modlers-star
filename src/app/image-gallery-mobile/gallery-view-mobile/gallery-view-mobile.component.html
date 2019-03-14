@@ -15,10 +15,6 @@
     <div fxFlex="1" class="info-container">
 
 
-
-      {{images[this.activeImageIndex]?.albumId}}
-      {{images[this.activeImageIndex]?.id}}
-      {{commentBoxMaxHieght}}
       
       <app-comment [albumId]="images[this.activeImageIndex]?.albumId" [photoId]="images[this.activeImageIndex]?.id"
         [commentMaxHieght]=commentBoxMaxHieght>

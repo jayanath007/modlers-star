@@ -1,8 +1,8 @@
 import { UtilsService } from '../Utils.service';
-import { GalleryViewMobileComponent } from './gallery-view-mobile/gallery-view-mobile.component';
 import {  OnInit, ViewChild } from '@angular/core';
-import { GalleryViewComponent } from './gallery-view/gallery-view.component';
 import { DEMO_GALLERY_CONF, DEMO_GALLERY_IMAGE, GalleryConf, GalleryImage } from './config';
+import { GalleryViewMobileComponent } from '../../image-gallery-mobile/gallery-view-mobile/gallery-view-mobile.component';
+import { GalleryViewComponent } from '../../image-gallery-desktop/gallery-view/gallery-view.component';
 
 
 export class ImageGallery implements OnInit {

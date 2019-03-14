@@ -19,6 +19,7 @@ import { NguCarouselModule } from '@ngu/carousel';
 import { CarouselModule } from 'ngx-bootstrap';
 import { DesktopAlbumContainerComponent } from './desktop-album-container/desktop-album-container.component';
 import { AlbumService } from '../album-core/service/album.service';
+import { ImageGalleryDesktopModule } from '../image-gallery-desktop/image-gallery.desktop.module';
 
 const routes = [
   { path: '', pathMatch: 'full', component: HomeComponent  },
@@ -40,7 +41,6 @@ const routes = [
     MatInputModule,
     MatSelectModule,
     MatListModule,
-    ImageGalleryModule,
     FlexLayoutModule,
     MatProgressSpinnerModule,
     CommentModule,
@@ -49,6 +49,7 @@ const routes = [
     CarouselModule.forRoot(),
     MatIconModule,
     NguCarouselModule,
+    ImageGalleryDesktopModule,
   ],
   declarations: [
     HomeComponent,

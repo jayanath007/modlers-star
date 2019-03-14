@@ -9,7 +9,7 @@ import { AlbumService } from '../../album-core/service/album.service';
 export class CarouselComponent implements OnInit {
 
   @Input() allbumCardWidth;
-  @Input() imageGalleryComponent;
+  @Input() imageGalleryDesktopComponent;
 
   carouselBanner;
   albums = [];

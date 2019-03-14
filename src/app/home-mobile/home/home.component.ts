@@ -1,13 +1,13 @@
 
 import { ViewChild, Component } from '@angular/core';
-import { ImageGalleryComponent } from '../../shared/image-gallery/image-gallery/image-gallery.component';
+
 import { PaginationService } from '../../shared/pagination.service';
 import { GalleryImage } from '../../shared/image-gallery/config';
 import { HomeBase } from '../../home-core/home.base';
 import { Album } from '../../models/models';
 import { AuthService } from '../../core/auth.service';
 import { ActivatedRoute } from '@angular/router';
-import { ImageGalleryMobileComponent } from '../../shared/image-gallery/image-gallery-mobile/image-gallery-mobile.component';
+import { ImageGalleryMobileComponent } from '../../image-gallery-mobile/image-gallery-mobile.component';
 
 
 @Component({

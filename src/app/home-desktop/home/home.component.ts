@@ -1,10 +1,11 @@
 
 import { ViewChild, Component } from '@angular/core';
-import { ImageGalleryComponent } from '../../shared/image-gallery/image-gallery/image-gallery.component';
+
 import { PaginationService } from '../../shared/pagination.service';
 import { HomeBase } from '../../home-core/home.base';
 import { AuthService } from '../../core/auth.service';
 import { ActivatedRoute } from '@angular/router';
+import { ImageGalleryDesktopComponent } from '../../image-gallery-desktop/image-gallery-desktop.component';
 
 
 @Component({
@@ -15,7 +16,7 @@ import { ActivatedRoute } from '@angular/router';
 export class HomeComponent extends HomeBase {
 
 
-    @ViewChild(ImageGalleryComponent) imageGalleryComponent: ImageGalleryComponent;
+    @ViewChild(ImageGalleryDesktopComponent) imageGalleryDesktopComponent: ImageGalleryDesktopComponent;
 
     constructor(public page: PaginationService, public auth: AuthService,  public route: ActivatedRoute) {
         super(page , route);

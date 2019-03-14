@@ -23,13 +23,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { ScrollableDirective } from './shared/scrollable.directive';
 import { SearchBoxComponent } from './search-box/search-box.component';
 import { SearchFromComponent } from './search-from/search-from.component';
-import {MatRadioModule} from '@angular/material/radio';
+import { MatRadioModule } from '@angular/material/radio';
 import { SerachUserService } from './search-box/serach-user.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { FacebookModule } from 'ngx-facebook';
 import { TagModule } from './tag-input-component/tag.module';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 // Initialize Firebase
 const firebaseConfig = {
   apiKey: 'AIzaSyDO4WN4ugiloTsArr1KktR-nVZyJP8s1G8',
@@ -46,7 +46,7 @@ const firebaseConfig = {
     ScrollableDirective,
     SearchBoxComponent,
     SearchFromComponent,
-],
+  ],
   imports: [
     AppRouteRoutes,
     BrowserAnimationsModule,

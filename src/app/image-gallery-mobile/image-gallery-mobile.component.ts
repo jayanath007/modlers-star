@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { UtilsService } from '../../Utils.service';
-import { ImageGallery } from '../ImageGallery';
+import { ImageGallery } from '../shared/image-gallery/ImageGallery';
+import { UtilsService } from '../shared/Utils.service';
+
 
 @Component({
   selector: 'app-image-gallery-mobile',

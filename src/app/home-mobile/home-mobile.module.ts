@@ -13,7 +13,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { CommentModule } from '../comment/comment.module';
 import { LikeModule } from '../like/like.module';
 import { StarReviewModule } from '../star-review/star-review.module';
-import { ImageGalleryMobileModule } from '../shared/image-gallery/image-gallery-mobile.module';
+import { ImageGalleryMobileModule } from '../image-gallery-mobile/image-gallery-mobile.module';
+
+
 
 
 const routes = [
