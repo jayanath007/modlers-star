@@ -25,7 +25,7 @@ export class CommentComponent implements OnInit, OnChanges, OnDestroy, AfterCont
   private unsubscribe: Subject<void> = new Subject();
   isHomePage = true;
 
-  constructor(protected page: CommentPaginationService,
+  constructor(public page: CommentPaginationService,
     private afs: AngularFirestore, public auth: AuthService) {
 
     this.page.reset();

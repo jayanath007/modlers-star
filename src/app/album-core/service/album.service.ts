@@ -44,7 +44,7 @@ export class AlbumService {
                     const fileData = fileDataList[_i];
                     album.imageUrls.push({ url: url, id: fileData.id });
                 }
-                if (album.id) {
+                if (!album.id) {
                     album.id = uuid();
                 }
 

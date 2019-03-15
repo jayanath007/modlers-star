@@ -50,7 +50,7 @@ export class AddAlbumComponent implements OnDestroy, OnInit {
     private auth: AuthService,
     private snackBar: MatSnackBar,
     private router: Router, protected route: ActivatedRoute, private afs: AngularFirestore) {
-      this.isEditMode = false;
+    this.isEditMode = false;
     if (window.location.href.indexOf('editAlbum') > 0) {
       this.isEditMode = true;
       this.route.params.switchMap((album) => {
@@ -82,15 +82,11 @@ export class AddAlbumComponent implements OnDestroy, OnInit {
   saveAlbum(album: Album, event: any) {
     this.clickSave = true;
 
-    if (event.keyCode !== 13 && (this.uploadFile.length >= 3 ||  this.isEditMode)
-      && this.albumNameControl.valid
-      && this.albumDescriptionControl.valid
-    ) {
+    if ( !(event && event.keyCode === 13) && (this.uploadFile.length >= 3 || this.isEditMode)
+      && this.albumNameControl.valid && this.albumDescriptionControl.valid) {
 
-
-
+        
       this.fileUploading = true;
-
       this.auth.user.takeUntil(this.unsubscribe).subscribe((user) => {
         album.userName = user.displayName;
         album.userId = user.uid;
